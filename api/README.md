@@ -22,5 +22,5 @@ npm run build
 
 ```
 npm start
-note: before this do: npm run build
+note: before this do npm run build
 ```
