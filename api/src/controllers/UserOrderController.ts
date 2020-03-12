@@ -1,25 +1,21 @@
 import { Response, Request } from "express";
 
-class WeeklyReceiptController {
-  public async getByUserId(req: Request, res: Response): Promise<any> {
+class UserOrderController {
+  public async delete(req: Request, res: Response): Promise<any> {
     throw new Error("Method not implemented.");
   }
-
-  public async getByUserIdAndWeek(req: Request, res: Response): Promise<any> {
+  public async update(req: Request, res: Response): Promise<any> {
     throw new Error("Method not implemented.");
   }
-
   public async add(req: Request, res: Response): Promise<any> {
     throw new Error("Method not implemented.");
   }
-
-  public async delete(req: Request, res: Response) {
+  public async getByUserAndDate(req: Request, res: Response): Promise<any> {
     throw new Error("Method not implemented.");
   }
-
-  public async update(req: Request, res: Response): Promise<any> {
+  public async getAllByDate(req: Request, res: Response): Promise<any> {
     throw new Error("Method not implemented.");
   }
 }
 
-export default new WeeklyReceiptController();
+export default new UserOrderController();
