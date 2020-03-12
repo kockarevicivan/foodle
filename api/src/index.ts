@@ -6,6 +6,10 @@ import cors from "cors";
 import config from "./config";
 
 import userRoutes from "./routes/userRoutes";
+import weeklyReceiptRoutes from "./routes/weeklyReceiptRoutes";
+import menuItemRoutes from "./routes/menuItemRoutes";
+import invoiceRoutes from "./routes/invoiceRoutes";
+import loginRoutes from "./routes/loginRoutes";
 
 // setup database
 mongoose.Promise = bluebird;
@@ -27,8 +31,11 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // routes
-//users
 app.use("/users", userRoutes);
+app.use("/receipt", weeklyReceiptRoutes);
+app.use("/menuItems", menuItemRoutes);
+app.use("/invoice", invoiceRoutes);
+app.use("/login", loginRoutes);
 
 app.listen(config.port, () =>
   console.log(`Server running on port ${config.port}`)
