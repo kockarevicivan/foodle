@@ -1,23 +1,47 @@
 import { Request, Response } from "express";
 
+import MenuItemService from "../services/MenuItemService";
+
 class MenuItemController {
-  public async delete(req: Request, res: Response): Promise<any> {
-    throw new Error("Method not implemented.");
+  public async getMenuItemsForDay(req: Request, res: Response) {
+    try {
+      const menuItems = await MenuItemService.getAllByDate(req.params.date);
+      res.send(menuItems);
+    } catch (error) {
+      res.status(400).send("Something went wrong while getting menu items.");
+    }
   }
+
+  public async addMenuItemForCurrentDay(req: Request, res: Response) {
+    try {
+      const menuItem = await MenuItemService.addForCurrentDay(req.body);
+      res.send(menuItem);
+    } catch (error) {
+      res
+        .status(400)
+        .send("You didn't provide all necessary parameters for menu item!");
+    }
+  }
+
   public async update(req: Request, res: Response): Promise<any> {
-    throw new Error("Method not implemented.");
+    try {
+      const menuItem = await MenuItemService.update(
+        req.params.menuItemId,
+        req.body
+      );
+      res.send(menuItem);
+    } catch (error) {
+      res.status(400).send("Couldn't update menu item.");
+    }
   }
-  public async updateMenuItem(req: Request, res: Response): Promise<any> {
-    throw new Error("Method not implemented.");
-  }
-  public async addMenuItemForCurrentWeek(
-    req: Request,
-    res: Response
-  ): Promise<any> {
-    throw new Error("Method not implemented.");
-  }
-  public async getMenuItemsForWeek(req: Request, res: Response): Promise<any> {
-    throw new Error("Method not implemented.");
+
+  public async delete(req: Request, res: Response): Promise<any> {
+    try {
+      await MenuItemService.delete(req.params.menuItemId);
+      res.send("Menu item deleted");
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
   }
 }
 

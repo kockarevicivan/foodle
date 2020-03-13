@@ -11,14 +11,13 @@ import menuItemRoutes from "./routes/menuItemRoutes";
 import invoiceRoutes from "./routes/invoiceRoutes";
 import loginRoutes from "./routes/loginRoutes";
 
-import MenuItem from "./models/MenuItem";
-
 // setup database
 mongoose.Promise = bluebird;
 mongoose.connect(config.databaseUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
-  useCreateIndex: true
+  useCreateIndex: true,
+  useFindAndModify: true
 });
 mongoose.connection.on("open", () => console.log("connected to the database"));
 mongoose.connection.on("error", () =>
@@ -39,6 +38,6 @@ app.use("/menuItems", menuItemRoutes);
 app.use("/invoice", invoiceRoutes);
 app.use("/login", loginRoutes);
 
-app.listen(config.port, () =>
-  console.log(`Server running on port ${config.port}`)
-);
+app.listen(config.port, () => {
+  console.log(`Server running on port ${config.port}`);
+});
