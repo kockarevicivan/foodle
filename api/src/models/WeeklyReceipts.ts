@@ -6,6 +6,10 @@ export default mongoose.model(
     totalPrice: { type: Number, default: 0 },
     paid: { type: Boolean, default: false },
     date: { type: Date, default: Date.now() },
+    user: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "users"
+    },
     userOrders: [
       {
         type: mongoose.Schema.Types.ObjectId,
