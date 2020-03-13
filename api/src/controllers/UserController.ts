@@ -3,44 +3,52 @@ import UserService from "../Services/UserService";
 
 import User from "../models/User";
 class UserController {
-    public async getAll(req: Request, res: Response) {
+    public async add(req: Request, res: Response) {
         try {
-            res.send(await UserService.getAll());
-        } catch (err) {
-            res.status(400).send({ error: err });
+            const user = await UserService.add(req.body);
+            res.send(user);
+        } catch (error) {
+            res.status(400).send({ error: error });
         }
     }
 
-    public async add(req: Request, res: Response) {
+    public async getAll(req: Request, res: Response) {
         try {
-            res.send(await UserService.add(req.body));
-        } catch (err) {
-            res.status(400).send({ error: err });
+            const users = await UserService.getAll();
+            res.send(users);
+        } catch (error) {
+            res.status(400).send({ error: error });
         }
     }
 
     public async getById(req: Request, res: Response) {
         try {
-            const id = req.params.id;
-            res.send(await UserService.getById(id));
-        } catch (err) {
-            res.status(400).send({ error: err });
+            const { id } = req.params;
+            const user = await UserService.getById(id);
+            res.send(user);
+        } catch (error) {
+            res.status(400).send({ error: error });
         }
     }
 
     public async update(req: Request, res: Response) {
-        const id = req.params.id;
-        const updateOps: any = {};
-
-        for (const key of Object.keys(req.body)) {
-            updateOps[key] = req.body[key];
+        try {
+            const { id } = req.params;
+            const user = await UserService.update(id, req.body);
+            res.send(user);
+        } catch (error) {
+            res.status(400).send({ error: error });
         }
-        res.send(await UserService.update(id, updateOps));
     }
 
     public async delete(req: Request, res: Response) {
-        const id = req.params.id;
-        res.send(await UserService.delete(id));
+        try {
+            const { id } = req.params;
+            const user = await UserService.delete(id);
+            res.send(user);
+        } catch (error) {
+            res.status(400).send({ error: error });
+        }
     }
 }
 
