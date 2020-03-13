@@ -18,7 +18,7 @@ class UserService {
     return await User.findById(id).select(["username", "fullName"]);
   }
 
-  async update(id: string, update: Object) {
+  async update(id: string, update: any) {
     await User.findByIdAndUpdate(id, { $set: update }, { runValidators: true });
     return await User.findById(id).select(["username", "fullName"]);
   }
