@@ -3,15 +3,15 @@ import mongoose from "mongoose";
 export default mongoose.model(
   "users",
   new mongoose.Schema({
-    username: { type: String, unique: true },
-    fullName: String,
-    password: String,
-    refreshToken: String,
-    role: String,
-    weeklyReceipt: [
+    username: { type: String, required: true, unique: true },
+    fullName: { type: String, required: true },
+    password: { type: String, required: true },
+    refreshToken: { type: String },
+    role: { type: String, required: true },
+    weeklyReceipts: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "weeklyReceipt"
+        ref: "weeklyreceipts"
       }
     ]
   })
