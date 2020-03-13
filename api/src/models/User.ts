@@ -11,7 +11,7 @@ export default mongoose.model(
     weeklyReceipts: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "weeklyreceipts"
+        ref: "weeklyReceipts"
       }
     ]
   })
