@@ -36,7 +36,12 @@ class MenuItemController {
   }
 
   public async delete(req: Request, res: Response): Promise<any> {
-    throw new Error("Method not implemented.");
+    try {
+      await MenuItemService.delete(req.params.menuItemId);
+      res.send("Menu item deleted");
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
   }
 }
 

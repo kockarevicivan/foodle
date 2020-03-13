@@ -1,4 +1,5 @@
 import MenuItem from "../models/MenuItem";
+import OrderedItem from "../models/OrderedItem";
 
 class MenuItemService {
   public async getAllByDate(dateTime: string) {
@@ -13,7 +14,7 @@ class MenuItemService {
     return menuItems;
   }
 
-  public async addForCurrentDay(menuItemPayload: object) {
+  public async addForCurrentDay(menuItemPayload: any) {
     const menuItem = await MenuItem.create(menuItemPayload);
     return menuItem;
   }
@@ -27,6 +28,18 @@ class MenuItemService {
 
     const updatedMenuItem = await MenuItem.findById(id);
     return updatedMenuItem;
+  }
+
+  public async delete(menuItemId: string) {
+    if (await OrderedItem.exists({ menuItem: menuItemId })) {
+      throw Error(`There is an ordered item for this menu item.`);
+    }
+
+    if (!(await MenuItem.exists({ _id: menuItemId }))) {
+      throw Error("Menu item doesn't exist.");
+    }
+
+    await MenuItem.findByIdAndDelete(menuItemId);
   }
 }
 
