@@ -17,12 +17,22 @@ class MenuItemController {
       const menuItem = await MenuItemService.addForCurrentDay(req.body);
       res.send(menuItem);
     } catch (error) {
-      res.status(400).send("You didn't provide all necessary parameters!");
+      res
+        .status(400)
+        .send("You didn't provide all necessary parameters for menu item!");
     }
   }
 
   public async update(req: Request, res: Response): Promise<any> {
-    throw new Error("Method not implemented.");
+    try {
+      const menuItem = await MenuItemService.update(
+        req.params.menuItemId,
+        req.body
+      );
+      res.send(menuItem);
+    } catch (error) {
+      res.status(400).send("Couldn't update menu item.");
+    }
   }
 
   public async delete(req: Request, res: Response): Promise<any> {

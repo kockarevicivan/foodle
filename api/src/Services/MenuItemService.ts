@@ -17,6 +17,17 @@ class MenuItemService {
     const menuItem = await MenuItem.create(menuItemPayload);
     return menuItem;
   }
+
+  public async update(id: string, menuItemUpdate: any) {
+    await MenuItem.updateOne(
+      { _id: id },
+      { $set: menuItemUpdate },
+      { runValidators: true }
+    );
+
+    const updatedMenuItem = await MenuItem.findById(id);
+    return updatedMenuItem;
+  }
 }
 
 export default new MenuItemService();
