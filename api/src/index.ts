@@ -11,6 +11,8 @@ import menuItemRoutes from "./routes/menuItemRoutes";
 import invoiceRoutes from "./routes/invoiceRoutes";
 import loginRoutes from "./routes/loginRoutes";
 
+import MenuItem from "./models/MenuItem";
+
 // setup database
 mongoose.Promise = bluebird;
 mongoose.connect(config.databaseUrl, {
