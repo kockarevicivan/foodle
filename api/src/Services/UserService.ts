@@ -11,24 +11,24 @@ class UserService {
     }
 
     async getAll() {
-        return await User.find({}).select(["username", "fullname"]);
+        return await User.find({}).select(["username", "fullName"]);
     }
 
     async getById(id: string) {
-        return await User.findById(id).select(["username", "fullname"]);
+        return await User.findById(id).select(["username", "fullName"]);
     }
 
     async update(id: string, update: Object) {
         return await User.findByIdAndUpdate(id, { $set: update }).select([
             "username",
-            "fullname"
+            "fullName"
         ]);
     }
 
     async delete(id: string) {
         return await User.findByIdAndDelete(id).select([
             "username",
-            "fullname"
+            "fullName"
         ]);
     }
 }
