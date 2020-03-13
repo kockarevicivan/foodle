@@ -19,10 +19,12 @@ class UserService {
     }
 
     async update(id: string, update: Object) {
-        return await User.findByIdAndUpdate(id, { $set: update }).select([
-            "username",
-            "fullName"
-        ]);
+        await User.findByIdAndUpdate(
+            id,
+            { $set: update },
+            { runValidators: true }
+        );
+        return await User.findById(id).select(["username", "fullName"]);
     }
 
     async delete(id: string) {

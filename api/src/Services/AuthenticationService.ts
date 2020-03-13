@@ -22,11 +22,13 @@ class AuthenticationService {
         const payload = {
             _id: user._id,
             username: user.username,
-            firstName: user.firstName,
-            lastName: user.lastName
+            fullName: user.fullName,
+            role: user.role
         };
-
-        return await jwt.sign(payload, config.secret);
+        const jwtOptions = {
+            expiresIn: "2h"
+        };
+        return await jwt.sign(payload, config.secret, jwtOptions);
     }
 }
 
