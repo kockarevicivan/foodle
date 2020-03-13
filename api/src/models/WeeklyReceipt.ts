@@ -3,12 +3,13 @@ import mongoose from "mongoose";
 export default mongoose.model(
   "weeklyReceipts",
   new mongoose.Schema({
-    totalPrice: { type: Number, default: 0 },
+    totalPrice: { type: Number, default: 0, min: 0 },
     paid: { type: Boolean, default: false },
-    date: { type: Date, default: Date.now() },
+    createdAt: { type: Date, default: Date.now() },
     user: {
       type: mongoose.Schema.Types.ObjectId,
-      ref: "users"
+      ref: "users",
+      required: true
     },
     userOrders: [
       {

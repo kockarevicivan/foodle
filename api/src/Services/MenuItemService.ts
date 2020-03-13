@@ -1,13 +1,10 @@
 import MenuItem from "../models/MenuItem";
 import OrderedItem from "../models/OrderedItem";
+import dateUtil from "../util/dateFormatting";
 
 class MenuItemService {
   public async getAllByDate(dateTime: string) {
-    const startOfDay: Date = new Date(dateTime);
-    startOfDay.setHours(0, 0, 0, 0);
-    const endOfDay: Date = new Date(dateTime);
-    endOfDay.setHours(23, 59, 59, 999);
-
+    const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
     const menuItems = await MenuItem.find({
       createdAt: { $gte: startOfDay, $lte: endOfDay }
     });
