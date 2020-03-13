@@ -16,6 +16,7 @@ router.put("/:id", AuthenticationMiddleware.verifyToken, UserController.update);
 router.delete(
     "/:id",
     AuthenticationMiddleware.verifyToken,
+    AuthenticationMiddleware.verifyPermission,
     UserController.delete
 );
 
