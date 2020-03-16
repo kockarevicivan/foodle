@@ -7,11 +7,19 @@ const router = express.Router();
 
 router.use(AuthorizationMiddleware.verifyToken);
 // get user orders for a given week for every user
-router.get("/:date", UserOrderController.getAllByDate);
+router.get(
+  "/everyUser/:date",
+  AuthorizationMiddleware.verifyPermission,
+  UserOrderController.getAllByDate
+);
 // get user order for a given week for a given user
-router.get("/:userId/:date", UserOrderController.getByUserAndDate);
+router.get("/:date", UserOrderController.getByUserAndDate);
 router.post("/", UserOrderController.add);
-router.put("/:orderId", UserOrderController.update);
-router.delete("/:orderId", UserOrderController.delete);
+router.put("/:userOrderId", UserOrderController.update);
+router.delete(
+  "/:userOrderId",
+  AuthorizationMiddleware.verifyPermission,
+  UserOrderController.delete
+);
 
 export default router;

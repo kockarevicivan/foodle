@@ -12,7 +12,16 @@ class UserOrderController {
     }
   }
 
-  public async getByUserAndDate(req: Request, res: Response) {}
+  public async getByUserAndDate(req: any, res: any) {
+    try {
+      const { _id } = req.user;
+      const { date } = req.params;
+      const userOrders = await UserOrderService.getAllByDateAndUser(_id, date);
+      res.send(userOrders);
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  }
 
   public async add(req: any, res: any): Promise<any> {
     try {
@@ -23,12 +32,27 @@ class UserOrderController {
     }
   }
 
-  public async update(req: Request, res: Response) {
-    throw new Error("Method not implemented.");
+  public async update(req: any, res: any) {
+    try {
+      const { userOrderId } = req.params;
+      const updatedUserOrder = await UserOrderService.update(
+        userOrderId,
+        req.body
+      );
+      res.send(updatedUserOrder);
+    } catch (error) {
+      res.status(400).send("User order was not updated!");
+    }
   }
 
   public async delete(req: Request, res: Response) {
-    throw new Error("Method not implemented.");
+    try {
+      const { userOrderId } = req.params;
+      await UserOrderService.delete(userOrderId);
+      res.send("User order was deleted");
+    } catch (error) {
+      res.status(400).send("User order with that id doesn't exist.");
+    }
   }
 }
 

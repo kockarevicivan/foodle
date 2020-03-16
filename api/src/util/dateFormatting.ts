@@ -1,4 +1,9 @@
 export default {
+  /**
+   * Returns an objects that contains the start and
+   * the end of the day in iso formats
+   * @param dateTime date and time string in iso format
+   */
   getStartAndEndOfDay(dateTime: string) {
     const startOfDay: Date = new Date(dateTime);
     startOfDay.setHours(0, 0, 0, 0);

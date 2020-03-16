@@ -18,7 +18,7 @@ mongoose.connect(config.databaseUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useFindAndModify: true
+  useFindAndModify: false
 });
 mongoose.connection.on("open", () => console.log("connected to the database"));
 mongoose.connection.on("error", () =>
