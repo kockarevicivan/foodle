@@ -10,9 +10,10 @@ class OrderService {
    */
   public async getAllByDate(dateTime: string) {
     const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
-    const orders = await Order.find({
+    const orders: any = await Order.find({
       createdAt: { $gte: startOfDay, $lte: endOfDay }
-    });
+    }).populate({ path: "orderItems.menuItem", select: "title price _id" });
+
     return orders;
   }
 
@@ -24,10 +25,10 @@ class OrderService {
    */
   public async getAllByDateAndUser(userId: string, dateTime: string) {
     const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
-    const orders = Order.find({
+    const orders = Order.findOne({
       user: userId,
       createdAt: { $gte: startOfDay, $lte: endOfDay }
-    });
+    }).populate({ path: "orderItems.menuItem", select: "title price _id" });
 
     return orders;
   }
@@ -37,11 +38,11 @@ class OrderService {
    * @param userId
    * @param orderPayload
    */
-  public async add(userId: string, orderPayload: any) {
-    let weeklyReceipt: any = await this.getOrCreateWeeklyReceipt(userId);
+  public async add(weeklyReceiptId: string, orderPayload: any) {
+    let weeklyReceipt: any = await WeeklyReceipts.findById(weeklyReceiptId);
 
     //create user order
-    orderPayload.user = userId;
+    orderPayload.user = weeklyReceipt._id;
     orderPayload.weeklyReceipt = weeklyReceipt._id;
     const order = await Order.create(orderPayload);
 
@@ -49,25 +50,6 @@ class OrderService {
     weeklyReceipt.orders.push(order);
     await weeklyReceipt.save();
     return order;
-  }
-
-  /* OVO TREBA DA SE IZBRISE */
-  private async getOrCreateWeeklyReceipt(userId: string) {
-    const currentDate = new Date();
-    const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(
-      currentDate.toString()
-    );
-
-    const filter = {
-      user: userId,
-      createdAt: { $gte: startOfDay, $lte: endOfDay }
-    };
-
-    if (!(await WeeklyReceipts.exists(filter))) {
-      return await WeeklyReceipts.create({ user: userId });
-    } else {
-      return await WeeklyReceipts.findOne(filter);
-    }
   }
 
   public async setStatusToSent(orderId: string) {

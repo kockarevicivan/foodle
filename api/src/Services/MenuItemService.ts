@@ -1,5 +1,5 @@
 import MenuItem from "../models/MenuItem";
-import OrderedItem from "../models/OrderItem";
+import OrderedItem from "../models/OrderItemSchema";
 import dateUtil from "../util/dateFormatting";
 
 class MenuItemService {
@@ -28,8 +28,8 @@ class MenuItemService {
   }
 
   public async delete(menuItemId: string) {
-    if (await OrderedItem.exists({ menuItem: menuItemId })) {
-      throw Error(`There is an ordered item for this menu item.`);
+    if (await MenuItem.exists({ menuItem: menuItemId })) {
+      throw Error(`There is an menu item for this menu item.`);
     }
 
     if (!(await MenuItem.exists({ _id: menuItemId }))) {

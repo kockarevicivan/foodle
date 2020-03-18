@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+
 import OrderStatus from "./OrderStatus";
 
 export default mongoose.model(
@@ -17,7 +18,7 @@ export default mongoose.model(
       ref: "weeklyReceipts",
       required: true
     },
-    orderedItems: [
+    orderItems: [
       {
         quantity: { type: Number, required: true },
         menuItem: {

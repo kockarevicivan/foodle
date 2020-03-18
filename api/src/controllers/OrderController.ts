@@ -8,7 +8,7 @@ class UserOrderController {
       const userOrders = await OrderService.getAllByDate(req.params.date);
       res.send(userOrders);
     } catch (error) {
-      res.status(400).send("Couldn't get user orders");
+      res.status(400).send(error.message);
     }
   }
 

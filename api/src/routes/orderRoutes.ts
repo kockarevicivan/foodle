@@ -25,10 +25,5 @@ router.delete(
   UserOrderMiddleware.checkIfUserOrderExists,
   OrderController.delete
 );
-// orderItem sub routes
-router.get("/items/:orderId", OrderItemController.getAll);
-router.post("/items/:orderId", OrderItemController.add);
-router.put("/items/:orderId/:orderItemIndex", OrderItemController.update);
-router.delete("/items/:orderId/:orderItemIndex", OrderItemController.delete);
 
 export default router;
