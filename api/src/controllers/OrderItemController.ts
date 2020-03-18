@@ -1,6 +1,6 @@
-class OrderItemController {
-  public async getAll(req: any, res: any) {}
+import OrderItemService from "../services/OrderItemService";
 
+class OrderItemController {
   public async add(req: any, res: any) {}
 
   public async update(req: any, res: any) {}
