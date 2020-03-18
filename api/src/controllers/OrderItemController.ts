@@ -29,8 +29,16 @@ class OrderItemController {
       res.status(400).send(error.message);
     }
   }
-
-  public async delete(req: any, res: any) {}
+  // /:orderId/:orderItemIndex"
+  public async delete(req: any, res: any) {
+    try {
+      const { orderId, orderItemIndex } = req.params;
+      await OrderItemService.delete(orderId, orderItemIndex);
+      res.send("Order item deleted");
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  }
 }
 
 export default new OrderItemController();

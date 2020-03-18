@@ -34,7 +34,11 @@ class OrderItemService {
     return order;
   }
 
-  public async remove() {}
+  public async delete(orderId: string, orderItemIndex: string) {
+    const order: any = await Order.findById(orderId);
+    order.orderItems.splice(orderItemIndex, 1);
+    await order.save();
+  }
 }
 
 export default new OrderItemService();
