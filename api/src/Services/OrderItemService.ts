@@ -1,6 +1,5 @@
 import MenuItem from "../models/MenuItem";
 import Order from "../models/Order";
-import OrderItem from "../models/OrderItemSchema";
 
 class OrderItemService {
   // prosledi mu id menuitema i kolicinu
@@ -20,11 +19,22 @@ class OrderItemService {
     return order;
   }
 
-  // prosledi mu samo id ordera i index itema
-  public async remove() {}
+  public async update(
+    orderId: string,
+    orderItemIndex: number,
+    orderItemUpdate: any
+  ) {
+    const order: any = await Order.findById(orderId);
+    if (!order) {
+      throw new Error("Order with that id doesn't exist");
+    }
 
-  // isto kao za remove i jos item payload
-  public async edit() {}
+    Object.assign(order.orderItems[orderItemIndex], orderItemUpdate);
+    await order.save();
+    return order;
+  }
+
+  public async remove() {}
 }
 
 export default new OrderItemService();

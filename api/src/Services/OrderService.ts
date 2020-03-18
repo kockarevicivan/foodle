@@ -38,11 +38,11 @@ class OrderService {
    * @param userId
    * @param orderPayload
    */
-  public async add(weeklyReceiptId: string, orderPayload: any) {
-    let weeklyReceipt: any = await WeeklyReceipts.findById(weeklyReceiptId);
-
+  public async add(userId: string, orderPayload: any) {
+    const weeklyReceipt: any = await WeeklyReceipts.create({ user: userId });
+    console.log(weeklyReceipt);
     //create user order
-    orderPayload.user = weeklyReceipt._id;
+    orderPayload.user = userId;
     orderPayload.weeklyReceipt = weeklyReceipt._id;
     const order = await Order.create(orderPayload);
 

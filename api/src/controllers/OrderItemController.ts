@@ -16,7 +16,19 @@ class OrderItemController {
     }
   }
 
-  public async update(req: any, res: any) {}
+  public async update(req: any, res: any) {
+    try {
+      const { orderId, orderItemIndex } = req.params;
+      const orderItem = await OrderItemService.update(
+        orderId,
+        orderItemIndex,
+        req.body
+      );
+      res.send(orderItem);
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  }
 
   public async delete(req: any, res: any) {}
 }

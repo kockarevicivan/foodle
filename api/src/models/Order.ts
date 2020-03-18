@@ -23,7 +23,8 @@ export default mongoose.model(
         quantity: { type: Number, required: true },
         menuItem: {
           type: mongoose.Schema.Types.ObjectId,
-          ref: "menuItems"
+          ref: "menuItems",
+          required: true
         }
       }
     ]
