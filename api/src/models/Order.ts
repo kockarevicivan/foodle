@@ -1,11 +1,12 @@
 import mongoose from "mongoose";
+import OrderStatus from "./OrderStatus";
 
 export default mongoose.model(
-  "userOrders",
+  "orders",
   new mongoose.Schema({
     totalPrice: { type: Number, default: 0, min: 0 },
     createdAt: { type: Date, default: Date.now() },
-    orderSent: { type: Boolean, default: false },
+    status: { type: OrderStatus, default: OrderStatus.Processing },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
@@ -18,8 +19,11 @@ export default mongoose.model(
     },
     orderedItems: [
       {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "orderedItems"
+        quantity: { type: Number, required: true },
+        menuItem: {
+          type: mongoose.Schema.Types.ObjectId,
+          ref: "menuItems"
+        }
       }
     ]
   })

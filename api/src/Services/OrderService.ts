@@ -1,20 +1,19 @@
-import UserOrder from "../models/UserOrder";
+import Order from "../models/Order";
 import WeeklyReceipts from "../models/WeeklyReceipt";
 import dateUtil from "../util/dateFormatting";
-import User from "../models/User";
-import WeeklyReceipt from "../models/WeeklyReceipt";
+import OrderStatus from "../models/OrderStatus";
 
-class UserOrderService {
+class OrderService {
   /**
    * Gets all user orders for a provided date
    * @param dateTime
    */
   public async getAllByDate(dateTime: string) {
     const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
-    const userOrders = await UserOrder.find({
+    const orders = await Order.find({
       createdAt: { $gte: startOfDay, $lte: endOfDay }
     });
-    return userOrders;
+    return orders;
   }
 
   /**
@@ -25,33 +24,34 @@ class UserOrderService {
    */
   public async getAllByDateAndUser(userId: string, dateTime: string) {
     const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
-    const userOrders = UserOrder.find({
+    const orders = Order.find({
       user: userId,
       createdAt: { $gte: startOfDay, $lte: endOfDay }
     });
 
-    return userOrders;
+    return orders;
   }
 
   /**
    * Creates a user order and adds it to the
    * @param userId
-   * @param userOrderPayload
+   * @param orderPayload
    */
-  public async add(userId: string, userOrderPayload: any) {
+  public async add(userId: string, orderPayload: any) {
     let weeklyReceipt: any = await this.getOrCreateWeeklyReceipt(userId);
 
     //create user order
-    userOrderPayload.user = userId;
-    userOrderPayload.weeklyReceipt = weeklyReceipt._id;
-    const userOrder = await UserOrder.create(userOrderPayload);
+    orderPayload.user = userId;
+    orderPayload.weeklyReceipt = weeklyReceipt._id;
+    const order = await Order.create(orderPayload);
 
     // add it to weekly receipt
-    weeklyReceipt.userOrders.push(userOrder);
+    weeklyReceipt.orders.push(order);
     await weeklyReceipt.save();
-    return userOrder;
+    return order;
   }
 
+  /* OVO TREBA DA SE IZBRISE */
   private async getOrCreateWeeklyReceipt(userId: string) {
     const currentDate = new Date();
     const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(
@@ -70,17 +70,38 @@ class UserOrderService {
     }
   }
 
-  public async update(userOrderId: string, userOrderUpdate: any) {
-    await UserOrder.findByIdAndUpdate(userOrderId, userOrderUpdate, {
-      runValidators: true
-    });
-    const userOrder = await UserOrder.findById(userOrderId);
-    return userOrder;
+  public async setStatusToSent(orderId: string) {
+    const order: any = await Order.findById(orderId);
+    if (order.status == OrderStatus.Finalized) {
+      throw new Error("Order status cannot be changed from Finalized to Sent");
+    }
+
+    order.status = OrderStatus.Sent;
+    await order.save();
+    return order;
   }
 
-  public async delete(userOrderId: string) {
-    await UserOrder.findByIdAndDelete(userOrderId);
+  public async setTotalPrice(orderId: string, totalPrice: number) {
+    const order: any = await Order.findById(orderId);
+    if (order.status == OrderStatus.Processing) {
+      throw new Error(
+        "You cannot set total price if order doesn't have status Sent"
+      );
+    }
+
+    if (totalPrice < 0) {
+      throw new Error("Total price must be greater than 0");
+    }
+
+    order.status = OrderStatus.Finalized;
+    order.totalPrice = totalPrice;
+    await order.save();
+    return order;
+  }
+
+  public async delete(orderId: string) {
+    await Order.findByIdAndDelete(orderId);
   }
 }
 
-export default new UserOrderService();
+export default new OrderService();

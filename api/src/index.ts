@@ -6,7 +6,7 @@ import cors from "cors";
 import config from "./config";
 
 import userRoutes from "./routes/userRoutes";
-import userOrderRoutes from "./routes/userOrderRoutes";
+import orderRoutes from "./routes/orderRoutes";
 import weeklyReceiptRoutes from "./routes/weeklyReceiptRoutes";
 import menuItemRoutes from "./routes/menuItemRoutes";
 import invoiceRoutes from "./routes/invoiceRoutes";
@@ -38,7 +38,7 @@ app.use("/receipt", weeklyReceiptRoutes);
 app.use("/menuItems", menuItemRoutes);
 app.use("/invoice", invoiceRoutes);
 app.use("/login", loginRoutes);
-app.use("/userOrders", userOrderRoutes);
+app.use("/orders", orderRoutes);
 
 app.listen(config.port, () => {
   console.log(`Server running on port ${config.port}`);

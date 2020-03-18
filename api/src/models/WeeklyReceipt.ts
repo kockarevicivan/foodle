@@ -11,10 +11,10 @@ export default mongoose.model(
       ref: "users",
       required: true
     },
-    userOrders: [
+    orders: [
       {
         type: mongoose.Schema.Types.ObjectId,
-        ref: "userOrders"
+        ref: "orders"
       }
     ]
   })
