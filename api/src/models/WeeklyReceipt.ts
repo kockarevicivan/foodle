@@ -6,6 +6,11 @@ export default mongoose.model(
     totalPrice: { type: Number, default: 0, min: 0 },
     paid: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now() },
+<<<<<<< HEAD:api/src/models/WeeklyReceipt.ts
+=======
+    week: { type: Number },
+    year: { type: Number },
+>>>>>>> develop:api/src/models/WeeklyReceipts.ts
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",
