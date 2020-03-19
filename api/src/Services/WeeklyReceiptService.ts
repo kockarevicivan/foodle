@@ -7,7 +7,7 @@ class WeeklyReceiptService {
     receiptPayload.week = date[1];
 
     const receipt = await WeeklyReceipts.create(receiptPayload);
-    return await WeeklyReceipts.find({ _id: receipt._id });
+    return receipt;
   }
 
   async getAll() {

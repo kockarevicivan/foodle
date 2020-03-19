@@ -24,9 +24,7 @@ class WeeklyReceiptController {
 
   public async getByUserIdAndWeek(req: Request, res: Response): Promise<any> {
     try {
-      const { userId } = req.params;
-      const { week } = req.params;
-      const { year } = req.params;
+      const { userId, week,year } = req.params;     
 
       const weeklyReceipt = await WeeklyReceiptService.getByUserIdAndWeek(
         userId,
