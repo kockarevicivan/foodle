@@ -16,7 +16,7 @@ router.get(
 );
 // get user order for a given week for a given user
 router.get("/:date", OrderController.getByUserAndDate);
-router.post("/", OrderController.add);
+router.post("/:weeklyReceiptId", OrderController.add);
 router.patch("/send/:orderId", OrderController.sendOrder);
 router.patch("/setTotal/:orderId", OrderController.setTotal);
 router.delete(

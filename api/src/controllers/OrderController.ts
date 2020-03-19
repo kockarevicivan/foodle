@@ -25,7 +25,8 @@ class UserOrderController {
 
   public async add(req: any, res: any): Promise<any> {
     try {
-      const userOrder = await OrderService.add(req.user._id, {});
+      const { weeklyReceiptId } = req.params;
+      const userOrder = await OrderService.add(req.user._id, weeklyReceiptId);
       res.send(userOrder);
     } catch (error) {
       res.status(400).send(error.message);

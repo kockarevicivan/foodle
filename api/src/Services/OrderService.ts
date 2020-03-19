@@ -2,6 +2,7 @@ import Order from "../models/Order";
 import WeeklyReceipts from "../models/WeeklyReceipt";
 import dateUtil from "../util/dateFormatting";
 import OrderStatus from "../models/OrderStatus";
+import WeeklyReceipt from "../models/WeeklyReceipt";
 
 class OrderService {
   /**
@@ -38,12 +39,16 @@ class OrderService {
    * @param userId
    * @param orderPayload
    */
-  public async add(userId: string, orderPayload: any) {
-    const weeklyReceipt: any = await WeeklyReceipts.create({ user: userId });
-    console.log(weeklyReceipt);
+  public async add(userId: string, weeklyReceiptId: string) {
+    const weeklyReceipt: any = await WeeklyReceipt.findById(weeklyReceiptId);
+    if (!weeklyReceipt) {
+      throw new Error("Weekly receipt with that id doesn't exist.");
+    }
+
     //create user order
+    let orderPayload: any = {};
     orderPayload.user = userId;
-    orderPayload.weeklyReceipt = weeklyReceipt._id;
+    orderPayload.weeklyReceipt = weeklyReceiptId;
     const order = await Order.create(orderPayload);
 
     // add it to weekly receipt
