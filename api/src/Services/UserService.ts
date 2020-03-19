@@ -4,10 +4,13 @@ class UserService {
   async add(userPayload: any) {
     const hashedPassword = await bcrypt.hash(userPayload.password, 10);
     userPayload.password = hashedPassword;
+
     const user = await User.create(userPayload);
-    const id = user._id;
-    const nest = User.findById(id).select(["username", "fullName"]);
-    return nest;
+    const userContainer = User.findById(user._id).select([
+      "username",
+      "fullName"
+    ]);
+    return userContainer;
   }
 
   async getAll() {
