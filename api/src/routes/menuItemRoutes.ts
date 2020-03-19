@@ -6,11 +6,11 @@ import AuthorizationMiddleware from "../middleware/AuthorizationMiddleware";
 const router = express.Router();
 
 router.use(AuthorizationMiddleware.verifyToken);
-router.get("/:date", MenuItemController.getMenuItemsForDay);
+router.get("/:date", MenuItemController.getAllForDay);
 router.post(
   "/",
   AuthorizationMiddleware.verifyPermission,
-  MenuItemController.addMenuItemForCurrentDay
+  MenuItemController.addForCurrentDay
 );
 router.put(
   "/:menuItemId",

@@ -1,13 +1,10 @@
 import MenuItem from "../models/MenuItem";
-import OrderedItem from "../models/OrderedItem";
+import OrderedItem from "../models/OrderItemSchema";
+import dateUtil from "../util/dateFormatting";
 
 class MenuItemService {
   public async getAllByDate(dateTime: string) {
-    const startOfDay: Date = new Date(dateTime);
-    startOfDay.setHours(0, 0, 0, 0);
-    const endOfDay: Date = new Date(dateTime);
-    endOfDay.setHours(23, 59, 59, 999);
-
+    const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
     const menuItems = await MenuItem.find({
       createdAt: { $gte: startOfDay, $lte: endOfDay }
     });
@@ -31,8 +28,8 @@ class MenuItemService {
   }
 
   public async delete(menuItemId: string) {
-    if (await OrderedItem.exists({ menuItem: menuItemId })) {
-      throw Error(`There is an ordered item for this menu item.`);
+    if (await MenuItem.exists({ menuItem: menuItemId })) {
+      throw Error(`There is an menu item for this menu item.`);
     }
 
     if (!(await MenuItem.exists({ _id: menuItemId }))) {

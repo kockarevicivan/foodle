@@ -1,4 +1,4 @@
-import WeeklyReceipts from "../models/WeeklyReceipts";
+import WeeklyReceipts from "../models/WeeklyReceipt";
 
 class WeeklyReceiptService {
   async add(receiptPayload: any, dateTime: any) {

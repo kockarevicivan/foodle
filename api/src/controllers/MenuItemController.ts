@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import MenuItemService from "../services/MenuItemService";
 
 class MenuItemController {
-  public async getMenuItemsForDay(req: Request, res: Response) {
+  public async getAllForDay(req: Request, res: Response) {
     try {
       const menuItems = await MenuItemService.getAllByDate(req.params.date);
       res.send(menuItems);
@@ -12,7 +12,7 @@ class MenuItemController {
     }
   }
 
-  public async addMenuItemForCurrentDay(req: Request, res: Response) {
+  public async addForCurrentDay(req: Request, res: Response) {
     try {
       const menuItem = await MenuItemService.addForCurrentDay(req.body);
       res.send(menuItem);
