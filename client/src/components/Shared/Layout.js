@@ -1,16 +1,13 @@
-import React from 'react'
-import {Container} from "react-bootstrap"
-import Header from '../UI/Header/Header'
-import Sidebar from '../UI/Sidebar'
+import React from "react";
+import Sidebar from "../UI/Sidebar/Sidebar";
 
-function Layout({children}) {
-    return (
-        <Container>
-            <Header></Header>
-            <Sidebar></Sidebar>
-            {children}
-        </Container>
-    )
+function Layout({ children }) {
+  return (
+    <React.Fragment>
+      <Sidebar />
+      {children}
+    </React.Fragment>
+  );
 }
 
-export default Layout
+export default Layout;

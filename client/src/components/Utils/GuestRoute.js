@@ -1,49 +1,22 @@
-import React, { Component } from 'react'
-import PropTypes from "prop-types"
-import { connect } from 'react-redux';
-import {Route, Redirect} from "react-router-dom"
-import {authUser} from "../../store/AuthStore/actions"
+import React, { Component } from "react";
+import PropTypes from "prop-types";
+import { Route, Redirect } from "react-router-dom";
 
- class GuestRoute extends Component {
+class GuestRoute extends Component {
+  render() {
+    const { component, ...rest } = this.props;
 
-componentDidMount() {
-    setTimeout(() => {
-        this.props.authenticate();
-        console.log(this.props.isAuth);
-        
-    }, 1000);
-}
-
-    render() {
-   
-        const {component, path, isAuth} = this.props;
-        
-        if (isAuth) {
-            return <Redirect to="/"/> 
-        }
-        return <Route path={path} component={component}></Route>
+    let kurac = false;
+    if (kurac) {
+      return <Redirect to="/" />;
     }
+    return <Route {...rest} component={component}></Route>;
+  }
 }
 
 GuestRoute.propTypes = {
-    component: PropTypes.func.isRequired,
-    path: PropTypes.string.isRequired,
-    isAuth: PropTypes.bool.isRequired,
-    authenticate: PropTypes.func.isRequired
-}
-
-const mapStateToProps = state => {
-    
-    return {
-        isAuth: state.auth.isAuth
-        // foo: state.foo.isFoo
-    };
+  component: PropTypes.func.isRequired,
+  path: PropTypes.string.isRequired
 };
 
-const mapDispatchToProps = dispatch => {
-    return {
-        authenticate: () => dispatch(authUser("Marko"))
-    };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(GuestRoute)
+export default GuestRoute;

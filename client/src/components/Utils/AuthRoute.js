@@ -1,14 +1,19 @@
-import React from 'react'
-import {Route, Redirect} from "react-router-dom"
+import React from "react";
+import { Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
-function AuthRoute({path, component}) {
-    let isAuth = true;
-    if (isAuth) {
-        return <Route path={path} component={component}></Route> 
-    } 
+function AuthRoute({ isLogged, component, ...rest }) {
+  if (isLogged) {
+    return <Route {...rest} component={component}></Route>;
+  }
 
-    return <Redirect to='/'></Redirect>
-    
+  return <Redirect to="/"></Redirect>;
 }
 
-export default AuthRoute
+const mapStateToProps = state => {
+  console.log(state.authenticationReducers);
+  return {
+    isLogged: state.authenticationReducers.user ? true : false
+  };
+};
+export default connect(mapStateToProps, {})(AuthRoute);
