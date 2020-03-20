@@ -10,10 +10,8 @@ function AuthRoute({ isLogged, component, ...rest }) {
   return <Redirect to="/"></Redirect>;
 }
 
-const mapStateToProps = state => {
-  console.log(state.authenticationReducers);
-  return {
-    isLogged: state.authenticationReducers.user ? true : false
-  };
-};
+const mapStateToProps = state => ({
+  isLogged: state.authenticationReducers.isLogged
+});
+
 export default connect(mapStateToProps, {})(AuthRoute);

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { authenticateUser } from "../../store/actions/authentication/authenticationActions";
 
@@ -20,7 +20,6 @@ class Login extends Component {
       this.props.history.push(`/dashboard/${this.props.user.role}`);
     } catch (error) {
       console.log(error.message);
-      alert("jebem ti mater promasio si nesto");
     }
   };
 
@@ -58,11 +57,8 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  console.log(state.authenticationReducers);
-  return {
-    user: state.authenticationReducers.user
-  };
-};
+const mapStateToProps = state => ({
+  user: state.authenticationReducers.user
+});
 
 export default connect(mapStateToProps, { authenticateUser })(Login);

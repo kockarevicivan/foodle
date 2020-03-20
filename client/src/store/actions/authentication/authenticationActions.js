@@ -6,7 +6,6 @@ import {
 
 export const authenticateUser = credentials => async dispatch => {
   const { data } = await axios.post("http://localhost:4200/login", credentials);
-  console.log(data);
   dispatch(authenticateUserCreator(data));
 };
 

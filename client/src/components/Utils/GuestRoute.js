@@ -1,22 +1,17 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { Route, Redirect } from "react-router-dom";
+import { connect } from "react-redux";
 
-class GuestRoute extends Component {
-  render() {
-    const { component, ...rest } = this.props;
-
-    let kurac = false;
-    if (kurac) {
-      return <Redirect to="/" />;
-    }
-    return <Route {...rest} component={component}></Route>;
+function GuestRoute({ user, component, ...rest }) {
+  if (user) {
+    return <Redirect to={`/dashboard/${user.role}`} />;
   }
+
+  return <Route {...rest} component={component}></Route>;
 }
 
-GuestRoute.propTypes = {
-  component: PropTypes.func.isRequired,
-  path: PropTypes.string.isRequired
-};
+const mapStateToProps = state => ({
+  user: state.authenticationReducers.user
+});
 
-export default GuestRoute;
+export default connect(mapStateToProps, {})(GuestRoute);

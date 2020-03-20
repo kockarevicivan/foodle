@@ -5,13 +5,15 @@ import DashboardPage from "./pages/Dashboard/Dashboard";
 import RegisterPage from "./pages/Register/Register";
 import NotFound from "./pages/NotFound/NotFound";
 
+import GuestRoute from "./components/Utils/GuestRoute";
+
 function App() {
   return (
     <BrowserRouter>
       <Switch>
         <Route exact path="/" component={LoginPage} />
         <Route path="/dashboard" component={DashboardPage} />
-        <Route path="/login" component={LoginPage} />
+        <GuestRoute path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
         <Route path="*" component={NotFound} />
       </Switch>
