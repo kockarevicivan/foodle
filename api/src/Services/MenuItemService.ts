@@ -1,5 +1,4 @@
 import MenuItem from "../models/MenuItem";
-import OrderedItem from "../models/OrderItemSchema";
 import dateUtil from "../util/dateFormatting";
 
 class MenuItemService {
