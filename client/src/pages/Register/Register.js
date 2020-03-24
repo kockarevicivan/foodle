@@ -18,9 +18,7 @@ class Register extends Component {
     const credentials = {
       username: this.state.username,
       fullName: this.state.fullName,
-      password: this.state.password,
-      role: "regular"
-
+      password: this.state.password
     }
     if(credentials.password == this.state.repeatPassword) {
       console.log(1);
@@ -62,7 +60,7 @@ class Register extends Component {
         <p>
         <label htmlFor="password">Password:</label><br/>
           <input
-            type="text"
+            type="password"
             name="password"
             required
             value={this.state.password}
@@ -72,7 +70,7 @@ class Register extends Component {
         <p>
         <label htmlFor="repeatPassword">Repeat password:</label><br/>
           <input
-            type="text"
+            type="password"
             name="repeatPassword"
             required
             value={this.state.repeatPassword}

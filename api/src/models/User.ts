@@ -7,7 +7,7 @@ export default mongoose.model(
         fullName: { type: String, required: true },
         password: { type: String, required: true },
         refreshToken: { type: String },
-        role: { type: String, required: true },
+        role: { type: String, default: 'regular' },
         weeklyReceipts: [
             {
                 type: mongoose.Schema.Types.ObjectId,
