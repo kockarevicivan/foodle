@@ -3,6 +3,7 @@ import { BrowserRouter, Switch, Route } from "react-router-dom";
 import LoginPage from "./pages/Login/Login";
 import DashboardPage from "./pages/Dashboard/Dashboard";
 import RegisterPage from "./pages/Register/Register";
+import ProfilePage from "./pages/Profile/Profile";
 import NotFound from "./pages/NotFound/NotFound";
 
 import GuestRoute from "./components/Utils/GuestRoute";
@@ -15,6 +16,7 @@ function App() {
         <Route path="/dashboard" component={DashboardPage} />
         <GuestRoute path="/login" component={LoginPage} />
         <Route path="/register" component={RegisterPage} />
+        <Route path="/profile" component={ProfilePage} />
         <Route path="*" component={NotFound} />
       </Switch>
     </BrowserRouter>
