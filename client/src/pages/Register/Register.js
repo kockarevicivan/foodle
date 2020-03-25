@@ -20,9 +20,7 @@ class Register extends Component {
       fullName: this.state.fullName,
       password: this.state.password
     }
-    if(credentials.password == this.state.repeatPassword) {
-      console.log(1);
-      
+    if(credentials.password == this.state.repeatPassword) {  
       try {
         await this.props.registerUser(credentials);
         this.props.history.push(`/login`);
@@ -30,7 +28,7 @@ class Register extends Component {
         console.log(error.message);
       }
     } else {
-      console.log('nope');
+      alert('Your passwords do not match. Please try again.')
       
     }
   };
