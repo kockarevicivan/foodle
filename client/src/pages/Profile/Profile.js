@@ -29,7 +29,6 @@ class Profile extends Component {
     };
     try {
       await this.props.updateUser(credentials, this.state.userId, this.state.token);
-      this.props.history.push(`/login`);
     } catch (error) {
       console.log(error.message);
     }
