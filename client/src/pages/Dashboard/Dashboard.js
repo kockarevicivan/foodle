@@ -4,6 +4,7 @@ import Layout from "../../components/Layout/DashboardLayout";
 import UserDashboard from "./UserDashboard/UserDashboard";
 import { connect } from "react-redux";
 import { isAuthenticatedAction } from "../../store/actions/authentication/authenticationActions";
+import { Redirect } from "react-router";
 
 class Dashboard extends Component {
   render() {
@@ -13,13 +14,15 @@ class Dashboard extends Component {
           <AdminDashboard />
         </Layout>
       );
+    } else if (this.props.user && this.props.role === "regular") {
+      return (
+        <Layout>
+          <UserDashboard />
+        </Layout>
+      );
     }
 
-    return (
-      <Layout>
-        <UserDashboard />
-      </Layout>
-    );
+    return <Redirect to="/login" />;
   }
 }
 

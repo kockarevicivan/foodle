@@ -13,7 +13,6 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import { isAuthenticatedAction } from "./store/actions/authentication/authenticationActions";
 
 class App extends Component {
-  state = {};
   render() {
     // svaki put kad refresuje izbrise se redux
     // pa trea da doda ulogovanog korisnika ako ima token u local storage

@@ -18,7 +18,6 @@ class LoginController {
   }
 
   public async isAuthenticated(req: any, res: any) {
-    console.log(req.user);
     res.send(req.user);
   }
 }
