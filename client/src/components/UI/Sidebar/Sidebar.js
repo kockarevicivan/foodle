@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { logoutUser } from "../../../store/actions/authentication/authenticationActions";
+import { withRouter } from "react-router";
 
 class Sidebar extends Component {
   state = {};
   onLogout = () => {
     this.props.logoutUser();
+    this.props.history.push("/login");
   };
   render() {
     return (
@@ -17,4 +19,4 @@ class Sidebar extends Component {
   }
 }
 
-export default connect(null, { logoutUser })(Sidebar);
+export default withRouter(connect(null, { logoutUser })(Sidebar));
