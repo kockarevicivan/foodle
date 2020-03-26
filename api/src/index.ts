@@ -10,7 +10,7 @@ import orderRoutes from "./routes/orderRoutes";
 import weeklyReceiptRoutes from "./routes/weeklyReceiptRoutes";
 import menuItemRoutes from "./routes/menuItemRoutes";
 import invoiceRoutes from "./routes/invoiceRoutes";
-import loginRoutes from "./routes/loginRoutes";
+import loginRoutes from "./routes/authenticationRoutes";
 import orderItemRoutes from "./routes/orderItemRoutes";
 
 // setup database
@@ -35,7 +35,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 // routes
 app.use("/users", userRoutes);
-app.use("/login", loginRoutes);
+app.use("/authentication", loginRoutes);
 app.use("/orders", orderRoutes);
 app.use("/menuItems", menuItemRoutes);
 app.use("/orderItems", orderItemRoutes);

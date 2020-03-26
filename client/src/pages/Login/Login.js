@@ -17,7 +17,7 @@ class Login extends Component {
     };
     try {
       await this.props.authenticateUser(credentials);
-      this.props.history.push(`/dashboard/${this.props.user.role}`);
+      this.props.history.push("/dashboard");
     } catch (error) {
       console.log(error.message);
     }
@@ -57,8 +57,4 @@ class Login extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  user: state.authenticationReducers.user
-});
-
-export default connect(mapStateToProps, { authenticateUser })(Login);
+export default connect(null, { authenticateUser })(Login);

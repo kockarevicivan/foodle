@@ -3,7 +3,7 @@ import { Request, Response } from "express";
 import AuthenticationService from "../Services/AuthenticationService";
 
 class LoginController {
-  public async login(req: Request, res: Response): Promise<any> {
+  public async login(req: Request, res: Response) {
     try {
       const { username, password } = req.body;
       const user = await AuthenticationService.authenticateUser(
@@ -15,6 +15,11 @@ class LoginController {
     } catch {
       res.status(400).send("Username or password are incorrect!");
     }
+  }
+
+  public async isAuthenticated(req: any, res: any) {
+    console.log(req.user);
+    res.send(req.user);
   }
 }
 
