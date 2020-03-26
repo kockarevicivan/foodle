@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import MainLayout from "../../components/Layout/MainLayout";
 
 class Home extends Component {
   state = {};
   render() {
-    return <h1>HOME</h1>;
+    return (
+      <MainLayout>
+        <h1>Home</h1>
+      </MainLayout>
+    );
   }
 }
 

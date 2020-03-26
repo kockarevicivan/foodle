@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import MainLayout from "../../components/Layout/MainLayout";
 
 class Register extends Component {
   state = {
@@ -18,48 +19,50 @@ class Register extends Component {
   };
   render() {
     return (
-      <form onSubmit={this.onSubmit}>
-        <p>
-          <input
-            type="text"
-            name="username"
-            required
-            value={this.state.username}
-            onChange={this.onChange}
-          />
-        </p>
-        <p>
-          <input
-            type="text"
-            name="fullName"
-            required
-            value={this.state.fullName}
-            onChange={this.onChange}
-          />
-        </p>
-        <p>
-          <input
-            type="password"
-            name="password"
-            required
-            value={this.state.password}
-            onChange={this.onChange}
-          />
-        </p>
-        <p>
-          <input
-            type="password"
-            name="repeatPassword"
-            required
-            value={this.state.repeatPassword}
-            onChange={this.onChange}
-          />
-        </p>
-        <button>Register</button>
-        <p>
-          <Link to="/login">Already have an account?</Link>
-        </p>
-      </form>
+      <MainLayout>
+        <form onSubmit={this.onSubmit}>
+          <p>
+            <input
+              type="text"
+              name="username"
+              required
+              value={this.state.username}
+              onChange={this.onChange}
+            />
+          </p>
+          <p>
+            <input
+              type="text"
+              name="fullName"
+              required
+              value={this.state.fullName}
+              onChange={this.onChange}
+            />
+          </p>
+          <p>
+            <input
+              type="password"
+              name="password"
+              required
+              value={this.state.password}
+              onChange={this.onChange}
+            />
+          </p>
+          <p>
+            <input
+              type="password"
+              name="repeatPassword"
+              required
+              value={this.state.repeatPassword}
+              onChange={this.onChange}
+            />
+          </p>
+          <button>Register</button>
+          <p>
+            <Link to="/login">Already have an account?</Link>
+          </p>
+        </form>
+      </MainLayout>
     );
   }
 }

@@ -3,8 +3,6 @@ import AdminDashboard from "./AdminDashboard/AdminDashboard";
 import Layout from "../../components/Layout/DashboardLayout";
 import UserDashboard from "./UserDashboard/UserDashboard";
 import { connect } from "react-redux";
-import { isAuthenticatedAction } from "../../store/actions/authentication/authenticationActions";
-import { Redirect } from "react-router";
 
 class Dashboard extends Component {
   render() {
@@ -22,7 +20,8 @@ class Dashboard extends Component {
       );
     }
 
-    return <Redirect to="/login" />;
+    // mora da vrati null jer je react najretardiraniji frejmvork na svetu
+    return null;
   }
 }
 
@@ -30,4 +29,4 @@ const mapStateToProps = state => ({
   user: state.authenticationReducers.user
 });
 
-export default connect(mapStateToProps, { isAuthenticatedAction })(Dashboard);
+export default connect(mapStateToProps, {})(Dashboard);

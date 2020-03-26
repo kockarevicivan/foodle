@@ -1,16 +1,11 @@
 import React from "react";
 import { Route, Redirect } from "react-router-dom";
-import { connect } from "react-redux";
 
-function AuthRoute({
-  isAuthenticated,
-  location,
-  component: Component,
-  ...rest
-}) {
-  if (isAuthenticated) {
+function AuthRoute({ location, component: Component, ...rest }) {
+  if (localStorage.getItem("token")) {
     return <Route {...rest} component={Component} />;
   }
+
   return (
     <Redirect
       to={{
@@ -21,8 +16,4 @@ function AuthRoute({
   );
 }
 
-const mapStateToProps = state => ({
-  isAuthenticated: state.authenticationReducers.isAuthenticated
-});
-
-export default connect(mapStateToProps, {})(AuthRoute);
+export default AuthRoute;

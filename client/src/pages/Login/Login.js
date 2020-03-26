@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { authenticateUser } from "../../store/actions/authentication/authenticationActions";
+import MainLayout from "../../components/Layout/MainLayout";
 
 class Login extends Component {
   state = {
@@ -29,7 +30,7 @@ class Login extends Component {
 
   render() {
     return (
-      <React.Fragment>
+      <MainLayout>
         <form onSubmit={this.onSubmit}>
           <p>
             <input
@@ -52,7 +53,7 @@ class Login extends Component {
           <button>Login</button>
         </form>
         <Link to="/register">Create an account</Link>
-      </React.Fragment>
+      </MainLayout>
     );
   }
 }
