@@ -5,11 +5,10 @@ function AuthRoute({ location, component: Component, ...rest }) {
   if (localStorage.getItem("token")) {
     return <Route {...rest} component={Component} />;
   }
-
   return (
     <Redirect
       to={{
-        pathname: "/login",
+        pathname: "/",
         state: { from: location }
       }}
     />

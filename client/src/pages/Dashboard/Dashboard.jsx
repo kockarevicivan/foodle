@@ -1,23 +1,14 @@
 import React, { Component } from "react";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
-import Layout from "../../components/Layout/DashboardLayout";
 import UserDashboard from "./UserDashboard/UserDashboard";
 import { connect } from "react-redux";
 
 class Dashboard extends Component {
   render() {
     if (this.props.user && this.props.user.role === "admin") {
-      return (
-        <Layout>
-          <AdminDashboard />
-        </Layout>
-      );
+      return <AdminDashboard />;
     } else if (this.props.user && this.props.user.role === "regular") {
-      return (
-        <Layout>
-          <UserDashboard />
-        </Layout>
-      );
+      return <UserDashboard />;
     }
 
     // mora da vrati null jer je react najretardiraniji frejmvork na svetu

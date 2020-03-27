@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { updateUser } from "../../store/actions/users/usersActions";
+import Layout from "../../components/Layout/Layout";
 
 class Profile extends Component {
   state = {
@@ -27,7 +28,7 @@ class Profile extends Component {
   };
   render() {
     return (
-      <React.Fragment>
+      <Layout>
         <h1>This is the profile page</h1>
         <form onSubmit={this.onSubmit}>
           <p>
@@ -55,7 +56,7 @@ class Profile extends Component {
 
           <button>Update profile</button>
         </form>
-      </React.Fragment>
+      </Layout>
     );
   }
 }
