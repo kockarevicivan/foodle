@@ -1,25 +1,32 @@
 import React, { Component } from "react";
-import { Switch, Redirect } from "react-router-dom";
-import UserDashboard from "./UserDashboard/UserDashboard";
 import AdminDashboard from "./AdminDashboard/AdminDashboard";
-import Layout from "../../components/Shared/Layout";
-import AuthRoute from "../../components/Utils/AuthRoute";
+import Layout from "../../components/Layout/DashboardLayout";
+import UserDashboard from "./UserDashboard/UserDashboard";
+import { connect } from "react-redux";
 
 class Dashboard extends Component {
-  state = {};
   render() {
-    return (
-      <React.Fragment>
+    if (this.props.user && this.props.user.role === "admin") {
+      return (
         <Layout>
-          <Switch>
-            <AuthRoute path="/dashboard/regular" component={UserDashboard} />
-            <AuthRoute path="/dashboard/admin" component={AdminDashboard} />
-            <Redirect to="/login" />
-          </Switch>
+          <AdminDashboard />
         </Layout>
-      </React.Fragment>
-    );
+      );
+    } else if (this.props.user && this.props.role === "regular") {
+      return (
+        <Layout>
+          <UserDashboard />
+        </Layout>
+      );
+    }
+
+    // mora da vrati null jer je react najretardiraniji frejmvork na svetu
+    return null;
   }
 }
 
-export default Dashboard;
+const mapStateToProps = state => ({
+  user: state.authenticationReducers.user
+});
+
+export default connect(mapStateToProps, {})(Dashboard);

@@ -1,26 +1,35 @@
-import React from "react";
+import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { connect } from "react-redux";
+
 import LoginPage from "./pages/Login/Login";
-import DashboardPage from "./pages/Dashboard/Dashboard";
 import RegisterPage from "./pages/Register/Register";
 import ProfilePage from "./pages/Profile/Profile";
 import NotFound from "./pages/NotFound/NotFound";
 
-import GuestRoute from "./components/Utils/GuestRoute";
+import AuthRoute from "./components/Routes/AuthRoute";
+import Home from "./pages/Home/Home";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
-function App() {
-  return (
-    <BrowserRouter>
-      <Switch>
-        <Route exact path="/" component={LoginPage} />
-        <Route path="/dashboard" component={DashboardPage} />
-        <GuestRoute path="/login" component={LoginPage} />
-        <Route path="/register" component={RegisterPage} />
-        <Route path="/profile" component={ProfilePage} />
-        <Route path="*" component={NotFound} />
-      </Switch>
-    </BrowserRouter>
-  );
-}
+import { isAuthenticatedAction } from "./store/actions/authentication/authenticationActions";
 
-export default App;
+class App extends Component {
+  componentDidMount() {
+    this.props.isAuthenticatedAction();
+  }
+
+  render() {
+    return (
+      <BrowserRouter>
+        <Switch>
+          <Route exact path="/" component={Home} />
+          <Route path="/register" component={RegisterPage} />
+          <Route path="/login" component={LoginPage} />
+          <AuthRoute path="/dashboard" component={Dashboard} />
+          <Route path="*" component={NotFound} />
+        </Switch>
+      </BrowserRouter>
+    );
+  }
+
+export default connect(null, { isAuthenticatedAction })(App);

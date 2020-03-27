@@ -10,7 +10,7 @@ class AuthenticationMiddleware {
       req.user = userDecoded;
       next();
     } catch (error) {
-      res.status(403).send("Forbidden");
+      res.status(403).send(error.message);
     }
   }
 
