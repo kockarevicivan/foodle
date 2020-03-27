@@ -13,11 +13,11 @@ import Dashboard from "./pages/Dashboard/Dashboard";
 import { isAuthenticatedAction } from "./store/actions/authentication/authenticationActions";
 
 class App extends Component {
-  render() {
-    // svaki put kad refresuje izbrise se redux
-    // pa trea da doda ulogovanog korisnika ako ima token u local storage
-    // i ako je taj token validan
+  componentDidMount() {
     this.props.isAuthenticatedAction();
+  }
+
+  render() {
     return (
       <BrowserRouter>
         <Switch>
