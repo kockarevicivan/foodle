@@ -6,7 +6,8 @@ class PlaceOrder extends Component {
   render() {
     return (
       <Layout>
-        <h1>PlaceOrder</h1>;
+        <h1>PlaceOrder</h1>; ovde idu one dve tabele, jedna gde bira menu item
+        druga gde unosi kolko oce
       </Layout>
     );
   }
