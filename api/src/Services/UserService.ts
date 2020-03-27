@@ -23,7 +23,7 @@ class UserService {
 
   async update(id: string, update: any) {
     await User.findByIdAndUpdate(id, { $set: update }, { runValidators: true });
-    return await User.findById(id).select(["username", "fullName"]);
+    return await User.findById(id).select("-password -weeklyReceipts -__v");
   }
 
   async delete(id: string) {

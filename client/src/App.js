@@ -25,11 +25,13 @@ class App extends Component {
           <Route exact path="/" component={Home} />
           <Route path="/register" component={RegisterPage} />
           <Route path="/login" component={LoginPage} />
+          <Route path="/profile" component={ProfilePage} />
           <AuthRoute path="/dashboard" component={Dashboard} />
           <Route path="*" component={NotFound} />
         </Switch>
       </BrowserRouter>
     );
   }
+}
 
 export default connect(null, { isAuthenticatedAction })(App);

@@ -4,7 +4,7 @@ import jwt from "jsonwebtoken";
 import {
   authenticateUserCreator,
   logoutUserCreator
-} from "./authenticationCreators";
+} from "./authenticationActionCreators";
 
 const authenticationUrl = "http://localhost:4200/authentication/";
 

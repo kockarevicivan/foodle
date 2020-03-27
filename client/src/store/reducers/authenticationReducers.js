@@ -1,7 +1,8 @@
 import {
   AUTHENTICATE_USER,
   LOGOUT_USER,
-  IS_AUTHENTICATED
+  IS_AUTHENTICATED,
+  UPDATE_PROFILE
 } from "../actions/authentication/authenticationTypes";
 const initialState = { user: null, isAuthenticated: false };
 
@@ -23,6 +24,12 @@ export const authenticationReducers = (state = initialState, action) => {
       return {
         ...state,
         isAuthenticated: action.isAuthenticated
+      };
+
+    case UPDATE_PROFILE:
+      return {
+        ...state,
+        user: action.updatedUser
       };
     default:
       return state;

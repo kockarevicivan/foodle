@@ -12,7 +12,7 @@ class Dashboard extends Component {
           <AdminDashboard />
         </Layout>
       );
-    } else if (this.props.user && this.props.role === "regular") {
+    } else if (this.props.user && this.props.user.role === "regular") {
       return (
         <Layout>
           <UserDashboard />

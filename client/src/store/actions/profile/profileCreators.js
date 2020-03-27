@@ -1,6 +1,6 @@
-import { UPDATE_USER } from './profileTypes';
+import { UPDATE_USER } from "./profileTypes";
 
 export const updateUserCreator = credentials => ({
-    type: UPDATE_USER,
-    credentials
-  });
+  type: UPDATE_USER,
+  credentials
+});

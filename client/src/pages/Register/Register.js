@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
 import { connect } from "react-redux";
-import { registerUser } from "../../store/actions/registration/registrationActions";
+import { registerUser } from "../../store/actions/users/usersActions";
+
 class Register extends Component {
   state = {
     username: "",
@@ -20,24 +21,26 @@ class Register extends Component {
       username: this.state.username,
       fullName: this.state.fullName,
       password: this.state.password
+    };
+
+    if (credentials.password !== this.state.repeatPassword) {
+      alert("Your passwords do not match. Please try again.");
+      return;
     }
-    if(credentials.password == this.state.repeatPassword) {  
-      try {
-        await this.props.registerUser(credentials);
-        this.props.history.push(`/login`);
-      } catch (error) {
-        console.log(error.message);
-      }
-    } else {
-      alert('Your passwords do not match. Please try again.')
-      
+
+    try {
+      await this.props.registerUser(credentials);
+      this.props.history.push(`/login`);
+    } catch (error) {
+      console.log(error.message);
     }
   };
   render() {
     return (
       <form onSubmit={this.onSubmit}>
         <p>
-          <label htmlFor="username">Username:</label><br/>
+          <label htmlFor="username">Username:</label>
+          <br />
           <input
             type="text"
             name="username"
@@ -47,7 +50,8 @@ class Register extends Component {
           />
         </p>
         <p>
-        <label htmlFor="fullName">Full name:</label><br/>
+          <label htmlFor="fullName">Full name:</label>
+          <br />
           <input
             type="text"
             name="fullName"
@@ -57,7 +61,8 @@ class Register extends Component {
           />
         </p>
         <p>
-        <label htmlFor="password">Password:</label><br/>
+          <label htmlFor="password">Password:</label>
+          <br />
           <input
             type="password"
             name="password"
@@ -67,7 +72,8 @@ class Register extends Component {
           />
         </p>
         <p>
-        <label htmlFor="repeatPassword">Repeat password:</label><br/>
+          <label htmlFor="repeatPassword">Repeat password:</label>
+          <br />
           <input
             type="password"
             name="repeatPassword"
@@ -85,8 +91,6 @@ class Register extends Component {
   }
 }
 
-
-const mapStateToProps = state => ({
-});
+const mapStateToProps = state => ({});
 
 export default connect(mapStateToProps, { registerUser })(Register);

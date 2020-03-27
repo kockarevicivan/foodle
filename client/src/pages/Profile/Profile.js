@@ -1,34 +1,26 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { updateUser } from "../../store/actions/profile/profileActions";
-import jwt from "jsonwebtoken";
+import { updateUser } from "../../store/actions/users/usersActions";
 
 class Profile extends Component {
   state = {
     username: "",
-    fullName: "",
-    token: localStorage.getItem('token'),
-    userId: this.getIdFromToken(localStorage.getItem("token"))
+    fullName: ""
   };
 
   onChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
   };
 
-  getIdFromToken(token) {
-    const decodedToken = jwt.decode(token);
-    return decodedToken._id;
-  }
-
   onSubmit = async event => {
     event.preventDefault();
-    const credentials = {
+    const userPayload = {
       username: this.state.username,
       fullName: this.state.fullName
     };
+    const { _id: userId } = this.props.user;
     try {
-      await this.props.updateUser(credentials, this.state.userId, this.state.token);
+      await this.props.updateUser(userPayload, userId);
     } catch (error) {
       console.log(error.message);
     }
@@ -68,6 +60,8 @@ class Profile extends Component {
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = state => ({
+  user: state.authenticationReducers.user
+});
 
 export default connect(mapStateToProps, { updateUser })(Profile);
