@@ -6,7 +6,7 @@ class UserDashboard extends Component {
   render() {
     return (
       <Layout>
-        <h1>UserDashboard</h1>;
+        <h1>UserDashboard</h1>
       </Layout>
     );
   }

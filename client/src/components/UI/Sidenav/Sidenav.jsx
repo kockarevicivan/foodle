@@ -8,14 +8,18 @@ class Sidebar extends Component {
   state = {};
   onLogout = () => {
     this.props.logoutUser();
-    this.props.history.push("/");
   };
   render() {
     const { isAuthenticated } = this.props;
     return (
-      <header>
-        <h2>foodle</h2>
+      <React.Fragment>
         <ul>
+          <li>
+            <h2 className="text-danger text-center">foodle</h2>
+          </li>
+          <li>
+            <div className="user-view"></div>
+          </li>
           <li>
             <Link to="/dashboard">Dashboard</Link>
           </li>
@@ -39,11 +43,18 @@ class Sidebar extends Component {
               <li>
                 <Link to="/weeklySummary">Weekly summary</Link>
               </li>
+              <li>
+                <Link to="/manageUsers"></Link>
+              </li>
             </React.Fragment>
           ) : null}
+          <li>
+            <Link onClick={this.onLogout} to="/">
+              Logout
+            </Link>
+          </li>
         </ul>
-        <button onClick={this.onLogout}>Logout</button>
-      </header>
+      </React.Fragment>
     );
   }
 }
