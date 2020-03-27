@@ -1,9 +1,10 @@
 import {
   AUTHENTICATE_USER,
   LOGOUT_USER,
-  IS_AUTHENTICATED,
-  UPDATE_PROFILE
+  IS_AUTHENTICATED
 } from "../actions/authentication/authenticationTypes";
+import { UPDATE_PROFILE } from "../actions/users/usersTypes";
+
 const initialState = { user: null, isAuthenticated: false };
 
 export const authenticationReducers = (state = initialState, action) => {

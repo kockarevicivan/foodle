@@ -1,5 +1,5 @@
 import { REGISTER_USER } from "./usersTypes";
-import { UPDATE_PROFILE } from "../authentication/authenticationTypes";
+import { UPDATE_PROFILE } from "./usersTypes";
 
 export const registerUserCreator = user => ({
   type: REGISTER_USER,
