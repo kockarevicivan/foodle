@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 
 import LoginPage from "./pages/Login/Login";
 import RegisterPage from "./pages/Register/Register";
+import ProfilePage from "./pages/Profile/Profile";
 import NotFound from "./pages/NotFound/NotFound";
 
 import AuthRoute from "./components/Routes/AuthRoute";
@@ -30,6 +31,5 @@ class App extends Component {
       </BrowserRouter>
     );
   }
-}
 
 export default connect(null, { isAuthenticatedAction })(App);
