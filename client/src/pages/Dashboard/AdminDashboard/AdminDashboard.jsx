@@ -1,9 +1,14 @@
 import React, { Component } from "react";
+import Layout from "../../../components/Layout/Layout";
 
 class AdminDashboard extends Component {
   state = {};
   render() {
-    return <h1>AdminDashboard</h1>;
+    return (
+      <Layout>
+        <h1>AdminDashboard</h1>;
+      </Layout>
+    );
   }
 }
 
