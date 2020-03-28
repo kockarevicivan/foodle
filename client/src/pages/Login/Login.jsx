@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
 import { authenticateUser } from "../../store/actions/authentication/authenticationActions";
-import MainLayout from "../../components/Layout/MainLayout";
+import FormLayout from "../../components/Layout/FormLayout";
 
 class Login extends Component {
   state = {
@@ -13,47 +13,68 @@ class Login extends Component {
   onSubmit = async event => {
     event.preventDefault();
     const credentials = {
-      username: this.state.username,
-      password: this.state.password
+      username: this.state.username.trim(),
+      password: this.state.password.trim()
     };
     try {
       await this.props.authenticateUser(credentials);
       this.props.history.push("/dashboard");
     } catch (error) {
-      console.log(error.message);
+      alert("Wrong username or password!");
     }
   };
 
   onChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
+    this.setState({ [target.id]: target.value });
   };
 
   render() {
     return (
-      <MainLayout>
-        <form onSubmit={this.onSubmit}>
-          <p>
-            <input
-              type="text"
-              name="username"
-              required
-              value={this.state.username}
-              onChange={this.onChange}
-            />
-          </p>
-          <p>
-            <input
-              type="password"
-              name="password"
-              required
-              value={this.state.password}
-              onChange={this.onChange}
-            />
-          </p>
-          <button>Login</button>
+      <FormLayout>
+        <h1 className="text-light text-center">foodle</h1>
+        <form
+          onSubmit={this.onSubmit}
+          className="col s12 bg-light p-3 rounded-lg"
+        >
+          <div>
+            <div className="input-field col s12">
+              <input
+                id="username"
+                type="text"
+                value={this.state.username}
+                required
+                onChange={this.onChange}
+              />
+              <label htmlFor="username">Username</label>
+            </div>
+          </div>
+          <div>
+            <div className="input-field col s12">
+              <input
+                id="password"
+                type="password"
+                required
+                value={this.state.password}
+                onChange={this.onChange}
+              />
+              <label htmlFor="password">Password</label>
+            </div>
+          </div>
+          <div>
+            <button type="submit" className="btn btn-danger">
+              Login
+            </button>
+            <div className="right">
+              <Link to="/register">
+                <p className="text-secondary">Create an account</p>
+              </Link>
+            </div>
+          </div>
         </form>
-        <Link to="/register">Create an account</Link>
-      </MainLayout>
+        <h3 className="text-light text-center">
+          <span>logo</span> marbleit
+        </h3>
+      </FormLayout>
     );
   }
 }
