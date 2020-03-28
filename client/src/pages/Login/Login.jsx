@@ -13,14 +13,14 @@ class Login extends Component {
   onSubmit = async event => {
     event.preventDefault();
     const credentials = {
-      username: this.state.username,
-      password: this.state.password
+      username: this.state.username.trim(),
+      password: this.state.password.trim()
     };
     try {
       await this.props.authenticateUser(credentials);
       this.props.history.push("/dashboard");
     } catch (error) {
-      console.log(error.message);
+      alert("Wrong username or password!");
     }
   };
 
@@ -42,6 +42,7 @@ class Login extends Component {
                 id="username"
                 type="text"
                 value={this.state.username}
+                required
                 onChange={this.onChange}
               />
               <label htmlFor="username">Username</label>
@@ -52,6 +53,7 @@ class Login extends Component {
               <input
                 id="password"
                 type="password"
+                required
                 value={this.state.password}
                 onChange={this.onChange}
               />
