@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { connect } from "react-redux";
+import "./index.css";
 
 import { isAuthenticatedAction } from "./store/actions/authentication/authenticationActions";
 import AuthRoute from "./components/Routes/AuthRoute";
