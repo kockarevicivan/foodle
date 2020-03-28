@@ -31,7 +31,7 @@ class Login extends Component {
   render() {
     return (
       <FormLayout>
-        <h1 className="text-light text-center">foodle</h1>
+        {/* <h1 className="text-light text-center">foodle</h1> */}
         <form
           onSubmit={this.onSubmit}
           className="col s12 bg-light p-3 rounded-lg"
@@ -71,9 +71,9 @@ class Login extends Component {
             </div>
           </div>
         </form>
-        <h3 className="text-light text-center">
+        {/* <h3 className="text-light text-center">
           <span>logo</span> marbleit
-        </h3>
+        </h3> */}
       </FormLayout>
     );
   }

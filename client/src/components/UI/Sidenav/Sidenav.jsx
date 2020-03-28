@@ -10,7 +10,7 @@ class Sidebar extends Component {
     this.props.logoutUser();
   };
   render() {
-    const { isAuthenticated } = this.props;
+    const { isAdmin } = this.props;
     return (
       <React.Fragment>
         <ul>
@@ -32,7 +32,7 @@ class Sidebar extends Component {
           <li>
             <Link to="/profile">Profile</Link>
           </li>
-          {isAuthenticated ? (
+          {isAdmin ? (
             <React.Fragment>
               <li>
                 <Link to="/ordersOverview">Orders overview</Link>
@@ -60,7 +60,7 @@ class Sidebar extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAuthenticated: state.authenticationReducers.isAuthenticated
+  isAdmin: state.authenticationReducers.user.role === "admin"
 });
 
 export default withRouter(connect(mapStateToProps, { logoutUser })(Sidebar));

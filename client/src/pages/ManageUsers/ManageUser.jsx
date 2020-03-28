@@ -6,6 +6,7 @@ class ManageUsers extends Component {
       <div>
         <h1>ManageUsers</h1>
         <p>this is a page</p>
+        <table></table>
       </div>
     );
   }

@@ -39,7 +39,6 @@ class Register extends Component {
   render() {
     return (
       <FormLayout>
-        <h1 className="text-light text-center">foodle</h1>
         <form
           onSubmit={this.onSubmit}
           className="col s12 bg-light p-3 rounded-lg"
@@ -100,60 +99,6 @@ class Register extends Component {
             </div>
           </div>
         </form>
-        <h3 className="text-light text-center">
-          <span>logo</span> marbleit
-        </h3>
-        {/*         
-        <form onSubmit={this.onSubmit}>
-          <p>
-            <label htmlFor="username">Username:</label>
-            <br />
-            <input
-              type="text"
-              name="username"
-              required
-              value={this.state.username}
-              onChange={this.onChange}
-            />
-          </p>
-          <p>
-            <label htmlFor="fullName">Full name:</label>
-            <br />
-            <input
-              type="text"
-              name="fullName"
-              required
-              value={this.state.fullName}
-              onChange={this.onChange}
-            />
-          </p>
-          <p>
-            <label htmlFor="password">Password:</label>
-            <br />
-            <input
-              type="password"
-              name="password"
-              required
-              value={this.state.password}
-              onChange={this.onChange}
-            />
-          </p>
-          <p>
-            <label htmlFor="repeatPassword">Repeat password:</label>
-            <br />
-            <input
-              type="password"
-              name="repeatPassword"
-              required
-              value={this.state.repeatPassword}
-              onChange={this.onChange}
-            />
-          </p>
-          <button>Register</button>
-          <p>
-            <Link to="/">Already have an account?</Link>
-          </p>
-        </form> */}
       </FormLayout>
     );
   }
