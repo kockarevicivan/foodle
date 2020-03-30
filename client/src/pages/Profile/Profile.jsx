@@ -21,11 +21,7 @@ class Profile extends Component {
     };
     const { _id: userId } = this.props.user;
     try {
-<<<<<<< HEAD:client/src/pages/Profile/Profile.jsx
-      await this.props.updateUser(userPayload, userId);
-=======
-      await this.props.updateUser(credentials, this.props.user._id);
->>>>>>> Rework table component:client/src/pages/Profile/Profile.js
+      await this.props.updateUser(userPayload, this.props.user._id);
     } catch (error) {
       console.log(error.message);
     }

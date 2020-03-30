@@ -41,8 +41,4 @@ class App extends Component {
     );
   }
 }
-<<<<<<< HEAD:client/src/App.jsx
-
-=======
->>>>>>> Rework table component:client/src/App.js
 export default connect(null, { isAuthenticatedAction })(App);
