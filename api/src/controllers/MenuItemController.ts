@@ -38,7 +38,7 @@ class MenuItemController {
   public async delete(req: Request, res: Response): Promise<any> {
     try {
       await MenuItemService.delete(req.params.menuItemId);
-      res.send("Menu item deleted");
+      res.send(req.params.menuItemId)
     } catch (error) {
       res.status(400).send(error.message);
     }
