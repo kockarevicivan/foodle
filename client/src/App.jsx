@@ -4,6 +4,7 @@ import { connect } from "react-redux";
 import "./index.css";
 
 import { isAuthenticatedAction } from "./store/actions/authentication/authenticationActions";
+import { getAllForDay, createItem, editItem, removeItem } from "./store/actions/menu/menuActions";
 import AuthRoute from "./components/Routes/AuthRoute";
 
 import LoginPage from "./pages/Login/Login";
@@ -20,9 +21,30 @@ import WeeklySummary from "./pages/WeeklySummary/WeeklySummary";
 class App extends Component {
   componentDidMount() {
     this.props.isAuthenticatedAction();
+    this.props.getAllForDay(new Date().toISOString());
+    console.log();
+    
+    // this.props.createItem({
+    //   title: 'Kokos kolac',
+    //   price: 60,
+    //   quantityType: '1kom'
+    // });
+    /*
+    this.props.editItem('5e820aaa53365a3cf848ef04',{
+      _id: '5e820aaa53365a3cf848ef04',
+      title: 'Gej kolac',
+      price: 69,
+      quantityType: '1kom'
+    });
+    */
+    this.props.removeItem("5e820c6c53365a3cf848ef07");
+    
+
   }
 
   render() {
+    console.log(this.props.items);
+    
     return (
       <BrowserRouter>
         <Switch>
@@ -41,4 +63,15 @@ class App extends Component {
     );
   }
 }
-export default connect(null, { isAuthenticatedAction })(App);
+
+const mapStateToProps = state => ({
+  items: state.menuReducers.items
+}); 
+
+export default connect(mapStateToProps, { 
+  isAuthenticatedAction,
+  getAllForDay: items => getAllForDay(items),
+  createItem: item => createItem(item),
+  editItem: (itemId,item) => editItem(itemId,item),
+  removeItem: itemId => removeItem(itemId)
+   })(App);
