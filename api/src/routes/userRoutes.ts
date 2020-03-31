@@ -5,7 +5,12 @@ import AuthenticationMiddleware from "../middleware/AuthorizationMiddleware";
 
 const router = express.Router();
 
-router.get("/", AuthenticationMiddleware.verifyToken, UserController.getAll);
+router.get(
+  "/",
+  AuthenticationMiddleware.verifyToken,
+  AuthenticationMiddleware.verifyPermission,
+  UserController.getAll
+);
 router.get(
   "/:id",
   AuthenticationMiddleware.verifyToken,

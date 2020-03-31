@@ -46,8 +46,9 @@ class Sidebar extends Component {
                 <li>
                   <Link to="/weeklySummary">Weekly summary</Link>
                 </li>{" "}
+                <br />
                 <li>
-                  <Link to="/manageUsers"></Link>
+                  <Link to="/manageUsers">Manage users</Link>
                 </li>{" "}
                 <br />
               </React.Fragment>
