@@ -32,9 +32,7 @@ class UserController {
 
   public async update(req: Request, res: Response) {
     try {
-      console.log(req.body);
       const { id } = req.params;
-      console.log(id);
       const user = await UserService.update(id, req.body);
       res.send(user);
     } catch (error) {
