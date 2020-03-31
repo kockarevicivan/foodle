@@ -20,8 +20,7 @@ import WeeklySummary from "./pages/WeeklySummary/WeeklySummary";
 class App extends Component {
   componentDidMount() {
     this.props.isAuthenticatedAction();
-    this.props.getAllForDay(new Date().toISOString());
-    console.log();
+    //this.props.getAllForDay(new Date().toISOString());
     
     // this.props.createItem({
     //   title: 'Kokos kolac',
@@ -36,7 +35,7 @@ class App extends Component {
       quantityType: '1kom'
     });
     */
-    this.props.removeItem("5e820c6c53365a3cf848ef07");
+    //this.props.removeItem("5e820c6c53365a3cf848ef07");
     
 
   }
