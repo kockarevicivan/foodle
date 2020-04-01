@@ -19,8 +19,7 @@ class Sidebar extends Component {
           <div className="sidebar-header bg-danger p-2">
             <h2 className="text-light text-center space">foodle</h2>
           </div>
-
-          <ul className="h-100 bg-secondary">
+          <ul className="h-100 bg-danger">
             <li className="w-100">
               <Link to="/placeOrder">Place order</Link>
             </li>{" "}
