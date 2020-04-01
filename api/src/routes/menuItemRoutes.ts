@@ -5,21 +5,21 @@ import AuthorizationMiddleware from "../middleware/AuthorizationMiddleware";
 
 const router = express.Router();
 
-router.use(AuthorizationMiddleware.verifyToken);
+//router.use(AuthorizationMiddleware.verifyToken);
 router.get("/:date", MenuItemController.getAllForDay);
 router.post(
   "/",
-  AuthorizationMiddleware.verifyPermission,
+  // AuthorizationMiddleware.verifyPermission,
   MenuItemController.addForCurrentDay
 );
 router.put(
   "/:menuItemId",
-  AuthorizationMiddleware.verifyPermission,
+  //AuthorizationMiddleware.verifyPermission,
   MenuItemController.update
 );
 router.delete(
   "/:menuItemId",
-  AuthorizationMiddleware.verifyPermission,
+  //AuthorizationMiddleware.verifyPermission,
   MenuItemController.delete
 );
 
