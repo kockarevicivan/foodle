@@ -13,10 +13,27 @@ class ManageUsers extends Component {
     await this.props.getUsersAction();
   }
 
-  changeRole = async (user, index) => {
-    const userPayload = { role: user.role === "admin" ? "regular" : "admin" };
+  demoteToUser = async (user, index) => {
+    const { loggedUser } = this.props;
+    if (user.promotedBy !== loggedUser._id) {
+      alert("You did not promote this user to admin");
+      return;
+    }
+
+    const userPayload = { role: "regular", promotedBy: null };
     await this.props.updateUser(userPayload, user._id, index);
-    alert("promnuli ste ga");
+  };
+
+  promoteToAdmin = async (user, index) => {
+    const { loggedUser } = this.props;
+    const userPayload = { role: "admin", promotedBy: loggedUser._id };
+    await this.props.updateUser(userPayload, user._id, index);
+  };
+
+  showDialog = async (user, index, changeRoleCallback) => {
+    if (window.confirm("Are you sure about that?")) {
+      await changeRoleCallback(user, index);
+    }
   };
 
   render() {
@@ -42,14 +59,27 @@ class ManageUsers extends Component {
                       <td>{user.fullName}</td>
                       <td>{user.role}</td>
                       <td>
-                        <button
-                          onClick={() => this.changeRole(user, index)}
-                          className="btn btn-success"
-                        >
-                          {user.role !== "admin"
-                            ? "Promote to admin"
-                            : "Demote to user"}
-                        </button>
+                        {user.role === "admin" ? (
+                          <button
+                            className="btn btn-danger"
+                            onClick={() =>
+                              this.showDialog(user, index, this.demoteToUser)
+                            }
+                          >
+                            {" "}
+                            Demote to user
+                          </button>
+                        ) : (
+                          <button
+                            className="btn btn-danger"
+                            onClick={() =>
+                              this.showDialog(user, index, this.promoteToAdmin)
+                            }
+                          >
+                            {" "}
+                            Promote to admin
+                          </button>
+                        )}
                       </td>
                     </tr>
                   ))}
@@ -64,7 +94,8 @@ class ManageUsers extends Component {
 }
 
 const mapStateToProps = state => ({
-  users: state.usersReducers.users
+  users: state.usersReducers.users,
+  loggedUser: state.authenticationReducers.user
 });
 
 export default connect(mapStateToProps, { getUsersAction, updateUser })(
