@@ -1,21 +1,27 @@
 import axios from "../../../axios";
 import {
-  registerUserCreator,
-  updateUserCreator,
-  getUsersCreator
+    registerUserCreator,
+    updateProfileCreator,
+    getUsersCreator,
+    updateUserCreator
 } from "./usersActionCreator";
 
-export const updateUser = (userPayload, userId) => async dispatch => {
-  const { data } = await axios.put(`/users/${userId}`, userPayload);
-  dispatch(updateUserCreator(data));
+export const updateProfile = (userPayload, userId) => async dispatch => {
+    const { data } = await axios.put(`/users/${userId}`, userPayload);
+    dispatch(updateProfileCreator(data));
+};
+
+export const updateUser = (userPayload, userId, index) => async dispatch => {
+    const { data } = await axios.put(`/users/${userId}`, userPayload);
+    dispatch(updateUserCreator(data, index));
 };
 
 export const registerUser = userPayload => async dispatch => {
-  const { data } = await axios.post("/users", userPayload);
-  dispatch(registerUserCreator(data));
+    const { data } = await axios.post("/users", userPayload);
+    dispatch(registerUserCreator(data));
 };
 
 export const getUsersAction = () => async dispatch => {
-  const { data } = await axios.get("/users");
-  dispatch(getUsersCreator(data));
+    const { data } = await axios.get("/users");
+    dispatch(getUsersCreator(data));
 };

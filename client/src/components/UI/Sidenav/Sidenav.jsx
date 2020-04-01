@@ -21,39 +21,39 @@ class Sidebar extends Component {
           </div>
 
           <ul className="h-100 bg-secondary">
-            <li>
+            <li className="w-100">
               <Link to="/placeOrder">Place order</Link>
             </li>{" "}
             <br />
-            <li>
+            <li className="w-100">
               <Link to="/orderHistory">Order history</Link>
             </li>{" "}
             <br />
-            <li>
+            <li className="w-100">
               <Link to="/profile">Profile</Link>
             </li>{" "}
             <br />
             {isAdmin ? (
               <React.Fragment>
-                <li>
+                <li className="w-100">
                   <Link to="/ordersOverview">Orders overview</Link>
                 </li>{" "}
                 <br />
-                <li>
+                <li className="w-100">
                   <Link to="/dailyMenu">Daily menu</Link>
                 </li>{" "}
                 <br />
-                <li>
+                <li className="w-100">
                   <Link to="/weeklySummary">Weekly summary</Link>
                 </li>{" "}
                 <br />
-                <li>
+                <li className="w-100">
                   <Link to="/manageUsers">Manage users</Link>
                 </li>{" "}
                 <br />
               </React.Fragment>
             ) : null}
-            <li>
+            <li className="w-100">
               <Link onClick={this.onLogout} to="/">
                 Logout
               </Link>
@@ -66,7 +66,7 @@ class Sidebar extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAdmin: state.authenticationReducers.user.role === "admin"
+  isAdmin: state.authenticationReducers.user?.role === "admin"
 });
 
 export default withRouter(connect(mapStateToProps, { logoutUser })(Sidebar));
