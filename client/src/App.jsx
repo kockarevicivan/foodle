@@ -39,11 +39,9 @@ class App extends Component {
     //this.props.removeItem("5e820c6c53365a3cf848ef07");
     
 
-  }
-
-  render() {
-    console.log(this.props.items);
-    
+  };
+  
+  render() { 
     return (
       <BrowserRouter>
         <Switch>
