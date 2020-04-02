@@ -8,6 +8,7 @@ import "./styles.css";
 
 class Sidebar extends Component {
   state = {};
+
   onLogout = () => {
     this.props.logoutUser();
   };
@@ -64,8 +65,8 @@ class Sidebar extends Component {
   }
 }
 
-// const mapStateToProps = state => ({
-//   isAdmin: state.authenticationReducers.user.role === "admin"
-// });
-//mapStateToProps umesto null
-export default withRouter(connect(null, { logoutUser })(Sidebar));
+const mapStateToProps = state => ({
+  isAdmin: state.authenticationReducers.user?.role === "admin"
+});
+
+export default withRouter(connect(mapStateToProps, { logoutUser })(Sidebar));

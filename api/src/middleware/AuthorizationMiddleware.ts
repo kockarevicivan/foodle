@@ -16,7 +16,6 @@ class AuthenticationMiddleware {
   }
 
   public async verifyPermission(req: any, res: any, next: any) {
-    next();
     if (req.user.role === "admin") {
       next();
     } else {

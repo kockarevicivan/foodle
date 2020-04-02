@@ -1,24 +1,17 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import MenuItem from "../../components/MenuComponents/MenuItem/MenuItemComponent"
-import {
-  getAllForDay,
-  createItem,
-  editItem,
-  removeItem
-} from "../../store/actions/menu/menuActions";
+
+import { createItem, editItem } from "../../store/actions/menu/menuActions";
+
 import Layout from "../../components/Layout/Layout";
+import AdminMenuTable from "../../components/MenuComponents/AdminMenuTableComponent/AdminMenuTableComponent"
+
 class DailyMenu extends Component {
   state = {
     title: "",
     price: "",
     quantityType: "100gr"
   };
-
-  
-  componentDidMount() {
-    this.props.getAllForDay(new Date().toISOString());
-  }
 
   onSubmit = async event => {
     event.preventDefault();
@@ -55,21 +48,7 @@ class DailyMenu extends Component {
           <div className="container">
             <div className="row pt-5">
               <div className="col-8">
-                <table className="table">
-                  <thead className="thead-dark">
-                    <tr>
-                      <th scope="col">Naziv</th>
-                      <th scope="col">Cena</th>
-                      <th scope="col">100gr/1kom</th>
-                      <th scope="col"></th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.props.items.map(item => (
-                      <MenuItem key={item._id} item={item}></MenuItem>
-                    ))}
-                  </tbody>
-                </table>
+                <AdminMenuTable></AdminMenuTable>
               </div>
               <div className="col-4">
                 <form onSubmit={this.onSubmit}>
@@ -119,13 +98,7 @@ class DailyMenu extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  items: state.menuReducers.items
-});
-
-export default connect(mapStateToProps, {
-  getAllForDay: items => getAllForDay(items),
+export default connect(null, {
   createItem: item => createItem(item),
-  editItem: (itemId, item) => editItem(itemId, item),
-  removeItem: itemId => removeItem(itemId)
+  editItem: (itemId, item) => editItem(itemId, item)
 })(DailyMenu);

@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import MenuItem from "../../MenuComponents/MenuItem/MenuItemComponent"
+
 import {
   getAllForDay,
   createItem,
@@ -8,7 +9,7 @@ import {
   removeItem
 } from "../../../store/actions/menu/menuActions";
 
-class MenuTable extends Component {
+class AdminMenuTable extends Component {
   state = {};
 
   componentDidMount() {
@@ -46,4 +47,5 @@ const mapStateToProps = state => ({
 export default connect(mapStateToProps, {
   getAllForDay: items => getAllForDay(items),
   editItem: (itemId, item) => editItem(itemId, item)
-})(MenuTable);
+})(AdminMenuTable);
+
