@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-
+import MenuItem from "../../components/MenuComponents/MenuItem/MenuItemComponent"
 import {
   getAllForDay,
   createItem,
@@ -15,9 +15,7 @@ class DailyMenu extends Component {
     quantityType: "100gr"
   };
 
-  deleteItem(id) {
-    this.props.removeItem(id);
-  }
+  
   componentDidMount() {
     this.props.getAllForDay(new Date().toISOString());
   }
@@ -41,8 +39,6 @@ class DailyMenu extends Component {
   };
 
   render() {
-    console.log(this.props.items);
-
     return (
       <Layout>
         <div className="container col-10">
@@ -70,20 +66,7 @@ class DailyMenu extends Component {
                   </thead>
                   <tbody>
                     {this.props.items.map(item => (
-                      <tr key={item._id}>
-                        <td>{item.title}</td>
-                        <td>{item.price}</td>
-                        <td>{item.quantityType}</td>
-                        <td>
-                          <button
-                            onClick={() => {
-                              this.deleteItem(item._id);
-                            }}
-                          >
-                            <i className="far fa-trash-alt"></i>
-                          </button>
-                        </td>
-                      </tr>
+                      <MenuItem key={item._id} item={item}></MenuItem>
                     ))}
                   </tbody>
                 </table>

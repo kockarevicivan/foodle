@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Layout from "../../components/Layout/Layout";
-import MenuTable from "../../components/MenuTableComponent/MenuTableComponent"
+import MenuTable from "../../components/MenuComponents/MenuTableComponent/MenuTableComponent"
 class PlaceOrder extends Component {
   state = {};
   render() {
