@@ -6,6 +6,13 @@ import { createItem, editItem } from "../../store/actions/menu/menuActions";
 import Layout from "../../components/Layout/Layout";
 import AdminMenuTable from "../../components/MenuComponents/AdminMenuTableComponent/AdminMenuTableComponent"
 
+import {
+  getAllForDay,
+  createItem,
+  editItem,
+  removeItem
+} from "../../store/actions/menu/menuActions";
+import Layout from "../../components/Layout/Layout";
 class DailyMenu extends Component {
   state = {
     title: "",
@@ -32,6 +39,8 @@ class DailyMenu extends Component {
   };
 
   render() {
+    console.log(this.props.items);
+
     return (
       <Layout>
         <div className="container col-10">
