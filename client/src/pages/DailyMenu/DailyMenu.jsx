@@ -6,13 +6,6 @@ import { createItem, editItem } from "../../store/actions/menu/menuActions";
 import Layout from "../../components/Layout/Layout";
 import AdminMenuTable from "../../components/MenuComponents/AdminMenuTableComponent/AdminMenuTableComponent"
 
-import {
-  getAllForDay,
-  createItem,
-  editItem,
-  removeItem
-} from "../../store/actions/menu/menuActions";
-import Layout from "../../components/Layout/Layout";
 class DailyMenu extends Component {
   state = {
     title: "",
