@@ -2,9 +2,18 @@ import React, { Component } from "react";
 import Layout from "../../components/Layout/Layout";
 import MenuTable from "../../components/UI/Menu/MenuTable";
 import OrderTable from "../../components/UI/Order/OrderTable";
+import { connect } from "react-redux";
+import { getWeeklyReceipt } from "../../store/actions/weeklyReceipts/weeklyReceiptActions";
+import { getTodaysOrder } from "../../store/actions/order/orderActions";
 
 class PlaceOrder extends Component {
   state = {};
+
+  async componentDidMount() {
+    await this.props.getWeeklyReceipt();
+    await this.props.getTodaysOrder();
+  }
+
   render() {
     return (
       <Layout>
@@ -25,4 +34,8 @@ class PlaceOrder extends Component {
   }
 }
 
-export default PlaceOrder;
+const mapStateToProps = state => ({});
+
+export default connect(mapStateToProps, { getWeeklyReceipt, getTodaysOrder })(
+  PlaceOrder
+);

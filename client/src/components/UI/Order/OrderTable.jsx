@@ -2,8 +2,11 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   setQuantity,
-  removeOrderItem
+  removeOrderItem,
+  completeOrder
 } from "../../../store/actions/order/orderActions";
+
+import { Button } from "@material-ui/core";
 
 class OrderTable extends Component {
   state = {};
@@ -15,7 +18,7 @@ class OrderTable extends Component {
   };
 
   render() {
-    const { orderItems } = this.props;
+    const { order } = this.props;
     return (
       <React.Fragment>
         <table className="centered">
@@ -27,14 +30,14 @@ class OrderTable extends Component {
             </tr>
           </thead>
           <tbody>
-            {orderItems.map((order, index) => (
+            {order?.orderItems.map((item, index) => (
               <tr key={index}>
-                <td>{order.title}</td>
+                <td>{item.title}</td>
                 <td>
                   <input
                     type="number"
                     id="quantity"
-                    value={order.quantity}
+                    value={item.quantity}
                     onChange={e => this.onChange(e, index)}
                   />
                 </td>
@@ -47,16 +50,24 @@ class OrderTable extends Component {
             ))}
           </tbody>
         </table>
-        <button>Complete order</button>
+        <Button variant="contained" onClick={this.onClick}>
+          Complete order
+        </Button>
       </React.Fragment>
     );
   }
+
+  onClick = async () => {
+    await this.props.completeOrder(this.props.order);
+  };
 }
 
 const mapStateToProps = state => ({
-  orderItems: state.orderReducers.orderItems
+  order: state.orderReducers.order
 });
 
-export default connect(mapStateToProps, { setQuantity, removeOrderItem })(
-  OrderTable
-);
+export default connect(mapStateToProps, {
+  setQuantity,
+  removeOrderItem,
+  completeOrder
+})(OrderTable);

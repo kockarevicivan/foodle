@@ -3,7 +3,6 @@ import express from "express";
 import OrderController from "../controllers/OrderController";
 import AuthorizationMiddleware from "../middleware/AuthorizationMiddleware";
 import UserOrderMiddleware from "../middleware/OrderMiddleware";
-import OrderItemController from "../controllers/OrderItemController";
 
 const router = express.Router();
 
@@ -14,9 +13,10 @@ router.get(
   AuthorizationMiddleware.verifyPermission,
   OrderController.getAllByDate
 );
-// get user order for a given week for a given user
+// get an order for a given day
 router.get("/:date", OrderController.getByUserAndDate);
-router.post("/:weeklyReceiptId", OrderController.add);
+router.post("/", OrderController.add);
+router.put("/:orderId", OrderController.update);
 router.patch("/send/:orderId", OrderController.sendOrder);
 router.patch("/setTotal/:orderId", OrderController.setTotal);
 router.delete(

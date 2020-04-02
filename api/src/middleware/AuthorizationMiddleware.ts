@@ -1,5 +1,4 @@
 import jwt from "jsonwebtoken";
-
 import config from "../config";
 
 class AuthenticationMiddleware {
@@ -11,7 +10,6 @@ class AuthenticationMiddleware {
       req.user = userDecoded;
       next();
     } catch (error) {
-      console.log(error);
       res.status(403).send(error);
     }
   }

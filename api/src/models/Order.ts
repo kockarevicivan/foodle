@@ -21,11 +21,7 @@ export default mongoose.model(
     orderItems: [
       {
         quantity: { type: Number, required: true },
-        menuItem: {
-          type: mongoose.Schema.Types.ObjectId,
-          ref: "menuItems",
-          required: true
-        }
+        title: { type: String, required: true }
       }
     ]
   })

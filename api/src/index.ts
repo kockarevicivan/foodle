@@ -39,7 +39,7 @@ app.use("/authentication", loginRoutes);
 app.use("/orders", orderRoutes);
 app.use("/menuItems", menuItemRoutes);
 app.use("/orderItems", orderItemRoutes);
-app.use("/receipt", weeklyReceiptRoutes);
+app.use("/receipts", weeklyReceiptRoutes);
 app.use("/invoice", invoiceRoutes);
 
 app.listen(config.port, () => {

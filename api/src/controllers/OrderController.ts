@@ -16,20 +16,33 @@ class UserOrderController {
     try {
       const { _id } = req.user;
       const { date } = req.params;
-      const userOrders = await OrderService.getAllByDateAndUser(_id, date);
-      res.send(userOrders);
+      const order = await OrderService.getByDateAndUser(_id, date);
+      console.log(order);
+      res.send(order);
     } catch (error) {
+      console.log(error);
       res.status(400).send(error.message);
     }
   }
 
-  public async add(req: any, res: any): Promise<any> {
+  public async add(req: any, res: any) {
     try {
-      const { weeklyReceiptId } = req.params;
-      const userOrder = await OrderService.add(req.user._id, weeklyReceiptId);
-      res.send(userOrder);
+      const { _id: userId } = req.user;
+      const order = await OrderService.add(userId);
+      res.send(order);
     } catch (error) {
+      console.log(error);
       res.status(400).send(error.message);
+    }
+  }
+
+  public async update(req: any, res: any) {
+    try {
+      const { orderId } = req.params;
+      const order = await OrderService.update(orderId, req.body);
+      res.send(order);
+    } catch (error) {
+      res.status(400).send(error);
     }
   }
 
