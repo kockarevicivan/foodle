@@ -2,11 +2,13 @@ import MenuItem from "../models/MenuItem";
 import dateUtil from "../util/dateFormatting";
 
 class MenuItemService {
-  public async getAllByDate(dateTime: string) {
+  public async getAllByDate(dateTime: string) { 
     const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
     const menuItems = await MenuItem.find({
       createdAt: { $gte: startOfDay, $lte: endOfDay }
     });
+    
+    
     return menuItems;
   }
 
