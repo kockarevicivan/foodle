@@ -25,7 +25,7 @@ class AuthenticationService {
       role: user.role
     };
     const jwtOptions = {
-      expiresIn: "2h"
+      expiresIn: "6h"
     };
     return await jwt.sign(payload, config.secret, jwtOptions);
   }

@@ -26,33 +26,40 @@ class Profile extends Component {
             console.log(error.message);
         }
     };
-    render() {
-        return (
-            <Layout>
-                <h1>This is the profile page</h1>
-                <form onSubmit={this.onSubmit}>
-                    <p>
-                        <label htmlFor="username">Username:</label>
-                        <br />
-                        <input
-                            type="text"
-                            name="username"
-                            required
-                            value={this.state.username}
-                            onChange={this.onChange}
-                        />
-                    </p>
-                    <p>
-                        <label htmlFor="fullName">Full name:</label>
-                        <br />
-                        <input
-                            type="text"
-                            name="fullName"
-                            required
-                            value={this.state.fullName}
-                            onChange={this.onChange}
-                        />
-                    </p>
+    const { _id: userId } = this.props.user;
+    try {
+      await this.props.updateUser(userPayload, this.props.user._id);
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
+  render() {
+    return (
+      <Layout>
+        <h1>This is the profile page</h1>
+        <form onSubmit={this.onSubmit}>
+          <p>
+            <label htmlFor="username">Username:</label>
+            <br />
+            <input
+              type="text"
+              name="username"
+              required
+              value={this.state.username}
+              onChange={this.onChange}
+            />
+          </p>
+          <p>
+            <label htmlFor="fullName">Full name:</label>
+            <br />
+            <input
+              type="text"
+              name="fullName"
+              required
+              value={this.state.fullName}
+              onChange={this.onChange}
+            />
+          </p>
 
                     <button>Update profile</button>
                 </form>

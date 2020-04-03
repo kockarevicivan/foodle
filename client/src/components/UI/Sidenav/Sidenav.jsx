@@ -8,6 +8,7 @@ import "./styles.css";
 
 class Sidebar extends Component {
   state = {};
+
   onLogout = () => {
     this.props.logoutUser();
   };
