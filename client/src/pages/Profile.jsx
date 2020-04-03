@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateProfile , updatePassword} from "../../store/actions/users/usersActions";
-import Layout from "../../components/Layout/Layout";
+import { updateProfile , updatePassword} from "../store/actions/users/usersActions";
+import Layout from "../components/Layout/Layout";
 //import ProfileForm from "../../components/ProfileFormComponent/ProfileFormComponent";
 class Profile extends Component {
   constructor(props) {
@@ -74,6 +74,9 @@ class Profile extends Component {
     return (
       <Layout>
         <h1>This is the profile page</h1>
+        <div className="container d-flex flex-row  col-8">
+        <div className="col-4">
+
         <form onSubmit={this.onSubmit}>
           <p>
             <label htmlFor="username">Username:</label>
@@ -84,7 +87,7 @@ class Profile extends Component {
               value={this.state.username}
               required
               onChange={this.onChange}
-            />
+              />
           </p>
           <p>
             <label htmlFor="fullName">Full name:</label>
@@ -95,11 +98,15 @@ class Profile extends Component {
               required
               value={this.state.fullName}
               onChange={this.onChange}
-            />
+              />
           </p>
 
           <button type="submit">Update profile</button>
         </form>
+            </div>
+      <div className="col-4">
+
+            
         <form onSubmit={this.onSubmitPassword}>
           <p>
             <label htmlFor="oldPassword">Old password:</label>
@@ -109,7 +116,7 @@ class Profile extends Component {
               name="oldPassword"
               required
               onChange={this.onChange}
-            />
+              />
           </p>
           <p>
             <label htmlFor="newPassword">New password:</label>
@@ -119,7 +126,7 @@ class Profile extends Component {
               name="newPassword"
               required
               onChange={this.onChange}
-            />
+              />
             <label htmlFor="newPassword2">Repeat new password:</label>
             <br />
             <input
@@ -127,11 +134,13 @@ class Profile extends Component {
               name="newPassword2"
               required
               onChange={this.onChange}
-            />
+              />
           </p>
 
-          <button type="submit">Update profile</button>
+          <button type="submit">Update password</button>
         </form>
+              </div>
+              </div>
       </Layout>
     );
   }

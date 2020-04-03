@@ -2,7 +2,8 @@ import {
     REGISTER_USER,
     UPDATE_PROFILE,
     GET_USERS,
-    UPDATE_USER
+    UPDATE_USER,
+    UPDATE_PASSWORD
 } from "./usersTypes";
 
 export const registerUserCreator = user => ({
