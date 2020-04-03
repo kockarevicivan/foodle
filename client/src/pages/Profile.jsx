@@ -1,29 +1,72 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateProfile } from "../store/actions/users/usersActions";
-import Layout from "../components/Layout/Layout";
-
+import { updateProfile , updatePassword} from "../../store/actions/users/usersActions";
+import Layout from "../../components/Layout/Layout";
+//import ProfileForm from "../../components/ProfileFormComponent/ProfileFormComponent";
 class Profile extends Component {
-  state = {
-    username: "",
-    fullName: ""
-  };
+  constructor(props) {
+    super(props);
+    this.state = {
+      username: "",
+      fullName: "",
+      oldPassword: "",
+      newPassword: "",
+      newPassword2: "",
+    };
+  }
+  // componenDidMount i WillUpdate su tu kako bi se prefill forma sa podacima usera
+  //ovo mora ovako barem za sad posto je react retardiran :)
+  componentDidMount() {
+    this.setState({
+      username: this.props.user.user?.username || "",
+      fullName: this.props.user.user?.fullName || ""
+    });
+  }
+
+  componentWillUpdate(prevProps, nextProps) {
+    if (prevProps.user.user !== this.props.user.user) {
+      this.setState({
+        username: prevProps.user.user?.username || "",
+        fullName: prevProps.user.user?.fullName || ""
+      });
+    }
+  }
 
   onChange = ({ target }) => {
     this.setState({ [target.name]: target.value });
   };
 
   onSubmit = async event => {
+    console.log(1);
+    
     event.preventDefault();
     const userPayload = {
       username: this.state.username,
       fullName: this.state.fullName
     };
-    const { _id: userId } = this.props.user;
     try {
-      await this.props.updateProfile(userPayload, userId);
+      await this.props.updateUser(userPayload, this.props.user.user._id);
     } catch (error) {
       console.log(error.message);
+    }
+  };
+  onSubmitPassword = async event => {
+    event.preventDefault();
+    console.log("entered submit");
+    
+    const payLoad = {
+      oldPassword: this.state.oldPassword,
+      newPassword: this.state.newPassword,
+      newPassword2: this.state.newPassword2
+    };
+    if(this.state.newPassword === this.state.newPassword2) {
+      try {
+        await this.props.updatePassword(payLoad, this.props.user.user._id);
+      } catch (error) {
+        console.log(error.message);
+      }
+    } else {
+      alert("Your new passwords do not match. Please try again.")
     }
   };
 
@@ -38,8 +81,8 @@ class Profile extends Component {
             <input
               type="text"
               name="username"
-              required
               value={this.state.username}
+              required
               onChange={this.onChange}
             />
           </p>
@@ -55,7 +98,39 @@ class Profile extends Component {
             />
           </p>
 
-          <button>Update profile</button>
+          <button type="submit">Update profile</button>
+        </form>
+        <form onSubmit={this.onSubmitPassword}>
+          <p>
+            <label htmlFor="oldPassword">Old password:</label>
+            <br />
+            <input
+              type="password"
+              name="oldPassword"
+              required
+              onChange={this.onChange}
+            />
+          </p>
+          <p>
+            <label htmlFor="newPassword">New password:</label>
+            <br />
+            <input
+              type="password"
+              name="newPassword"
+              required
+              onChange={this.onChange}
+            />
+            <label htmlFor="newPassword2">Repeat new password:</label>
+            <br />
+            <input
+              type="password"
+              name="newPassword2"
+              required
+              onChange={this.onChange}
+            />
+          </p>
+
+          <button type="submit">Update profile</button>
         </form>
       </Layout>
     );
@@ -63,7 +138,10 @@ class Profile extends Component {
 }
 
 const mapStateToProps = state => ({
-  user: state.authenticationReducers.user
+  user: state.authenticationReducers
 });
 
-export default connect(mapStateToProps, { updateProfile })(Profile);
+export default connect(mapStateToProps, {
+  updateProfile: (payLoad, _id) => updateProfile(payLoad, _id),
+  updatePassword: (payLoad, _id) => updatePassword(payLoad, _id)
+})(Profile);
