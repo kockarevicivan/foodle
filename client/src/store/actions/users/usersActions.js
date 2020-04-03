@@ -3,7 +3,8 @@ import {
     registerUserCreator,
     updateProfileCreator,
     getUsersCreator,
-    updateUserCreator
+    updateUserCreator,
+    updatePasswordCreator
 } from "./usersActionCreator";
 
 export const updateProfile = (userPayload, userId) => async dispatch => {
@@ -24,4 +25,8 @@ export const registerUser = userPayload => async dispatch => {
 export const getUsersAction = () => async dispatch => {
     const { data } = await axios.get("/users");
     dispatch(getUsersCreator(data));
+};
+export const updatePassword = (payload, userId) => async dispatch => {
+  const { data } = await axios.put(`/users/password/${userId}`, payload);
+  dispatch(updatePasswordCreator(data));
 };

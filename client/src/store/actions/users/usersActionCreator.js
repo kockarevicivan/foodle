@@ -25,3 +25,7 @@ export const getUsersCreator = users => ({
     type: GET_USERS,
     users
 });
+export const updatePasswordCreator = updatedPassword => ({
+  type: UPDATE_PASSWORD,
+  updatedPassword
+});

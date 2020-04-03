@@ -39,6 +39,16 @@ class UserController {
       res.status(400).send({ error });
     }
   }
+  public async updatePassword(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const user = await UserService.updatePassword(id, req.body);
+      res.send(user);
+    } catch (error) {
+      res.status(400).send({ error });
+    }
+  }
+  
 
   public async delete(req: Request, res: Response) {
     try {
