@@ -1,7 +1,7 @@
 import {
   ADD_ITEM,
   SET_QUANTITY,
-  REMOVE_ITEM,
+  REMOVE_ORDER_ITEM,
   COMPLETE_ORDER,
   SET_ORDER
 } from "./orderTypes";
@@ -18,7 +18,7 @@ export const setQuantityCreator = (index, quantity) => ({
 });
 
 export const removeOrderItemCreator = index => ({
-  type: REMOVE_ITEM,
+  type: REMOVE_ORDER_ITEM,
   index
 });
 

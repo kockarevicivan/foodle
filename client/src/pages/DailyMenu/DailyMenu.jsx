@@ -4,7 +4,7 @@ import { connect } from "react-redux";
 import { createItem, editItem } from "../../store/actions/menu/menuActions";
 
 import Layout from "../../components/Layout/Layout";
-import AdminMenuTable from "../../components/MenuComponents/AdminMenuTableComponent/AdminMenuTableComponent"
+import Menu from "../../components/UI/Menu/Menu";
 
 class DailyMenu extends Component {
   state = {
@@ -32,8 +32,6 @@ class DailyMenu extends Component {
   };
 
   render() {
-    console.log(this.props.items);
-
     return (
       <Layout>
         <div className="container col-10">
@@ -50,7 +48,7 @@ class DailyMenu extends Component {
           <div className="container">
             <div className="row pt-5">
               <div className="col-8">
-                <AdminMenuTable></AdminMenuTable>
+                <Menu admin />
               </div>
               <div className="col-4">
                 <form onSubmit={this.onSubmit}>

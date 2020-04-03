@@ -1,7 +1,7 @@
 import {
   ADD_ITEM,
   SET_QUANTITY,
-  REMOVE_ITEM,
+  REMOVE_ORDER_ITEM,
   SET_ORDER
 } from "../actions/order/orderTypes";
 
@@ -29,7 +29,7 @@ export const orderReducers = (state = initialState, action) => {
       order.orderItems[index].quantity = quantity;
       return { order };
 
-    case REMOVE_ITEM:
+    case REMOVE_ORDER_ITEM:
       var { index } = action;
       var order = { ...state.order };
       order.orderItems = order.orderItems.filter((item, i) => i !== index);

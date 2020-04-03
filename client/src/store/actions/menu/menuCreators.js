@@ -1,5 +1,9 @@
-import { GET_ITEMS_FOR_DAY,CREATE_ITEM, EDIT_ITEM, REMOVE_ITEM } from "./menuTypes";
-
+import {
+  GET_ITEMS_FOR_DAY,
+  CREATE_ITEM,
+  EDIT_ITEM,
+  REMOVE_MENU_ITEM
+} from "./menuTypes";
 
 export const getAllForDayCreator = items => ({
   type: GET_ITEMS_FOR_DAY,
@@ -14,6 +18,6 @@ export const editItemCreator = item => ({
   item
 });
 export const removeItemCreator = itemId => ({
-  type: REMOVE_ITEM,
+  type: REMOVE_MENU_ITEM,
   itemId
 });

@@ -4,35 +4,29 @@ import { updateProfile } from "../../store/actions/users/usersActions";
 import Layout from "../../components/Layout/Layout";
 
 class Profile extends Component {
-    state = {
-        username: "",
-        fullName: ""
-    };
+  state = {
+    username: "",
+    fullName: ""
+  };
 
-    onChange = ({ target }) => {
-        this.setState({ [target.name]: target.value });
-    };
+  onChange = ({ target }) => {
+    this.setState({ [target.name]: target.value });
+  };
 
-    onSubmit = async event => {
-        event.preventDefault();
-        const userPayload = {
-            username: this.state.username,
-            fullName: this.state.fullName
-        };
-        const { _id: userId } = this.props.user;
-        try {
-            await this.props.updateProfile(userPayload, userId);
-        } catch (error) {
-            console.log(error.message);
-        }
+  onSubmit = async event => {
+    event.preventDefault();
+    const userPayload = {
+      username: this.state.username,
+      fullName: this.state.fullName
     };
     const { _id: userId } = this.props.user;
     try {
-      await this.props.updateUser(userPayload, this.props.user._id);
+      await this.props.updateProfile(userPayload, userId);
     } catch (error) {
       console.log(error.message);
     }
   };
+
   render() {
     return (
       <Layout>
@@ -61,15 +55,15 @@ class Profile extends Component {
             />
           </p>
 
-                    <button>Update profile</button>
-                </form>
-            </Layout>
-        );
-    }
+          <button>Update profile</button>
+        </form>
+      </Layout>
+    );
+  }
 }
 
 const mapStateToProps = state => ({
-    user: state.authenticationReducers.user
+  user: state.authenticationReducers.user
 });
 
 export default connect(mapStateToProps, { updateProfile })(Profile);

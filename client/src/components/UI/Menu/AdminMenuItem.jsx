@@ -1,20 +1,25 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { editItem, removeItem } from "../../../store/actions/menu/menuActions";
+
 class MenuItem extends Component {
-  deleteItem(id) {
-    this.props.removeItem(id);
+  deleteItem() {
+    const { item } = this.props;
+    this.props.removeItem(item._id);
   }
+
   render() {
+    const { item } = this.props;
     return (
       <tr>
-        <td>{this.props.item.title}</td>
-        <td>{this.props.item.price}</td>
-        <td>{this.props.item.quantityType}</td>
+        <td>{item.title}</td>
+        <td>{item.price}</td>
+        <td>{item.quantityType}</td>
         <td>
+          <button>E</button>
           <button
             onClick={() => {
-              this.deleteItem(this.props.item._id);
+              this.deleteItem();
             }}
           >
             <i className="far fa-trash-alt"></i>
