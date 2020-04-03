@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateProfile } from "../../store/actions/users/usersActions";
-import Layout from "../../components/Layout/Layout";
+import { updateProfile } from "../store/actions/users/usersActions";
+import Layout from "../components/Layout/Layout";
 
 class Profile extends Component {
   state = {

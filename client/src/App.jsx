@@ -4,45 +4,32 @@ import { connect } from "react-redux";
 import "./index.css";
 
 import { isAuthenticatedAction } from "./store/actions/authentication/authenticationActions";
-import { getAllForDay, createItem, editItem, removeItem } from "./store/actions/menu/menuActions";
+import {
+  getAllForDay,
+  createItem,
+  editItem,
+  removeItem
+} from "./store/actions/menu/menuActions";
 import AuthRoute from "./components/Routes/AuthRoute";
 
-import LoginPage from "./pages/Login/Login";
-import RegisterPage from "./pages/Register/Register";
-import NotFound from "./pages/NotFound/NotFound";
+import LoginPage from "./pages/Login";
+import RegisterPage from "./pages/Register";
+import NotFound from "./pages/NotFound";
 import Dashboard from "./pages/Dashboard/Dashboard";
-import Profile from "./pages/Profile/Profile";
-import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
-import OrderHistory from "./pages/OrderHistory/OrderHistory";
-import OrderOverview from "./pages/OrderOverview/OrderOverview";
-import DailyMenu from "./pages/DailyMenu/DailyMenu";
-import WeeklySummary from "./pages/WeeklySummary/WeeklySummary";
-import ManageUser from "./pages/ManageUsers/ManageUser";
+import Profile from "./pages/Profile";
+import PlaceOrder from "./pages/PlaceOrder";
+import OrderHistory from "./pages/OrderHistory";
+import OrderOverview from "./pages/OrderOverview";
+import DailyMenu from "./pages/DailyMenu";
+import WeeklySummary from "./pages/WeeklySummary";
+import ManageUser from "./pages/ManageUser";
 
 class App extends Component {
   componentDidMount() {
     this.props.isAuthenticatedAction();
-    //this.props.getAllForDay(new Date().toISOString());
-    
-    // this.props.createItem({
-    //   title: 'Kokos kolac',
-    //   price: 60,
-    //   quantityType: '1kom'
-    // });
-    /*
-    this.props.editItem('5e820aaa53365a3cf848ef04',{
-      _id: '5e820aaa53365a3cf848ef04',
-      title: 'Gej kolac',
-      price: 69,
-      quantityType: '1kom'
-    });
-    */
-    //this.props.removeItem("5e820c6c53365a3cf848ef07");
-    
+  }
 
-  };
-  
-  render() { 
+  render() {
     return (
       <BrowserRouter>
         <Switch>
@@ -65,12 +52,12 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   items: state.menuReducers.items
-}); 
+});
 
-export default connect(mapStateToProps, { 
+export default connect(mapStateToProps, {
   isAuthenticatedAction,
   getAllForDay: items => getAllForDay(items),
   createItem: item => createItem(item),
-  editItem: (itemId,item) => editItem(itemId,item),
+  editItem: (itemId, item) => editItem(itemId, item),
   removeItem: itemId => removeItem(itemId)
-   })(App);
+})(App);

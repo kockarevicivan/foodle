@@ -4,11 +4,8 @@ import MenuItemService from "../Services/MenuItemService";
 
 class MenuItemController {
   public async getAllForDay(req: Request, res: Response) {
-    
     try {
       const menuItems = await MenuItemService.getAllByDate(req.params.date);
-      console.log(menuItems);
-      
       res.send(menuItems);
     } catch (error) {
       res.status(400).send("Something went wrong while getting menu items.");
@@ -41,7 +38,7 @@ class MenuItemController {
   public async delete(req: Request, res: Response): Promise<any> {
     try {
       await MenuItemService.delete(req.params.menuItemId);
-      res.send(req.params.menuItemId)
+      res.send(req.params.menuItemId);
     } catch (error) {
       res.status(400).send(error.message);
     }

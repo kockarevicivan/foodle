@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import AdminDashboard from "./AdminDashboard/AdminDashboard";
-import UserDashboard from "./UserDashboard/UserDashboard";
+import AdminDashboard from "./AdminDashboard";
+import UserDashboard from "./UserDashboard";
 import { connect } from "react-redux";
 
 class Dashboard extends Component {

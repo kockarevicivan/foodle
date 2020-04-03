@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import FormLayout from "../../components/Layout/FormLayout";
+import FormLayout from "../components/Layout/FormLayout";
 
 import { connect } from "react-redux";
-import { registerUser } from "../../store/actions/users/usersActions";
+import { registerUser } from "../store/actions/users/usersActions";
 
 class Register extends Component {
   state = {

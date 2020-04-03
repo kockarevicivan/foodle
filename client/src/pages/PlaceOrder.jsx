@@ -1,10 +1,10 @@
 import React, { Component } from "react";
-import Layout from "../../components/Layout/Layout";
-import Menu from "../../components/UI/Menu/Menu";
-import OrderTable from "../../components/UI/Order/OrderTable";
+import Layout from "../components/Layout/Layout";
+import Menu from "../components/UI/Menu/Menu";
+import OrderTable from "../components/UI/Order/OrderTable";
 import { connect } from "react-redux";
-import { getWeeklyReceipt } from "../../store/actions/weeklyReceipts/weeklyReceiptActions";
-import { getTodaysOrder } from "../../store/actions/order/orderActions";
+import { getWeeklyReceipt } from "../store/actions/weeklyReceipts/weeklyReceiptActions";
+import { getTodaysOrder } from "../store/actions/order/orderActions";
 
 class PlaceOrder extends Component {
   state = {};

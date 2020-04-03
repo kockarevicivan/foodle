@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { connect } from "react-redux";
-import { authenticateUser } from "../../store/actions/authentication/authenticationActions";
-import FormLayout from "../../components/Layout/FormLayout";
+import { authenticateUser } from "../store/actions/authentication/authenticationActions";
+import FormLayout from "../components/Layout/FormLayout";
 
 class Login extends Component {
   state = {

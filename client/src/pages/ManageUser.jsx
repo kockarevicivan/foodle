@@ -3,8 +3,8 @@ import { connect } from "react-redux";
 import {
   getUsersAction,
   updateUser
-} from "../../store/actions/users/usersActions";
-import Layout from "../../components/Layout/Layout";
+} from "../store/actions/users/usersActions";
+import Layout from "../components/Layout/Layout";
 
 class ManageUsers extends Component {
   state = {};
