@@ -1,5 +1,5 @@
 import React from "react";
-import Sidenav from "../UI/Sidenav/Sidenav";
+import Sidenav from "../UI/Sidenav";
 
 function Layout({ children }) {
   return (

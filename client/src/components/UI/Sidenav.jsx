@@ -1,10 +1,8 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { logoutUser } from "../../../store/actions/authentication/authenticationActions";
+import { logoutUser } from "../../store/actions/authentication/authenticationActions";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
-
-import "./styles.css";
 
 class Sidebar extends Component {
   state = {};

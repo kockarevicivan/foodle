@@ -13,7 +13,7 @@ export const getAllForDay = () => async dispatch => {
 };
 
 export const createItem = payLoad => async dispatch => {
-  const { data } = await axios.post("/menuItems/", payLoad);
+  const { data } = await axios.post("/menuItems", payLoad);
   dispatch(createItemCreator(data));
 };
 

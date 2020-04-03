@@ -4,7 +4,7 @@ import {
   setQuantity,
   removeOrderItem,
   completeOrder
-} from "../../../store/actions/order/orderActions";
+} from "../../store/actions/order/orderActions";
 
 import { Button } from "@material-ui/core";
 
