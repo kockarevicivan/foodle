@@ -9,7 +9,7 @@ class AuthenticationMiddleware {
       req.user = userDecoded;
       next();
     } catch (error) {
-      res.status(403).send(error);
+      return res.status(403).send(error);
     }
   }
 
@@ -18,7 +18,7 @@ class AuthenticationMiddleware {
     if (req.user.role === "admin") {
       next();
     } else {
-      res
+      return res
         .status(403)
         .send(
           "Forbidden, you need administrator rights to access this feature"

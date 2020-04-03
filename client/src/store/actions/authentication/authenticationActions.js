@@ -5,6 +5,8 @@ import {
   authenticateUserCreator,
   logoutUserCreator
 } from "./authenticationActionCreators";
+import { setOrderCreator } from "../order/orderCreators";
+import { setWeeklyReceiptCreator } from "../weeklyReceipts/weeklyReceiptsCreators";
 
 export const authenticateUser = credentials => async dispatch => {
   const { data } = await axios.post("/authentication/login", credentials);
@@ -24,4 +26,6 @@ export const isAuthenticatedAction = () => async dispatch => {
 
 export const logoutUser = () => dispatch => {
   dispatch(logoutUserCreator());
+  dispatch(setOrderCreator(null));
+  dispatch(setWeeklyReceiptCreator(null));
 };

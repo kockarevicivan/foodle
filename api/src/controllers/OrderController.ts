@@ -17,10 +17,8 @@ class UserOrderController {
       const { _id } = req.user;
       const { date } = req.params;
       const order = await OrderService.getByDateAndUser(_id, date);
-      console.log(order);
       res.send(order);
     } catch (error) {
-      console.log(error);
       res.status(400).send(error.message);
     }
   }
@@ -31,7 +29,6 @@ class UserOrderController {
       const order = await OrderService.add(userId);
       res.send(order);
     } catch (error) {
-      console.log(error);
       res.status(400).send(error.message);
     }
   }

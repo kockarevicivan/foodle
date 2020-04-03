@@ -8,7 +8,6 @@ class WeeklyReceiptController {
       const weeklyReceipt = await WeeklyReceiptService.add(req.user._id, today);
       res.send(weeklyReceipt);
     } catch (error) {
-      console.log(error);
       res.status(400).send({ error });
     }
   }
@@ -35,7 +34,6 @@ class WeeklyReceiptController {
 
       res.send(weeklyReceipt);
     } catch (error) {
-      console.log(error);
       res.status(400).send({ error });
     }
   }

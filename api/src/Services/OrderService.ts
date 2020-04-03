@@ -49,11 +49,13 @@ class OrderService {
     if (!weeklyReceipt) {
       throw new Error("Weekly receipt with that id doesn't exist.");
     }
+    console.log(weeklyReceipt);
 
     //create order
-    let orderPayload: any = { user, weeklyReceipt };
+    let orderPayload: any = { user, weeklyReceipt: weeklyReceipt._id };
     const order = await Order.create(orderPayload);
     // add it to weekly receipt
+    console.log(order);
     weeklyReceipt.orders.push(order);
     await weeklyReceipt.save();
     return order;
