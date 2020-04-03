@@ -64,7 +64,7 @@ class Sidebar extends Component {
 }
 
 const mapStateToProps = state => ({
-  isAdmin: state.authenticationReducers.user?.role === "admin"
+  isAdmin: state.authenticationReducers.user?.role === "admin",
 });
 
 export default withRouter(connect(mapStateToProps, { logoutUser })(Sidebar));

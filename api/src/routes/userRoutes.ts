@@ -17,6 +17,7 @@ router.get(
   UserController.getById
 );
 router.post("/", UserController.add);
+router.put("/password/:id", AuthenticationMiddleware.verifyToken, UserController.updatePassword);
 router.put("/:id", AuthenticationMiddleware.verifyToken, UserController.update);
 router.delete(
   "/:id",

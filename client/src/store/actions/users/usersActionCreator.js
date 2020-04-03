@@ -2,7 +2,8 @@ import {
     REGISTER_USER,
     UPDATE_PROFILE,
     GET_USERS,
-    UPDATE_USER
+    UPDATE_USER,
+    UPDATE_PASSWORD
 } from "./usersTypes";
 
 export const registerUserCreator = user => ({
@@ -24,4 +25,8 @@ export const updateUserCreator = (updatedUser, index) => ({
 export const getUsersCreator = users => ({
     type: GET_USERS,
     users
+});
+export const updatePasswordCreator = updatedPassword => ({
+  type: UPDATE_PASSWORD,
+  updatedPassword
 });
