@@ -24,7 +24,7 @@ export const orderReducers = (state = initialState, action) => {
       var { index, quantity } = action;
       var order = { ...state.order };
       order.orderItems = state.order.orderItems.map((item, i) =>
-        i === index ? item : { ...item, quantity }
+        i !== index ? item : { ...item, quantity }
       );
       order.orderItems[index].quantity = quantity;
       return { order };
