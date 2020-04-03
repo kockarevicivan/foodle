@@ -1,32 +1,45 @@
 import WeeklyReceipts from "../models/WeeklyReceipt";
 
 class WeeklyReceiptService {
-  async add(receiptPayload: any, dateTime: any) {
-    const date = await this.getWeekNumber(dateTime);
-    receiptPayload.year = date[0];
-    receiptPayload.week = date[1];
+  public async add(user: string, dateTime: any) {
+    const date = this.getWeekAndYearNumber(dateTime);
+    let receiptPayload = {
+      year: date[0],
+      week: date[1],
+      user
+    };
 
-    const receipt = await WeeklyReceipts.create(receiptPayload);
+    const { _id } = await WeeklyReceipts.create(receiptPayload);
+    const receipt = await WeeklyReceipts.findById(_id).select("-orders -__v");
     return receipt;
   }
 
-  async getAll() {
+  public async getAll() {
     return await WeeklyReceipts.find({});
   }
 
-  async getByUserId(userId: string) {
+  public async getByUserId(userId: string) {
     return await WeeklyReceipts.find({ user: userId });
   }
 
-  async getByUserIdAndWeek(userId: string, dateTime: any) {
-    return await WeeklyReceipts.find({
-      user: userId,
-      year: dateTime[0],
-      week: dateTime[1]
-    });
+  public async getByUserIdAndWeek(user: string, dateTime: any) {
+    const weekAndYear = this.getWeekAndYearNumber(new Date(dateTime));
+    const weeklyReceipt = await WeeklyReceipts.findOne({
+      user,
+      year: weekAndYear[0],
+      week: weekAndYear[1]
+    }).select("-orders -__v");
+
+    if (!weeklyReceipt) {
+      throw new Error(
+        "Weekly receipt was not created for this week. You need to create one."
+      );
+    }
+
+    return weeklyReceipt;
   }
 
-  async update(id: string, update: any) {
+  public async update(id: string, update: any) {
     await WeeklyReceipts.findByIdAndUpdate(
       id,
       { $set: update },
@@ -35,11 +48,11 @@ class WeeklyReceiptService {
     return await WeeklyReceipts.findById(id);
   }
 
-  async delete(id: string) {
+  public async delete(id: string) {
     return await WeeklyReceipts.findByIdAndDelete(id);
   }
   //Method returns the number of the week since the year started
-  async getWeekNumber(d: any) {
+  private getWeekAndYearNumber(d: any) {
     // Copy date so don't modify original
     d = new Date(Date.UTC(d.getFullYear(), d.getMonth(), d.getDate()));
     // Set to nearest Thursday: current date + 4 - current day number

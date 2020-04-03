@@ -2,17 +2,18 @@ import { Response, Request } from "express";
 import WeeklyReceiptService from "../Services/WeeklyReceiptService";
 
 class WeeklyReceiptController {
-  public async add(req: Request, res: Response): Promise<any> {
+  public async add(req: any, res: any) {
     try {
-      const date = new Date();
-      const weeklyReceipt = await WeeklyReceiptService.add(req.body, date);
+      const today = new Date();
+      const weeklyReceipt = await WeeklyReceiptService.add(req.user._id, today);
       res.send(weeklyReceipt);
     } catch (error) {
+      console.log(error);
       res.status(400).send({ error });
     }
   }
 
-  public async getByUserId(req: Request, res: Response): Promise<any> {
+  public async getByUserId(req: Request, res: Response) {
     try {
       const { userId } = req.params;
       const weeklyReceipt = await WeeklyReceiptService.getByUserId(userId);
@@ -22,17 +23,19 @@ class WeeklyReceiptController {
     }
   }
 
-  public async getByUserIdAndWeek(req: Request, res: Response): Promise<any> {
+  public async getByUserIdAndWeek(req: any, res: any) {
     try {
-      const { userId, week, year } = req.params;     
+      const { dateTime } = req.params;
+      const { _id } = req.user;
 
       const weeklyReceipt = await WeeklyReceiptService.getByUserIdAndWeek(
-        userId,
-        [year, week]
+        _id,
+        dateTime
       );
 
       res.send(weeklyReceipt);
     } catch (error) {
+      console.log(error);
       res.status(400).send({ error });
     }
   }

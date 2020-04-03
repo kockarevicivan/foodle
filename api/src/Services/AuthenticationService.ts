@@ -10,12 +10,11 @@ class AuthenticationService {
     password: string
   ): Promise<any> {
     const user: any = await User.findOne({ username });
-    const match = await bcrypt.compare(password, user.password);
-    if (match) {
-      return user;
-    } else {
+    if (!(await bcrypt.compare(password, user.password))) {
       throw new Error("Authentication failed.");
     }
+
+    return user;
   }
 
   public async generateToken(user: any): Promise<string> {

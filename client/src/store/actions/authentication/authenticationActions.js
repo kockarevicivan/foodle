@@ -15,7 +15,6 @@ export const authenticateUser = credentials => async dispatch => {
 export const isAuthenticatedAction = () => async dispatch => {
   try {
     const { data } = await axios.get("/authentication/verify");
-    console.log(data);
     const token = localStorage.getItem("token");
     dispatch(authenticateUserCreator(data, token));
   } catch (error) {

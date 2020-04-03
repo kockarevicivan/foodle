@@ -20,40 +20,40 @@ class Sidebar extends Component {
           <div className="sidebar-header bg-danger p-2">
             <h2 className="text-light text-center space">foodle</h2>
           </div>
-
-          <ul className="h-100 bg-secondary">
-            <li>
+          <ul className="h-100 bg-danger">
+            <li className="w-100">
               <Link to="/placeOrder">Place order</Link>
             </li>{" "}
             <br />
-            <li>
+            <li className="w-100">
               <Link to="/orderHistory">Order history</Link>
             </li>{" "}
             <br />
-            <li>
+            <li className="w-100">
               <Link to="/profile">Profile</Link>
             </li>{" "}
             <br />
             {isAdmin ? (
               <React.Fragment>
-                <li>
+                <li className="w-100">
                   <Link to="/ordersOverview">Orders overview</Link>
                 </li>{" "}
                 <br />
-                <li>
+                <li className="w-100">
                   <Link to="/dailyMenu">Daily menu</Link>
                 </li>{" "}
                 <br />
-                <li>
+                <li className="w-100">
                   <Link to="/weeklySummary">Weekly summary</Link>
                 </li>{" "}
-                <li>
-                  <Link to="/manageUsers"></Link>
+                <br />
+                <li className="w-100">
+                  <Link to="/manageUsers">Manage users</Link>
                 </li>{" "}
                 <br />
               </React.Fragment>
             ) : null}
-            <li>
+            <li className="w-100">
               <Link onClick={this.onLogout} to="/">
                 Logout
               </Link>

@@ -24,37 +24,48 @@ class OrderService {
    * @param userId
    * @param dateTime
    */
-  public async getAllByDateAndUser(userId: string, dateTime: string) {
+  public async getByDateAndUser(userId: string, dateTime: string) {
     const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
-    const orders = Order.findOne({
+    const order = await Order.findOne({
       user: userId,
       createdAt: { $gte: startOfDay, $lte: endOfDay }
-    }).populate({ path: "orderItems.menuItem", select: "title price _id" });
+    }).select("-weeklyReceipt");
 
-    return orders;
+    if (!order) {
+      throw new Error("No order for current day.");
+    }
+
+    return order;
   }
 
-  /**
-   * Creates a user order and adds it to the
-   * @param userId
-   * @param orderPayload
-   */
-  public async add(userId: string, weeklyReceiptId: string) {
-    const weeklyReceipt: any = await WeeklyReceipt.findById(weeklyReceiptId);
+  public async add(user: string) {
+    // get weekly receipt for current week and logged user
+    const { week, year } = dateUtil.getWeekAndYearNumber(new Date());
+    const weeklyReceipt: any = await WeeklyReceipt.findOne({
+      user,
+      week,
+      year
+    });
     if (!weeklyReceipt) {
       throw new Error("Weekly receipt with that id doesn't exist.");
     }
 
-    //create user order
-    let orderPayload: any = {};
-    orderPayload.user = userId;
-    orderPayload.weeklyReceipt = weeklyReceiptId;
+    //create order
+    let orderPayload: any = { user, weeklyReceipt };
     const order = await Order.create(orderPayload);
-
     // add it to weekly receipt
     weeklyReceipt.orders.push(order);
     await weeklyReceipt.save();
     return order;
+  }
+
+  public async update(orderId: string, orderUpdate: any) {
+    await Order.findByIdAndUpdate(
+      orderId,
+      { $set: orderUpdate },
+      { runValidators: true }
+    );
+    return await Order.findById(orderId);
   }
 
   public async setStatusToSent(orderId: string) {

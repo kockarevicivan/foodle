@@ -6,8 +6,8 @@ export default mongoose.model(
     totalPrice: { type: Number, default: 0, min: 0 },
     paid: { type: Boolean, default: false },
     createdAt: { type: Date, default: Date.now() },
-    week: { type: Number },
-    year: { type: Number },
+    week: { type: Number, required: true },
+    year: { type: Number, required: true },
     user: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "users",

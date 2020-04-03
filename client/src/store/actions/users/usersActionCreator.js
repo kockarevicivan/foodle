@@ -1,12 +1,27 @@
-import { REGISTER_USER } from "./usersTypes";
-import { UPDATE_PROFILE } from "./usersTypes";
+import {
+    REGISTER_USER,
+    UPDATE_PROFILE,
+    GET_USERS,
+    UPDATE_USER
+} from "./usersTypes";
 
 export const registerUserCreator = user => ({
-  type: REGISTER_USER,
-  user
+    type: REGISTER_USER,
+    user
 });
 
-export const updateUserCreator = updatedUser => ({
-  type: UPDATE_PROFILE,
-  updatedUser
+export const updateProfileCreator = updatedUser => ({
+    type: UPDATE_PROFILE,
+    updatedUser
+});
+
+export const updateUserCreator = (updatedUser, index) => ({
+    type: UPDATE_USER,
+    updatedUser,
+    index
+});
+
+export const getUsersCreator = users => ({
+    type: GET_USERS,
+    users
 });

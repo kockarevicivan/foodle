@@ -17,6 +17,7 @@ export const authenticationReducers = (state = initialState, action) => {
         user: action.user,
         isAuthenticated: true
       };
+
     case LOGOUT_USER:
       localStorage.removeItem("token");
       axios.defaults.headers["authorization"] = "";
@@ -24,6 +25,7 @@ export const authenticationReducers = (state = initialState, action) => {
         user: null,
         isAuthenticated: false
       };
+
     case IS_AUTHENTICATED:
       return {
         ...state,
@@ -35,6 +37,7 @@ export const authenticationReducers = (state = initialState, action) => {
         ...state,
         user: action.updatedUser
       };
+
     default:
       return state;
   }

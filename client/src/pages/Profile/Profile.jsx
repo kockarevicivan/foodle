@@ -1,23 +1,30 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { updateUser } from "../../store/actions/users/usersActions";
+import { updateProfile } from "../../store/actions/users/usersActions";
 import Layout from "../../components/Layout/Layout";
 
 class Profile extends Component {
-  state = {
-    username: "",
-    fullName: ""
-  };
+    state = {
+        username: "",
+        fullName: ""
+    };
 
-  onChange = ({ target }) => {
-    this.setState({ [target.name]: target.value });
-  };
+    onChange = ({ target }) => {
+        this.setState({ [target.name]: target.value });
+    };
 
-  onSubmit = async event => {
-    event.preventDefault();
-    const userPayload = {
-      username: this.state.username,
-      fullName: this.state.fullName
+    onSubmit = async event => {
+        event.preventDefault();
+        const userPayload = {
+            username: this.state.username,
+            fullName: this.state.fullName
+        };
+        const { _id: userId } = this.props.user;
+        try {
+            await this.props.updateProfile(userPayload, userId);
+        } catch (error) {
+            console.log(error.message);
+        }
     };
     const { _id: userId } = this.props.user;
     try {
@@ -54,15 +61,15 @@ class Profile extends Component {
             />
           </p>
 
-          <button>Update profile</button>
-        </form>
-      </Layout>
-    );
-  }
+                    <button>Update profile</button>
+                </form>
+            </Layout>
+        );
+    }
 }
 
 const mapStateToProps = state => ({
-  user: state.authenticationReducers.user
+    user: state.authenticationReducers.user
 });
 
-export default connect(mapStateToProps, { updateUser })(Profile);
+export default connect(mapStateToProps, { updateProfile })(Profile);
