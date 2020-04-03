@@ -52,7 +52,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   items: state.menuReducers.items
-});
+}); 
 
 export default connect(mapStateToProps, {
   isAuthenticatedAction,
