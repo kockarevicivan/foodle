@@ -1,6 +1,5 @@
 import React from "react";
 import clsx from "clsx";
-import { useTheme } from "@material-ui/core/styles";
 import Drawer from "@material-ui/core/Drawer";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -13,8 +12,6 @@ import MenuIcon from "@material-ui/icons/Menu";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
-import InboxIcon from "@material-ui/icons/MoveToInbox";
-import MailIcon from "@material-ui/icons/Mail";
 import useStyles from "./styles";
 import RestaurantIcon from "@material-ui/icons/Restaurant";
 import SupervisorAccountIcon from "@material-ui/icons/SupervisorAccount";

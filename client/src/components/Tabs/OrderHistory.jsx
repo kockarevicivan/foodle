@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import Layout from "../Layout/Layout";
 
 class OrderHistory extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div style={{ backgroundColor: "white" }}>
         <h1>OrderHistory</h1>
       </div>
     );

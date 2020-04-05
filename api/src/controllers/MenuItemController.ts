@@ -17,6 +17,7 @@ class MenuItemController {
       const menuItem = await MenuItemService.addForCurrentDay(req.body);
       res.send(menuItem);
     } catch (error) {
+      console.log(error);
       res
         .status(400)
         .send("You didn't provide all necessary parameters for menu item!");

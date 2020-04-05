@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { editItem, removeItem } from "../../../store/actions/menu/menuActions";
+import { TableCell, TableRow, Button } from "@material-ui/core";
+import DeleteIcon from "@material-ui/icons/Delete";
+import EditIcon from "@material-ui/icons/Edit";
 
 class MenuItem extends Component {
   deleteItem() {
@@ -11,26 +14,27 @@ class MenuItem extends Component {
   render() {
     const { item } = this.props;
     return (
-      <tr>
-        <td>{item.title}</td>
-        <td>{item.price}</td>
-        <td>{item.quantityType}</td>
-        <td>
-          <button>E</button>
-          <button
+      <TableRow>
+        <TableCell align="center">{item.title}</TableCell>
+        <TableCell align="center">{item.price}</TableCell>
+        <TableCell align="center">
+          <Button
             onClick={() => {
               this.deleteItem();
             }}
           >
-            <i className="far fa-trash-alt"></i>
-          </button>
-        </td>
-      </tr>
+            <DeleteIcon fontSize="small" color="secondary" />
+          </Button>
+          <Button>
+            <EditIcon fontSize="small" style={{ color: "green" }} />
+          </Button>
+        </TableCell>
+      </TableRow>
     );
   }
 }
 
 export default connect(null, {
   editItem: (itemId, item) => editItem(itemId, item),
-  removeItem: itemId => removeItem(itemId)
+  removeItem: (itemId) => removeItem(itemId),
 })(MenuItem);

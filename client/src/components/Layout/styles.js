@@ -62,5 +62,7 @@ export default makeStyles((theme) => ({
   content: {
     flexGrow: 1,
     padding: theme.spacing(3),
+    backgroundColor: "#ffebee",
+    minHeight: "100vh",
   },
 }));

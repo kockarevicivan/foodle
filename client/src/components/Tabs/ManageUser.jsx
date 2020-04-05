@@ -1,10 +1,24 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import { compose } from "redux";
 import {
   getUsersAction,
   updateUser,
 } from "../../store/actions/users/usersActions";
-import Layout from "../Layout/Layout";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableContainer,
+  TableHead,
+  TableRow,
+  Paper,
+  Button,
+  Toolbar,
+  Typography,
+} from "@material-ui/core";
+import { withStyles } from "@material-ui/styles";
+import styles from "./styles";
 
 class ManageUsers extends Component {
   state = {};
@@ -40,54 +54,60 @@ class ManageUsers extends Component {
     const { users } = this.props;
     return (
       <div>
-        <div className="container mt-5">
-          <div className="row">
-            <div className="col">
-              <table className="centered">
-                <thead>
-                  <tr>
-                    <th>Username</th>
-                    <th>Full name</th>
-                    <th>Role</th>
-                    <th>Action</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {users.map((user, index) => (
-                    <tr key={index}>
-                      <td>{user.username}</td>
-                      <td>{user.fullName}</td>
-                      <td>{user.role}</td>
-                      <td>
-                        {user.role === "admin" ? (
-                          <button
-                            className="btn btn-danger"
-                            onClick={() =>
-                              this.showDialog(user, index, this.demoteToUser)
-                            }
-                          >
-                            {" "}
-                            Demote to user
-                          </button>
-                        ) : (
-                          <button
-                            className="btn btn-danger"
-                            onClick={() =>
-                              this.showDialog(user, index, this.promoteToAdmin)
-                            }
-                          >
-                            {" "}
-                            Promote to admin
-                          </button>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </div>
+        <Toolbar className={this.props.classes.header}>
+          <Typography
+            className={this.props.classes.title}
+            variant="h6"
+            id="tableTitle"
+            component="div"
+          >
+            Users
+          </Typography>
+        </Toolbar>
+        <TableContainer component={Paper}>
+          <Table aria-label="simple table">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">Username</TableCell>
+                <TableCell align="center">Full name</TableCell>
+                <TableCell align="center">Role</TableCell>
+                <TableCell align="center">Actions</TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {users.map((row, index) => (
+                <TableRow key={index}>
+                  <TableCell align="center">{row.username}</TableCell>
+                  <TableCell align="center">{row.fullName}</TableCell>
+                  <TableCell align="center">{row.role}</TableCell>
+                  <TableCell align="center">
+                    {row.role !== "admin" ? (
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() =>
+                          this.showDialog(row, index, this.promoteToAdmin)
+                        }
+                      >
+                        Promote{" "}
+                      </Button>
+                    ) : (
+                      <Button
+                        variant="contained"
+                        color="secondary"
+                        onClick={() =>
+                          this.showDialog(row, index, this.demoteToUser)
+                        }
+                      >
+                        Demote{" "}
+                      </Button>
+                    )}
+                  </TableCell>
+                </TableRow>
+              ))}
+            </TableBody>
+          </Table>
+        </TableContainer>
       </div>
     );
   }
@@ -98,6 +118,7 @@ const mapStateToProps = (state) => ({
   loggedUser: state.authenticationReducers.user,
 });
 
-export default connect(mapStateToProps, { getUsersAction, updateUser })(
-  ManageUsers
-);
+export default compose(
+  withStyles(styles, { name: "ManageUsers" }),
+  connect(mapStateToProps, { getUsersAction, updateUser })
+)(ManageUsers);

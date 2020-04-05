@@ -1,11 +1,10 @@
 import React, { Component } from "react";
-import Layout from "../Layout/Layout";
 
 class OrderOverview extends Component {
   state = {};
   render() {
     return (
-      <div>
+      <div style={{ backgroundColor: "white" }}>
         <h1>OrderOverview</h1>
         <p>
           Ovde ce admin moci da izabere dan i da vidi narudzbine za taj dan.
