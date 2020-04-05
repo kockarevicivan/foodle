@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 
-import { createItem, editItem } from "../store/actions/menu/menuActions";
+import { createItem, editItem } from "../../store/actions/menu/menuActions";
 
-import Layout from "../components/Layout/Layout";
-import Menu from "../components/UI/Menu/Menu";
+import Layout from "../Layout/Layout";
+import Menu from "../UI/Menu/Menu";
 
 class DailyMenu extends Component {
   state = {

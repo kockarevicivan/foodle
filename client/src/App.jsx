@@ -15,15 +15,11 @@ import AuthRoute from "./components/Routes/AuthRoute";
 import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register";
 import NotFound from "./pages/NotFound";
-import Dashboard from "./pages/Dashboard/Dashboard";
-import Profile from "./pages/Profile";
-import PlaceOrder from "./pages/PlaceOrder";
-import OrderHistory from "./pages/OrderHistory";
-import OrderOverview from "./pages/OrderOverview";
-import DailyMenu from "./pages/DailyMenu";
-import WeeklySummary from "./pages/WeeklySummary";
-import ManageUser from "./pages/ManageUser";
 import Layout from "./components/Layout/Layout";
+import Administration from "./pages/Administration";
+import Profile from "./pages/Profile";
+import Ordering from "./pages/Ordering";
+import Dashboard from "./pages/Dashboard/Dashboard";
 
 class App extends Component {
   componentDidMount() {
@@ -38,13 +34,9 @@ class App extends Component {
           <Route path="/register" component={RegisterPage} />
           <Layout>
             <AuthRoute path="/dashboard" component={Dashboard} />
-            <AuthRoute path="/placeOrder" component={PlaceOrder} />
-            <AuthRoute path="/orderHistory" component={OrderHistory} />
-            <AuthRoute path="/manageUsers" component={ManageUser} />
+            <AuthRoute path="/administration" component={Administration} />
             <AuthRoute path="/profile" component={Profile} />
-            <AuthRoute path="/ordersOverview" component={OrderOverview} />
-            <AuthRoute path="/dailyMenu" component={DailyMenu} />
-            <AuthRoute path="/weeklySummary" component={WeeklySummary} />
+            <AuthRoute path="/orders" component={Ordering} />
           </Layout>
           <Route path="*" component={NotFound} />
         </Switch>
