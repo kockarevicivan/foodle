@@ -16,7 +16,7 @@ class PlaceOrder extends Component {
 
   render() {
     return (
-      <Layout>
+      <div>
         <div className="container">
           <div className="row">
             <div className="col-lg-6">
@@ -29,12 +29,12 @@ class PlaceOrder extends Component {
             </div>
           </div>
         </div>
-      </Layout>
+      </div>
     );
   }
 }
 
-const mapStateToProps = state => ({});
+const mapStateToProps = (state) => ({});
 
 export default connect(mapStateToProps, { getWeeklyReceipt, getTodaysOrder })(
   PlaceOrder

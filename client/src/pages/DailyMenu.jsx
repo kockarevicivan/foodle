@@ -10,15 +10,15 @@ class DailyMenu extends Component {
   state = {
     title: "",
     price: "",
-    quantityType: "100gr"
+    quantityType: "100gr",
   };
 
-  onSubmit = async event => {
+  onSubmit = async (event) => {
     event.preventDefault();
     const itemInfo = {
       title: this.state.title.trim(),
       price: this.state.price,
-      quantityType: this.state.quantityType
+      quantityType: this.state.quantityType,
     };
     try {
       await this.props.createItem(itemInfo);
@@ -33,7 +33,7 @@ class DailyMenu extends Component {
 
   render() {
     return (
-      <Layout>
+      <div>
         <div className="container col-10">
           <h1 className="text-center">DailyMenu</h1>
           <div className="d-flex justify-content-md-between justify-content-sm-center flex-md-row flex-sm-column">
@@ -93,12 +93,12 @@ class DailyMenu extends Component {
             </div>
           </div>
         </div>
-      </Layout>
+      </div>
     );
   }
 }
 
 export default connect(null, {
-  createItem: item => createItem(item),
-  editItem: (itemId, item) => editItem(itemId, item)
+  createItem: (item) => createItem(item),
+  editItem: (itemId, item) => editItem(itemId, item),
 })(DailyMenu);

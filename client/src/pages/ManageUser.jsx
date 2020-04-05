@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {
   getUsersAction,
-  updateUser
+  updateUser,
 } from "../store/actions/users/usersActions";
 import Layout from "../components/Layout/Layout";
 
@@ -39,7 +39,7 @@ class ManageUsers extends Component {
   render() {
     const { users } = this.props;
     return (
-      <Layout>
+      <div>
         <div className="container mt-5">
           <div className="row">
             <div className="col">
@@ -88,14 +88,14 @@ class ManageUsers extends Component {
             </div>
           </div>
         </div>
-      </Layout>
+      </div>
     );
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   users: state.usersReducers.users,
-  loggedUser: state.authenticationReducers.user
+  loggedUser: state.authenticationReducers.user,
 });
 
 export default connect(mapStateToProps, { getUsersAction, updateUser })(

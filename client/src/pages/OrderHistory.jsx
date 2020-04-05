@@ -5,9 +5,9 @@ class OrderHistory extends Component {
   state = {};
   render() {
     return (
-      <Layout>
+      <div>
         <h1>OrderHistory</h1>
-      </Layout>
+      </div>
     );
   }
 }

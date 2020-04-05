@@ -75,7 +75,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <Layout>
+      <div>
         <h1>This is the profile page</h1>
         <div className="container d-flex flex-row  col-8">
           <div className="col-4">
@@ -141,7 +141,7 @@ class Profile extends Component {
             </form>
           </div>
         </div>
-      </Layout>
+      </div>
     );
   }
 }

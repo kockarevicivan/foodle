@@ -4,9 +4,9 @@ class AdminDashboard extends Component {
   state = {};
   render() {
     return (
-      <Layout>
+      <div>
         <h1>Dashboard</h1>
-      </Layout>
+      </div>
     );
   }
 }
