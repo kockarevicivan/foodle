@@ -1,26 +1,26 @@
 import express from "express";
 
-import MenuItemController from "../controllers/MenuItemController";
+import MenuItemController from "../controllers/MenuController";
 import AuthorizationMiddleware from "../middleware/AuthorizationMiddleware";
 
 const router = express.Router();
 
 router.use(AuthorizationMiddleware.verifyToken);
-router.get("/:date", MenuItemController.getAllForDay);
+router.get("/:date", MenuItemController.getByDate);
 router.post(
   "/",
   AuthorizationMiddleware.verifyPermission,
-  MenuItemController.addForCurrentDay
+  MenuItemController.createMenuForToday
 );
 router.put(
-  "/:menuItemId",
+  "/:menuId",
   AuthorizationMiddleware.verifyPermission,
-  MenuItemController.update
+  MenuItemController.addMenuItemToCurrentMenu
 );
-router.delete(
-  "/:menuItemId",
-  AuthorizationMiddleware.verifyPermission,
-  MenuItemController.delete
-);
+// router.delete(
+//   "/:menuItemId",
+//   AuthorizationMiddleware.verifyPermission,
+//   MenuItemController.delete
+// );
 
 export default router;

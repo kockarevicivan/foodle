@@ -1,17 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { connect } from "react-redux";
-import "./index.css";
-
-import { isAuthenticatedAction } from "./store/actions/authentication/authenticationActions";
-import {
-  getAllForDay,
-  createItem,
-  editItem,
-  removeItem,
-} from "./store/actions/menu/menuActions";
 import AuthRoute from "./components/Routes/AuthRoute";
-
 import LoginPage from "./pages/Login";
 import RegisterPage from "./pages/Register";
 import NotFound from "./pages/NotFound";
@@ -20,6 +9,9 @@ import Administration from "./pages/Administration";
 import Profile from "./pages/Profile";
 import Ordering from "./pages/Ordering";
 import Dashboard from "./pages/Dashboard/Dashboard";
+import "./index.css";
+import { connect } from "react-redux";
+import { isAuthenticatedAction } from "./store/actions/authentication/authenticationActions";
 
 class App extends Component {
   componentDidMount() {
@@ -51,8 +43,4 @@ const mapStateToProps = (state) => ({
 
 export default connect(mapStateToProps, {
   isAuthenticatedAction,
-  getAllForDay: (items) => getAllForDay(items),
-  createItem: (item) => createItem(item),
-  editItem: (itemId, item) => editItem(itemId, item),
-  removeItem: (itemId) => removeItem(itemId),
 })(App);

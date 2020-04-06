@@ -1,6 +1,4 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import { createItem, editItem } from "../../store/actions/menu/menuActions";
 import AddMenuItem from "../UI/Menu/AddMenuItem";
 import Menu from "../UI/Menu/Menu";
 import { Grid, Button } from "@material-ui/core";
@@ -42,7 +40,4 @@ class DailyMenu extends Component {
   }
 }
 
-export default connect(null, {
-  createItem: (item) => createItem(item),
-  editItem: (itemId, item) => editItem(itemId, item),
-})(DailyMenu);
+export default DailyMenu;

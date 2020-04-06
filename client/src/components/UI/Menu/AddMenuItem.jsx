@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { createItem, editItem } from "../../../store/actions/menu/menuActions";
+import { addMenuItem } from "../../../store/actions/menu/menuActions";
 import {
   Dialog,
   DialogTitle,
@@ -29,11 +29,10 @@ class AddMenuItem extends Component {
     };
 
     try {
-      await this.props.createItem(item);
+      await this.props.addMenuItem(item, this.props.menuId);
       this.setState({ title: "", price: "" });
       this.props.handleClose();
     } catch (error) {
-      console.log(error);
       alert("Unable to add item");
     }
   };
@@ -85,7 +84,8 @@ class AddMenuItem extends Component {
   }
 }
 
-export default connect(null, {
-  createItem: (item) => createItem(item),
-  editItem: (itemId, item) => editItem(itemId, item),
-})(AddMenuItem);
+const mapStateToProps = (state) => ({
+  menuId: state.menuReducers.menu?._id,
+});
+
+export default connect(mapStateToProps, { addMenuItem })(AddMenuItem);

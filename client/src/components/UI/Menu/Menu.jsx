@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { getAllForDay } from "../../../store/actions/menu/menuActions";
+import { getTodaysMenu } from "../../../store/actions/menu/menuActions";
 import { Link } from "react-router-dom";
 import {
   Table,
@@ -23,7 +23,7 @@ class Menu extends Component {
   state = {};
 
   componentDidMount() {
-    this.props.getAllForDay();
+    this.props.getTodaysMenu();
   }
 
   render() {
@@ -56,14 +56,14 @@ class Menu extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items.map((item) =>
+              {items?.map((item) =>
                 this.props.admin ? (
                   <AdminMenuItem key={item._id} item={item} />
                 ) : (
                   <RegularMenuItem key={item._id} item={item} />
                 )
               )}
-              {items.length === 0 ? (
+              {items?.length === 0 ? (
                 <TableRow>
                   <TableCell colSpan={3} align="center">
                     Menu wasn't created for today.{" "}
@@ -80,12 +80,10 @@ class Menu extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  items: state.menuReducers.items,
+  items: state.menuReducers.menu?.items,
 });
 
 export default compose(
   withStyles(styles, { name: "Menu" }),
-  connect(mapStateToProps, {
-    getAllForDay: (items) => getAllForDay(items),
-  })
+  connect(mapStateToProps, { getTodaysMenu })
 )(Menu);

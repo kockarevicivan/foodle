@@ -8,7 +8,7 @@ import config from "./config";
 import userRoutes from "./routes/userRoutes";
 import orderRoutes from "./routes/orderRoutes";
 import weeklyReceiptRoutes from "./routes/weeklyReceiptRoutes";
-import menuItemRoutes from "./routes/menuItemRoutes";
+import menuItemRoutes from "./routes/menuRoutes";
 import invoiceRoutes from "./routes/invoiceRoutes";
 import loginRoutes from "./routes/authenticationRoutes";
 import orderItemRoutes from "./routes/orderItemRoutes";
@@ -19,7 +19,7 @@ mongoose.connect(config.databaseUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
   useCreateIndex: true,
-  useFindAndModify: false
+  useFindAndModify: false,
 });
 mongoose.connection.on("open", () => console.log("connected to the database"));
 mongoose.connection.on("error", () =>
@@ -37,7 +37,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use("/users", userRoutes);
 app.use("/authentication", loginRoutes);
 app.use("/orders", orderRoutes);
-app.use("/menuItems", menuItemRoutes);
+app.use("/menu", menuItemRoutes);
 app.use("/orderItems", orderItemRoutes);
 app.use("/receipts", weeklyReceiptRoutes);
 app.use("/invoice", invoiceRoutes);
