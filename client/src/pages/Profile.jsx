@@ -4,8 +4,7 @@ import {
   updateProfile,
   updatePassword,
 } from "../store/actions/users/usersActions";
-import Layout from "../components/Layout/Layout";
-//import ProfileForm from "../../components/ProfileFormComponent/ProfileFormComponent";
+
 class Profile extends Component {
   constructor(props) {
     super(props);
@@ -40,8 +39,6 @@ class Profile extends Component {
   };
 
   onSubmit = async (event) => {
-    console.log(1);
-
     event.preventDefault();
     const userPayload = {
       username: this.state.username,
@@ -75,8 +72,7 @@ class Profile extends Component {
 
   render() {
     return (
-      <Layout>
-        <h1>This is the profile page</h1>
+      <div style={{ backgroundColor: "white" }}>
         <div className="container d-flex flex-row  col-8">
           <div className="col-4">
             <form onSubmit={this.onSubmit}>
@@ -141,7 +137,7 @@ class Profile extends Component {
             </form>
           </div>
         </div>
-      </Layout>
+      </div>
     );
   }
 }
