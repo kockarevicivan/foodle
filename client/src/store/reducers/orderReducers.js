@@ -2,10 +2,11 @@ import {
   ADD_ITEM,
   SET_QUANTITY,
   REMOVE_ORDER_ITEM,
-  SET_ORDER
+  SET_ORDER,
+  SET_ALL_ORDERS,
 } from "../actions/order/orderTypes";
 
-const initialState = { order: null };
+const initialState = { order: null, orders: [] };
 export const orderReducers = (state = initialState, action) => {
   switch (action.type) {
     case ADD_ITEM:
@@ -13,7 +14,7 @@ export const orderReducers = (state = initialState, action) => {
       let orderItem = {
         title: menuItem.title,
         menuItem: menuItem._id,
-        quantity: 0
+        quantity: 0,
       };
 
       var order = { ...state.order };
@@ -38,6 +39,9 @@ export const orderReducers = (state = initialState, action) => {
     case SET_ORDER:
       var { order } = action;
       return { ...state, order };
+
+    case SET_ALL_ORDERS:
+      return { ...state, orders: action.orders };
 
     default:
       return state;

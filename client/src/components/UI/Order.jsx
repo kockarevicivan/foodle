@@ -91,7 +91,7 @@ class OrderTable extends Component {
                   <TableCell align="center">{row.title}</TableCell>
                   <TableCell align="center">
                     <TextField
-                      id="quantity"
+                      name="quantity"
                       value={row.quantity}
                       onChange={(e) => this.onChange(e, index)}
                     />
