@@ -56,9 +56,9 @@ class Menu extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items?.map((item) =>
+              {items?.map((item, index) =>
                 this.props.admin ? (
-                  <AdminMenuItem key={item._id} item={item} />
+                  <AdminMenuItem key={item._id} item={item} index={index} />
                 ) : (
                   <RegularMenuItem key={item._id} item={item} />
                 )

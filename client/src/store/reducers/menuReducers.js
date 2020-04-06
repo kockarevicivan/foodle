@@ -33,9 +33,12 @@ export const menuReducers = (state = initialState, action) => {
         items: modifiedItems,
       };
     case REMOVE_MENU_ITEM:
+      const { itemIndex } = action;
       return {
-        ...state,
-        items: state.items.filter((item) => item._id !== action.itemId),
+        menu: {
+          ...state.menu,
+          items: state.menu.items.filter((item, i) => i !== itemIndex),
+        },
       };
 
     default:

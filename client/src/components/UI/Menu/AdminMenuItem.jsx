@@ -7,8 +7,8 @@ import EditIcon from "@material-ui/icons/Edit";
 
 class MenuItem extends Component {
   deleteItem() {
-    const { item } = this.props;
-    this.props.removeItem(item._id);
+    const { menuId, index } = this.props;
+    this.props.removeItem(menuId, index);
   }
 
   render() {
@@ -34,7 +34,8 @@ class MenuItem extends Component {
   }
 }
 
-export default connect(null, {
-  editItem: (itemId, item) => editItem(itemId, item),
-  removeItem: (itemId) => removeItem(itemId),
-})(MenuItem);
+const mapStateToProps = (state) => ({
+  menuId: state.menuReducers.menu?._id,
+});
+
+export default connect(mapStateToProps, { editItem, removeItem })(MenuItem);

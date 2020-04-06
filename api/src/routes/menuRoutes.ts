@@ -17,10 +17,10 @@ router.put(
   AuthorizationMiddleware.verifyPermission,
   MenuItemController.addMenuItemToCurrentMenu
 );
-// router.delete(
-//   "/:menuItemId",
-//   AuthorizationMiddleware.verifyPermission,
-//   MenuItemController.delete
-// );
+router.delete(
+  "/:menuId/:menuItemIndex",
+  AuthorizationMiddleware.verifyPermission,
+  MenuItemController.delete
+);
 
 export default router;

@@ -28,7 +28,7 @@ export const editItem = (itemId, payLoad) => async (dispatch) => {
   dispatch(editItemCreator(data));
 };
 
-export const removeItem = (itemId) => async (dispatch) => {
-  const { data } = await axios.delete(`/menuItems/${itemId}`);
-  dispatch(removeItemCreator(data));
+export const removeItem = (itemId, index) => async (dispatch) => {
+  await axios.delete(`/menu/${itemId}/${index}`);
+  dispatch(removeItemCreator(index));
 };

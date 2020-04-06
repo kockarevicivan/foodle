@@ -17,7 +17,7 @@ export const editItemCreator = (item) => ({
   type: EDIT_ITEM,
   item,
 });
-export const removeItemCreator = (itemId) => ({
+export const removeItemCreator = (itemIndex) => ({
   type: REMOVE_MENU_ITEM,
-  itemId,
+  itemIndex,
 });

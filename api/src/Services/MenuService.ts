@@ -26,17 +26,11 @@ class MenuService {
     await menu.save();
   }
 
-  //   public async delete(menuItemId: string) {
-  //     if (await MenuItem.exists({ menuItem: menuItemId })) {
-  //       throw Error(`There is an menu item for this menu item.`);
-  //     }
-
-  //     if (!(await MenuItem.exists({ _id: menuItemId }))) {
-  //       throw Error("Menu item doesn't exist.");
-  //     }
-
-  //     await MenuItem.findByIdAndDelete(menuItemId);
-  //   }
+  public async delete(menuId: string, menuItemIndex: number) {
+    let menu: any = await Menu.findById(menuId);
+    menu.items.splice(menuItemIndex, 1);
+    await menu.save();
+  }
 }
 
 export default new MenuService();

@@ -34,14 +34,15 @@ class MenuController {
     }
   }
 
-  //   public async delete(req: Request, res: Response): Promise<any> {
-  //     try {
-  //       await MenuService.delete(req.params.menuItemId);
-  //       res.send(req.params.menuItemId);
-  //     } catch (error) {
-  //       res.status(400).send(error.message);
-  //     }
-  //   }
+  public async delete(req: Request, res: Response): Promise<any> {
+    try {
+      const { menuId, menuItemIndex } = req.params;
+      await MenuService.delete(menuId, parseInt(menuItemIndex));
+      res.send("Item deleted");
+    } catch (error) {
+      res.status(400).send(error.message);
+    }
+  }
 }
 
 export default new MenuController();
