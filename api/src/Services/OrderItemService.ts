@@ -1,4 +1,4 @@
-import MenuItem from "../models/MenuItem";
+import MenuItem from "../models/Menu";
 import Order from "../models/Order";
 
 class OrderItemService {

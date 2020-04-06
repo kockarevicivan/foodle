@@ -1,28 +1,34 @@
 import axios from "../../../axios";
 import {
-  getAllForDayCreator,
-  createItemCreator,
+  setMenuCreator,
+  addMenuItemCreator,
   editItemCreator,
-  removeItemCreator
+  removeItemCreator,
 } from "./menuCreators";
 
-export const getAllForDay = () => async dispatch => {
-  const today = new Date();
-  const { data } = await axios.get(`/menuItems/${today}`);
-  dispatch(getAllForDayCreator(data));
+export const getTodaysMenu = () => async (dispatch) => {
+  try {
+    const today = new Date();
+    const { data: menu } = await axios.get(`/menu/${today}`);
+    dispatch(setMenuCreator(menu));
+  } catch (error) {
+    const { data: menu } = await axios.post("/menu");
+    console.log(menu);
+    dispatch(setMenuCreator(menu));
+  }
 };
 
-export const createItem = payLoad => async dispatch => {
-  const { data } = await axios.post("/menuItems", payLoad);
-  dispatch(createItemCreator(data));
+export const addMenuItem = (payLoad, menuId) => async (dispatch) => {
+  const { data: menuItem } = await axios.put(`/menu/${menuId}`, payLoad);
+  dispatch(addMenuItemCreator(menuItem));
 };
 
-export const editItem = (itemId, payLoad) => async dispatch => {
+export const editItem = (itemId, payLoad) => async (dispatch) => {
   const { data } = await axios.put(`/menuItems/${itemId}`, payLoad);
   dispatch(editItemCreator(data));
 };
 
-export const removeItem = itemId => async dispatch => {
-  const { data } = await axios.delete(`/menuItems/${itemId}`);
-  dispatch(removeItemCreator(data));
+export const removeItem = (itemId, index) => async (dispatch) => {
+  await axios.delete(`/menu/${itemId}/${index}`);
+  dispatch(removeItemCreator(index));
 };
