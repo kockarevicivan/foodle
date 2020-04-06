@@ -38,7 +38,7 @@ app.use("/users", userRoutes);
 app.use("/authentication", loginRoutes);
 app.use("/orders", orderRoutes);
 app.use("/menu", menuItemRoutes);
-app.use("/orderItems", orderItemRoutes);
+// app.use("/orderItems", orderItemRoutes);
 app.use("/receipts", weeklyReceiptRoutes);
 app.use("/invoice", invoiceRoutes);
 
