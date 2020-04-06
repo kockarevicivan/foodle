@@ -32,6 +32,21 @@ class OrderTable extends Component {
     }
   };
 
+  onCompleteOrder = async () => {
+    const { order } = this.props;
+    for (let item of order.orderItems) {
+      if (item.quantity <= 0) {
+        alert("You need to enter the quantity");
+        return;
+      }
+    }
+
+    await this.props.completeOrder(order);
+    alert(
+      "Your order has been sent, you can still change it until the admin doesn't send it."
+    );
+  };
+
   render() {
     const { order } = this.props;
     return (
@@ -44,6 +59,15 @@ class OrderTable extends Component {
             component="div"
           >
             Your order
+            {order?.orderItems.length !== 0 ? (
+              <Button
+                variant="contained"
+                color=""
+                onClick={this.onCompleteOrder}
+              >
+                Complete order
+              </Button>
+            ) : null}
           </Typography>
         </Toolbar>
         <TableContainer component={Paper}>
