@@ -1,28 +1,11 @@
 export default (theme) => ({
-  header: {
-    backgroundColor: "#d50000",
-  },
-
-  title: {
-    color: "white",
+  root: {
+    flexGrow: 1,
+    backgroundColor: "inherit",
   },
   formContainer: {
     padding: '15px 50px',
   },
-  inputField: {
-    '&:focus': {
-      border:"none",
-      boxShadow: "none"
-    },
-    '&:blur': {
-      border:"none",
-      boxShadow: "none"
-    },
-    color: "red",
-    border:"none",
-    boxShadow: "none"
-  },
-  
   buttonStyles: {
     '&:focus': {
       backgroundColor: "#d50000",
@@ -36,4 +19,5 @@ export default (theme) => ({
     marginRight: ".5em",
     
   }
+
 });

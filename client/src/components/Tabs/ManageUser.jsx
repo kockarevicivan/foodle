@@ -52,11 +52,12 @@ class ManageUsers extends Component {
 
   render() {
     const { users } = this.props;
+    const { classes } = this.props;
     return (
       <div>
-        <Toolbar className={this.props.classes.header}>
+        <Toolbar className={classes.header}>
           <Typography
-            className={this.props.classes.title}
+            className={classes.title}
             variant="h6"
             id="tableTitle"
             component="div"
