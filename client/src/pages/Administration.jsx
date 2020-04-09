@@ -6,23 +6,16 @@ import TabPanel from "../components/Tabs/TabPanel";
 import DailyMenu from "../components/Tabs/DailyMenu";
 import ManageUsers from "../components/Tabs/ManageUser";
 import WeeklySummary from "../components/Tabs/WeeklySummary";
+import styles from "./styles";
+const useStyles = makeStyles(styles);
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    backgroundColor: "inherit",
-  },
-
-  buttonStyles: {
-    borderRadius: "1em",
-    marginRight: ".5em",
-  },
-}));
 export default function SimpleTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
+  console.log(classes);
   return (
+    
     <div className={classes.root}>
       <Tabs value={value}>
         <IconButton
