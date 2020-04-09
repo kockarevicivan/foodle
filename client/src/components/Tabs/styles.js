@@ -7,33 +7,19 @@ export default (theme) => ({
     color: "white",
   },
   formContainer: {
-    padding: '15px 50px',
+    padding: "15px 50px",
   },
-  inputField: {
-    '&:focus': {
-      border:"none",
-      boxShadow: "none"
-    },
-    '&:blur': {
-      border:"none",
-      boxShadow: "none"
-    },
-    color: "red",
-    border:"none",
-    boxShadow: "none"
-  },
-  
+  inputField: {},
   buttonStyles: {
-    '&:focus': {
+    "&:focus": {
       backgroundColor: "#d50000",
       color: "white",
-      outline: 'none'
+      outline: "none",
     },
     border: 0,
     borderRadius: "1em",
     paddingLeft: "10px",
     paddingRight: "10px",
     marginRight: ".5em",
-    
-  }
+  },
 });

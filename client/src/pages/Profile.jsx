@@ -24,7 +24,7 @@ export default function Profile() {
             color="secondary"
             onClick={() => setValue(0)}
           >
-            Menu
+            Credentials
           </IconButton>
           <IconButton
             className={classes.buttonStyles}
@@ -33,14 +33,16 @@ export default function Profile() {
             color="secondary"
             onClick={() => setValue(1)}
           >
-            Users
+            Security
           </IconButton>
         </Tabs>
         <Grid
           container
-          direction="column"
+          direction="row"
           justify="flex-start"
           alignItems="center"
+          mt="4rem"
+          className={classes.tabContainer}
         >
           <TabPanel value={value} index={0}>
             <ProfileCredentialsForm />

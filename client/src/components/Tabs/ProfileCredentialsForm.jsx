@@ -5,9 +5,7 @@ import { updateProfile } from "../../store/actions/users/usersActions";
 
 import TextField from "@material-ui/core/TextField";
 import { withStyles } from "@material-ui/styles";
-import { Button } from "@material-ui/core";
-import Grid from "@material-ui/core/Grid";
-import { Paper } from "@material-ui/core";
+import { Button, Paper, Grid} from "@material-ui/core";
 import styles from "./styles";
 
 
@@ -58,48 +56,45 @@ class ProfileCredentialsForm extends Component {
   render() {
     const { classes } = this.props;
     return (
-        <Paper>
-
-      <form onSubmit={this.onSubmit} noValidate autoComplete="off">
-        <Grid
-          container
-          direction="column"
-          justify="center"
-          alignItems="center"
-          spacing={3}
-          className={classes.formContainer}
+      <Paper>
+        <form onSubmit={this.onSubmit} noValidate autoComplete="off">
+          <Grid
+            container
+            direction="column"
+            justify="center"
+            alignItems="center"
+            spacing={3}
+            className={classes.formContainer}
           >
-          <h2>Credentials</h2>
-          <Grid item>
-            <TextField
-              required
-              value={this.state.username}
-              name="username"
-              label="Username"
-              className={classes.inputField}
-              onChange={this.onChange}
+            <h2>Credentials</h2>
+            <Grid item>
+              <TextField
+                required
+                value={this.state.username}
+                name="username"
+                label="Username"
+                className={classes.inputField}
+                onChange={this.onChange}
               />
-          </Grid>
-
-          <Grid item>
-            <TextField
-              required
-              value={this.state.fullName}
-              name="fullName"
-              label="Full name"
-              inputProps={{classes, disableUnderline: true}}
-              className={classes.inputField}
-              onChange={this.onChange}
+            </Grid>
+            <Grid item>
+              <TextField
+                required
+                value={this.state.fullName}
+                name="fullName"
+                label="Full name"
+                className={classes.inputField}
+                onChange={this.onChange}
               />
+            </Grid>
+            <Grid item>
+              <Button type="submit" variant="outlined">
+                Submit
+              </Button>
+            </Grid>
           </Grid>
-          <Grid item>
-            <Button type="submit" variant="outlined">
-              Submit
-            </Button>
-          </Grid>
-        </Grid>
-      </form>
-  </Paper>
+        </form>
+      </Paper>
     );
   }
 }
