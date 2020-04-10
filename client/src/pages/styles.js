@@ -1,25 +1,26 @@
 export default (theme) => ({
-  header: {
-    backgroundColor: "#d50000",
+  root: {
+    flexGrow: 1,
+    backgroundColor: "inherit",
   },
-
-  title: {
-    color: "white",
+  tabContainer: {
+    marginTop: '30px',
   },
   formContainer: {
-    padding: "15px 50px",
+    padding: '15px 50px',
   },
-  inputField: {},
   buttonStyles: {
-    "&:focus": {
+    '&:focus': {
       backgroundColor: "#d50000",
       color: "white",
-      outline: "none",
+      outline: 'none'
     },
     border: 0,
     borderRadius: "1em",
     paddingLeft: "10px",
     paddingRight: "10px",
     marginRight: ".5em",
-  },
+    
+  }
+
 });
