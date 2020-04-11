@@ -12,8 +12,8 @@ class OrderService {
   public async getAllByDate(dateTime: string) {
     const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
     const orders: any = await Order.find({
-      createdAt: { $gte: startOfDay, $lte: endOfDay }
-    }).populate({ path: "orderItems.menuItem", select: "title price _id" });
+      createdAt: { $gte: startOfDay, $lte: endOfDay },
+    }).populate({ path: "user", select: "fullName" });
 
     return orders;
   }
@@ -28,7 +28,7 @@ class OrderService {
     const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
     const order = await Order.findOne({
       user: userId,
-      createdAt: { $gte: startOfDay, $lte: endOfDay }
+      createdAt: { $gte: startOfDay, $lte: endOfDay },
     }).select("-weeklyReceipt");
 
     if (!order) {
@@ -44,18 +44,16 @@ class OrderService {
     const weeklyReceipt: any = await WeeklyReceipt.findOne({
       user,
       week,
-      year
+      year,
     });
     if (!weeklyReceipt) {
       throw new Error("Weekly receipt with that id doesn't exist.");
     }
-    console.log(weeklyReceipt);
 
     //create order
     let orderPayload: any = { user, weeklyReceipt: weeklyReceipt._id };
     const order = await Order.create(orderPayload);
     // add it to weekly receipt
-    console.log(order);
     weeklyReceipt.orders.push(order);
     await weeklyReceipt.save();
     return order;

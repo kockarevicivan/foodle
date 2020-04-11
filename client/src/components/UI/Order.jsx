@@ -88,7 +88,9 @@ class OrderTable extends Component {
             <TableBody>
               {order?.orderItems.map((row, index) => (
                 <TableRow key={index}>
-                  <TableCell align="center">{row.title}</TableCell>
+                  <TableCell align="center">
+                    {row.title + " " + row.price}
+                  </TableCell>
                   <TableCell align="center">
                     <TextField
                       name="quantity"

@@ -13,7 +13,7 @@ export const orderReducers = (state = initialState, action) => {
       const { menuItem } = action;
       let orderItem = {
         title: menuItem.title,
-        menuItem: menuItem._id,
+        price: menuItem.price,
         quantity: 0,
       };
 

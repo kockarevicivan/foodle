@@ -51,8 +51,7 @@ class ManageUsers extends Component {
   };
 
   render() {
-    const { users } = this.props;
-    const { classes } = this.props;
+    const { users, classes } = this.props;
     return (
       <div>
         <Toolbar className={classes.header}>
