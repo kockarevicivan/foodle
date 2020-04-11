@@ -55,7 +55,7 @@ class OrderOverview extends Component {
                   <TableBody>
                     {order.orderItems.map((item) => (
                       <TableRow key={item._id}>
-                        <TableCell>{item.title}</TableCell>
+                        <TableCell>{item.title + " " + item.price}</TableCell>
                         <TableCell>{item.quantity}</TableCell>
                       </TableRow>
                     ))}
