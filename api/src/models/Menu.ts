@@ -5,6 +5,7 @@ export default mongoose.model(
   "menus",
   new mongoose.Schema({
     createdAt: { type: Date, default: dateUtil.getLocalTime() },
+    ordersSent: { type: Boolean, default: false },
     items: [
       {
         title: { type: String, required: true },

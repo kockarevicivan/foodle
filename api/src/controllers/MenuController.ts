@@ -23,6 +23,16 @@ class MenuController {
     }
   }
 
+  public async update(req: any, res: any) {
+    try {
+      const { menuId } = req.params;
+      const menu = await MenuService.update(menuId, req.body);
+      return res.send(menu);
+    } catch (error) {
+      return res.status(400).send(error.message);
+    }
+  }
+
   public async addMenuItemToCurrentMenu(req: Request, res: Response) {
     try {
       const { menuId } = req.params;

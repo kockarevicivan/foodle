@@ -26,6 +26,16 @@ class MenuService {
     await menu.save();
   }
 
+  public async update(menuId: string, menuUpdate: any) {
+    await Menu.findByIdAndUpdate(
+      menuId,
+      { $set: menuUpdate },
+      { runValidators: true }
+    );
+    const menu = await Menu.findById(menuId);
+    return menu;
+  }
+
   public async delete(menuId: string, menuItemIndex: number) {
     let menu: any = await Menu.findById(menuId);
     menu.items.splice(menuItemIndex, 1);

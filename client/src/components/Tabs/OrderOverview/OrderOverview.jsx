@@ -28,10 +28,10 @@ class OrderOverview extends Component {
   }
 
   sendOrders = async () => {
-    const { orders, sendAllOrders } = this.props;
+    const { orders, sendAllOrders, menuId } = this.props;
     const orderIds = orders?.map((order) => order._id);
     try {
-      await sendAllOrders(orderIds);
+      await sendAllOrders(orderIds, menuId);
       alert("All orders have been sent.");
     } catch (error) {
       alert(error);
@@ -92,6 +92,7 @@ class OrderOverview extends Component {
 
 const mapStateToProps = (state) => ({
   orders: state.orderReducers.orders,
+  menuId: state.menuReducers.menu?._id,
 });
 
 const styles = (theme) => ({
