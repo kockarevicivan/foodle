@@ -86,7 +86,10 @@ class OrderService {
   };
 
   public async setTotalPrice(orderId: string, totalPrice: number) {
-    const order: any = await Order.findById(orderId);
+    const order: any = await Order.findById(orderId).populate({
+      path: "user",
+      select: "fullName",
+    });
     if (order.status == OrderStatus.Processing) {
       throw new Error(
         "You cannot set total price if order doesn't have status Sent"

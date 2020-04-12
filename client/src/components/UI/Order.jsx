@@ -4,7 +4,7 @@ import { compose } from "redux";
 import {
   setQuantity,
   removeOrderItem,
-  completeOrder,
+  updateOrder,
 } from "../../store/actions/order/orderActions";
 import {
   Table,
@@ -41,7 +41,7 @@ class OrderTable extends Component {
       }
     }
 
-    await this.props.completeOrder(order);
+    await this.props.updateOrder(order);
     alert(
       "Your order has been sent, you can still change it until the admin doesn't send it."
     );
@@ -133,6 +133,6 @@ export default compose(
   connect(mapStateToProps, {
     setQuantity,
     removeOrderItem,
-    completeOrder,
+    updateOrder,
   })
 )(OrderTable);

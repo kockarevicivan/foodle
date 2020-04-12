@@ -39,6 +39,7 @@ class UserOrderController {
       const order = await OrderService.update(orderId, req.body);
       res.send(order);
     } catch (error) {
+      console.log(error);
       res.status(400).send(error);
     }
   }
@@ -55,9 +56,11 @@ class UserOrderController {
   public async setTotal(req: any, res: any) {
     try {
       const { orderId } = req.params;
-      const order = await OrderService.setTotalPrice(orderId, req.body);
+      const { totalPrice } = req.body;
+      const order = await OrderService.setTotalPrice(orderId, totalPrice);
       res.send(order);
     } catch (error) {
+      console.log(error);
       res.status(400).send(error.message);
     }
   }

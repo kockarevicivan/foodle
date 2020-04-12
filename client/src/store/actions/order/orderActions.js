@@ -4,6 +4,7 @@ import {
   removeOrderItemCreator,
   setOrderCreator,
   setAllOrdersCreator,
+  setTotalCreator,
 } from "./orderCreators";
 import axios from "../../../axios";
 
@@ -30,9 +31,16 @@ export const getTodaysOrder = () => async (dispatch) => {
   }
 };
 
-export const completeOrder = (order) => async (dispatch) => {
+export const updateOrder = (order) => async (dispatch) => {
   const { data } = await axios.put(`/orders/${order._id}`, order);
   dispatch(setOrderCreator(data));
+};
+
+export const setTotal = (orderId, totalPrice) => async (dispatch) => {
+  const { data: order } = await axios.patch(`/orders/setTotal/${orderId}`, {
+    totalPrice,
+  });
+  dispatch(setTotalCreator(order));
 };
 
 export const getAllTodaysOrders = () => async (dispatch) => {

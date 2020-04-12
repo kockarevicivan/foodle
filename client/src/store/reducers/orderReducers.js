@@ -4,6 +4,7 @@ import {
   REMOVE_ORDER_ITEM,
   SET_ORDER,
   SET_ALL_ORDERS,
+  UPDATE_ORDER,
 } from "../actions/order/orderTypes";
 
 const initialState = { order: null, orders: [] };
@@ -43,6 +44,17 @@ export const orderReducers = (state = initialState, action) => {
     case SET_ALL_ORDERS:
       return { ...state, orders: action.orders };
 
+    case UPDATE_ORDER:
+      var { order } = action;
+      return {
+        ...state,
+        orders: state.orders.map((o) => {
+          if (o._id === order._id) {
+            return order;
+          }
+          return o;
+        }),
+      };
     default:
       return state;
   }

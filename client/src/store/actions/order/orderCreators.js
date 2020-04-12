@@ -5,6 +5,7 @@ import {
   COMPLETE_ORDER,
   SET_ORDER,
   SET_ALL_ORDERS,
+  UPDATE_ORDER,
 } from "./orderTypes";
 
 export const addItemToOrderCreator = (menuItem) => ({
@@ -35,4 +36,9 @@ export const completeOrderCreator = () => ({
 export const setAllOrdersCreator = (orders) => ({
   type: SET_ALL_ORDERS,
   orders,
+});
+
+export const setTotalCreator = (order) => ({
+  type: UPDATE_ORDER,
+  order,
 });
