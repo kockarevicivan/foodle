@@ -11,7 +11,6 @@ import weeklyReceiptRoutes from "./routes/weeklyReceiptRoutes";
 import menuItemRoutes from "./routes/menuRoutes";
 import invoiceRoutes from "./routes/invoiceRoutes";
 import loginRoutes from "./routes/authenticationRoutes";
-import orderItemRoutes from "./routes/orderItemRoutes";
 
 // setup database
 mongoose.Promise = bluebird;
@@ -38,7 +37,6 @@ app.use("/users", userRoutes);
 app.use("/authentication", loginRoutes);
 app.use("/orders", orderRoutes);
 app.use("/menu", menuItemRoutes);
-app.use("/orderItems", orderItemRoutes);
 app.use("/receipts", weeklyReceiptRoutes);
 app.use("/invoice", invoiceRoutes);
 

@@ -8,8 +8,8 @@ import {
 
 export const getTodaysMenu = () => async (dispatch) => {
   try {
-    const today = new Date();
-    const { data: menu } = await axios.get(`/menu/${today}`);
+    const now = new Date();
+    const { data: menu } = await axios.get(`/menu/${now}`);
     dispatch(setMenuCreator(menu));
   } catch (error) {
     const { data: menu } = await axios.post("/menu");

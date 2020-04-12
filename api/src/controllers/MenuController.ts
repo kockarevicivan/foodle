@@ -17,10 +17,19 @@ class MenuController {
       const menu = await MenuService.createMenuForToday();
       res.send(menu);
     } catch (error) {
-      console.log(error);
       res
         .status(400)
         .send("You didn't provide all necessary parameters for menu item!");
+    }
+  }
+
+  public async update(req: any, res: any) {
+    try {
+      const { menuId } = req.params;
+      const menu = await MenuService.update(menuId, req.body);
+      return res.send(menu);
+    } catch (error) {
+      return res.status(400).send(error.message);
     }
   }
 

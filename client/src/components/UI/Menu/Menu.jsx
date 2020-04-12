@@ -27,7 +27,7 @@ class Menu extends Component {
   }
 
   render() {
-    const { items } = this.props;
+    const { menu } = this.props;
     return (
       <div>
         <Toolbar className={this.props.classes.header}>
@@ -56,21 +56,31 @@ class Menu extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {items?.map((item, index) =>
-                this.props.admin ? (
-                  <AdminMenuItem key={item._id} item={item} index={index} />
-                ) : (
-                  <RegularMenuItem key={item._id} item={item} />
-                )
-              )}
-              {items?.length === 0 ? (
+              {menu?.ordersSent ? (
                 <TableRow>
                   <TableCell colSpan={3} align="center">
-                    Menu wasn't created for today.{" "}
-                    <Link to="/administration">Create a menu</Link>
+                    Orders have been sent for today, you're to late.
                   </TableCell>
                 </TableRow>
-              ) : null}
+              ) : (
+                <React.Fragment>
+                  {menu?.items.map((item, index) =>
+                    this.props.admin ? (
+                      <AdminMenuItem key={item._id} item={item} index={index} />
+                    ) : (
+                      <RegularMenuItem key={item._id} item={item} />
+                    )
+                  )}
+                  {menu?.items.length === 0 ? (
+                    <TableRow>
+                      <TableCell colSpan={3} align="center">
+                        Menu wasn't created for today.{" "}
+                        <Link to="/administration">Create a menu</Link>
+                      </TableCell>
+                    </TableRow>
+                  ) : null}
+                </React.Fragment>
+              )}
             </TableBody>
           </Table>
         </TableContainer>
@@ -80,7 +90,7 @@ class Menu extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  items: state.menuReducers.menu?.items,
+  menu: state.menuReducers.menu,
 });
 
 export default compose(

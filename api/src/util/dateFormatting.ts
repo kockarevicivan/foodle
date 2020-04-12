@@ -5,11 +5,17 @@ export default {
    * @param dateTime date and time string in iso format
    */
   getStartAndEndOfDay(dateTime: string) {
-    const startOfDay: Date = new Date(dateTime);
+    const startOfDay = new Date(dateTime);
     startOfDay.setHours(0, 0, 0, 0);
-    const endOfDay: Date = new Date(dateTime);
+    const endOfDay = new Date(dateTime);
     endOfDay.setHours(23, 59, 59, 999);
     return { startOfDay, endOfDay };
+  },
+
+  getLocalTime() {
+    let now = new Date();
+    now.setHours(now.getHours() + 2);
+    return now;
   },
 
   //Method returns the number of the week since the year started
@@ -24,5 +30,5 @@ export default {
     // Calculate full weeks to nearest Thursday
     var weekNo = Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
     return { week: weekNo, year: d.getUTCFullYear() };
-  }
+  },
 };

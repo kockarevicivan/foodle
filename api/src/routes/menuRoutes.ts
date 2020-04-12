@@ -17,6 +17,11 @@ router.put(
   AuthorizationMiddleware.verifyPermission,
   MenuItemController.addMenuItemToCurrentMenu
 );
+router.patch(
+  "/:menuId",
+  AuthorizationMiddleware.verifyPermission,
+  MenuItemController.update
+);
 router.delete(
   "/:menuId/:menuItemIndex",
   AuthorizationMiddleware.verifyPermission,

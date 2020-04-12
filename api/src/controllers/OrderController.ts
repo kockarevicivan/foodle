@@ -39,15 +39,15 @@ class UserOrderController {
       const order = await OrderService.update(orderId, req.body);
       res.send(order);
     } catch (error) {
+      console.log(error);
       res.status(400).send(error);
     }
   }
 
-  public async sendOrder(req: any, res: any) {
+  public async sendOrders(req: any, res: any) {
     try {
-      const { orderId } = req.params;
-      const order = await OrderService.setStatusToSent(orderId);
-      res.send(order);
+      const orders = await OrderService.sendOrders(req.body);
+      res.send(orders);
     } catch (error) {
       res.status(400).send(error.message);
     }
@@ -60,6 +60,7 @@ class UserOrderController {
       const order = await OrderService.setTotalPrice(orderId, totalPrice);
       res.send(order);
     } catch (error) {
+      console.log(error);
       res.status(400).send(error.message);
     }
   }

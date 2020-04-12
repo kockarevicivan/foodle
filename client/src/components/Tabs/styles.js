@@ -5,6 +5,7 @@ export default (theme) => ({
 
   title: {
     color: "white",
+    flex: "1 1 100%",
   },
   formContainer: {
     padding: "15px 50px",

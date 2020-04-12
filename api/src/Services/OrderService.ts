@@ -5,30 +5,20 @@ import OrderStatus from "../models/OrderStatus";
 import WeeklyReceipt from "../models/WeeklyReceipt";
 
 class OrderService {
-  /**
-   * Gets all user orders for a provided date
-   * @param dateTime
-   */
   public async getAllByDate(dateTime: string) {
     const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
     const orders: any = await Order.find({
-      createdAt: { $gte: startOfDay, $lte: endOfDay }
-    }).populate({ path: "orderItems.menuItem", select: "title price _id" });
+      createdAt: { $gte: startOfDay, $lte: endOfDay },
+    }).populate({ path: "user", select: "fullName" });
 
     return orders;
   }
 
-  /**
-   * Gets a user order (or user orders if there are more than one)
-   *  for a specific user and for a specific day
-   * @param userId
-   * @param dateTime
-   */
   public async getByDateAndUser(userId: string, dateTime: string) {
     const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
     const order = await Order.findOne({
       user: userId,
-      createdAt: { $gte: startOfDay, $lte: endOfDay }
+      createdAt: { $gte: startOfDay, $lte: endOfDay },
     }).select("-weeklyReceipt");
 
     if (!order) {
@@ -44,45 +34,62 @@ class OrderService {
     const weeklyReceipt: any = await WeeklyReceipt.findOne({
       user,
       week,
-      year
+      year,
     });
     if (!weeklyReceipt) {
       throw new Error("Weekly receipt with that id doesn't exist.");
     }
-    console.log(weeklyReceipt);
 
     //create order
     let orderPayload: any = { user, weeklyReceipt: weeklyReceipt._id };
     const order = await Order.create(orderPayload);
     // add it to weekly receipt
-    console.log(order);
     weeklyReceipt.orders.push(order);
     await weeklyReceipt.save();
     return order;
   }
 
   public async update(orderId: string, orderUpdate: any) {
-    await Order.findByIdAndUpdate(
-      orderId,
-      { $set: orderUpdate },
-      { runValidators: true }
-    );
-    return await Order.findById(orderId);
+    const order: any = await Order.findById(orderId);
+    if (order.status !== OrderStatus.Processing) {
+      throw new Error(
+        "You can't change an order that has been sent or finalized."
+      );
+    }
+    await order.updateOne({ $set: orderUpdate }, { runValidators: true });
+    const updatedOrder = await Order.findById(orderId);
+    return updatedOrder;
   }
 
-  public async setStatusToSent(orderId: string) {
-    const order: any = await Order.findById(orderId);
-    if (order.status == OrderStatus.Finalized) {
-      throw new Error("Order status cannot be changed from Finalized to Sent");
+  public async sendOrders(orderIds: [string]) {
+    let orders: any[] = [];
+    for (let orderId of orderIds) {
+      const order = await this.setStatusToSent(orderId);
+      orders.push(order);
+    }
+
+    return orders;
+  }
+
+  private setStatusToSent = async (orderId: string) => {
+    const order: any = await Order.findById(orderId).populate({
+      path: "user",
+      select: "fullName",
+    });
+    if (order.status !== OrderStatus.Processing) {
+      throw new Error("Order status cannot be set to sent.");
     }
 
     order.status = OrderStatus.Sent;
     await order.save();
     return order;
-  }
+  };
 
   public async setTotalPrice(orderId: string, totalPrice: number) {
-    const order: any = await Order.findById(orderId);
+    const order: any = await Order.findById(orderId).populate({
+      path: "user",
+      select: "fullName",
+    });
     if (order.status == OrderStatus.Processing) {
       throw new Error(
         "You cannot set total price if order doesn't have status Sent"

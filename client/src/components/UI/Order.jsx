@@ -4,7 +4,7 @@ import { compose } from "redux";
 import {
   setQuantity,
   removeOrderItem,
-  completeOrder,
+  updateOrder,
 } from "../../store/actions/order/orderActions";
 import {
   Table,
@@ -41,7 +41,7 @@ class OrderTable extends Component {
       }
     }
 
-    await this.props.completeOrder(order);
+    await this.props.updateOrder(order);
     alert(
       "Your order has been sent, you can still change it until the admin doesn't send it."
     );
@@ -64,6 +64,7 @@ class OrderTable extends Component {
                 variant="contained"
                 color=""
                 onClick={this.onCompleteOrder}
+                disabled={order?.status !== 0}
               >
                 Complete order
               </Button>
@@ -88,19 +89,23 @@ class OrderTable extends Component {
             <TableBody>
               {order?.orderItems.map((row, index) => (
                 <TableRow key={index}>
-                  <TableCell align="center">{row.title}</TableCell>
+                  <TableCell align="center">
+                    {row.title + " " + row.price}
+                  </TableCell>
                   <TableCell align="center">
                     <TextField
-                      id="quantity"
+                      name="quantity"
                       value={row.quantity}
                       onChange={(e) => this.onChange(e, index)}
                     />
                   </TableCell>
-                  <TableCell align="center">
-                    <Button onClick={() => this.props.removeOrderItem(index)}>
-                      <RemoveIcon />
-                    </Button>
-                  </TableCell>
+                  {order?.status === 0 ? (
+                    <TableCell align="center">
+                      <Button onClick={() => this.props.removeOrderItem(index)}>
+                        <RemoveIcon />
+                      </Button>
+                    </TableCell>
+                  ) : null}
                 </TableRow>
               ))}
               {order?.orderItems.length === 0 ? (
@@ -131,6 +136,6 @@ export default compose(
   connect(mapStateToProps, {
     setQuantity,
     removeOrderItem,
-    completeOrder,
+    updateOrder,
   })
 )(OrderTable);
