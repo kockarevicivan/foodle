@@ -5,7 +5,7 @@ import { IconButton } from "@material-ui/core";
 import TabPanel from "../components/Tabs/TabPanel";
 import { connect } from "react-redux";
 import PlaceOrder from "../components/Tabs/PlaceOrder";
-import OrderOverview from "../components/Tabs/OrderOverview";
+import OrderOverview from "../components/Tabs/OrderOverview/OrderOverview";
 import OrderHistory from "../components/Tabs/OrderHistory";
 
 const useStyles = makeStyles((theme) => ({
@@ -52,7 +52,7 @@ function Ordering({ isAdmin }) {
             variant="contained"
             onClick={() => setValue(2)}
           >
-            Send an order
+            All orders
           </IconButton>
         ) : null}
       </Tabs>

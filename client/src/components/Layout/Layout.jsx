@@ -101,7 +101,7 @@ function Layout({ children, isAdmin, logoutUser }) {
             <ListItemIcon>
               <RestaurantIcon />
             </ListItemIcon>
-            <ListItemText primary={"orders"} />
+            <ListItemText primary={"Ordering"} />
           </ListItem>
           <ListItem button component={Link} to="/profile">
             <ListItemIcon>

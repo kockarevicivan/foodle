@@ -40,3 +40,8 @@ export const getAllTodaysOrders = () => async (dispatch) => {
   const { data: orders } = await axios.get(`/orders/everyUser/${today}`);
   dispatch(setAllOrdersCreator(orders));
 };
+
+export const sendAllOrders = (orderIds) => async (dispatch) => {
+  const { data: orders } = await axios.patch("/orders/send", orderIds);
+  dispatch(setAllOrdersCreator(orders));
+};

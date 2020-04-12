@@ -17,7 +17,7 @@ router.get(
 router.get("/:date", OrderController.getByUserAndDate);
 router.post("/", OrderController.add);
 router.put("/:orderId", OrderController.update);
-router.patch("/send/:orderId", OrderController.sendOrder);
+router.patch("/send", OrderController.sendOrders);
 router.patch("/setTotal/:orderId", OrderController.setTotal);
 router.delete(
   "/:orderId",

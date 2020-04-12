@@ -5,10 +5,6 @@ import OrderStatus from "../models/OrderStatus";
 import WeeklyReceipt from "../models/WeeklyReceipt";
 
 class OrderService {
-  /**
-   * Gets all user orders for a provided date
-   * @param dateTime
-   */
   public async getAllByDate(dateTime: string) {
     const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
     const orders: any = await Order.find({
@@ -18,12 +14,6 @@ class OrderService {
     return orders;
   }
 
-  /**
-   * Gets a user order (or user orders if there are more than one)
-   *  for a specific user and for a specific day
-   * @param userId
-   * @param dateTime
-   */
   public async getByDateAndUser(userId: string, dateTime: string) {
     const { startOfDay, endOfDay } = dateUtil.getStartAndEndOfDay(dateTime);
     const order = await Order.findOne({
@@ -60,24 +50,40 @@ class OrderService {
   }
 
   public async update(orderId: string, orderUpdate: any) {
-    await Order.findByIdAndUpdate(
-      orderId,
-      { $set: orderUpdate },
-      { runValidators: true }
-    );
-    return await Order.findById(orderId);
+    const order: any = await Order.findById(orderId);
+    if (order.status !== OrderStatus.Processing) {
+      throw new Error(
+        "You can't change an order that has been sent or finalized."
+      );
+    }
+    await order.updateOne({ $set: orderUpdate }, { runValidators: true });
+    const updatedOrder = await Order.findById(orderId);
+    return updatedOrder;
   }
 
-  public async setStatusToSent(orderId: string) {
-    const order: any = await Order.findById(orderId);
-    if (order.status == OrderStatus.Finalized) {
-      throw new Error("Order status cannot be changed from Finalized to Sent");
+  public async sendOrders(orderIds: [string]) {
+    let orders: any[] = [];
+    for (let orderId of orderIds) {
+      const order = await this.setStatusToSent(orderId);
+      orders.push(order);
+    }
+
+    return orders;
+  }
+
+  private setStatusToSent = async (orderId: string) => {
+    const order: any = await Order.findById(orderId).populate({
+      path: "user",
+      select: "fullName",
+    });
+    if (order.status !== OrderStatus.Processing) {
+      throw new Error("Order status cannot be set to sent.");
     }
 
     order.status = OrderStatus.Sent;
     await order.save();
     return order;
-  }
+  };
 
   public async setTotalPrice(orderId: string, totalPrice: number) {
     const order: any = await Order.findById(orderId);
