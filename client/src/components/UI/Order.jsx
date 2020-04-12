@@ -64,6 +64,7 @@ class OrderTable extends Component {
                 variant="contained"
                 color=""
                 onClick={this.onCompleteOrder}
+                disabled={order?.status !== 0}
               >
                 Complete order
               </Button>
@@ -98,11 +99,13 @@ class OrderTable extends Component {
                       onChange={(e) => this.onChange(e, index)}
                     />
                   </TableCell>
-                  <TableCell align="center">
-                    <Button onClick={() => this.props.removeOrderItem(index)}>
-                      <RemoveIcon />
-                    </Button>
-                  </TableCell>
+                  {order?.status === 0 ? (
+                    <TableCell align="center">
+                      <Button onClick={() => this.props.removeOrderItem(index)}>
+                        <RemoveIcon />
+                      </Button>
+                    </TableCell>
+                  ) : null}
                 </TableRow>
               ))}
               {order?.orderItems.length === 0 ? (
