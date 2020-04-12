@@ -28,10 +28,10 @@ class OrderOverview extends Component {
   }
 
   sendOrders = async () => {
-    const { orders, sendAllOrders, menuId } = this.props;
+    const { orders, sendAllOrders, menu } = this.props;
     const orderIds = orders?.map((order) => order._id);
     try {
-      await sendAllOrders(orderIds, menuId);
+      await sendAllOrders(orderIds, menu?._id);
       alert("All orders have been sent.");
     } catch (error) {
       alert(error);
@@ -39,10 +39,11 @@ class OrderOverview extends Component {
   };
 
   render() {
-    const { orders, classes } = this.props;
+    const { orders, classes, menu } = this.props;
     return (
       <div>
         <Button
+          disabled={menu.ordersSent}
           onClick={this.sendOrders}
           variant="contained"
           className={classes.buttonStyles}
@@ -92,7 +93,7 @@ class OrderOverview extends Component {
 
 const mapStateToProps = (state) => ({
   orders: state.orderReducers.orders,
-  menuId: state.menuReducers.menu?._id,
+  menu: state.menuReducers.menu,
 });
 
 const styles = (theme) => ({
