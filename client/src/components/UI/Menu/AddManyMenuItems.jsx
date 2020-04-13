@@ -10,24 +10,23 @@ import {
   TextField,
 } from "@material-ui/core";
 
-class AddMenuItem extends Component {
+class AddManyMenuItems extends Component {
   state = {
-   postContent: "",
+    postText: null,
   };
 
   create = async (event) => {
     event.preventDefault();
-    const { postContent } = this.state;
-    if ( postContent) {
+    const { postText } = this.state;
+    if (postText === null) {
       alert("Please paste in the text");
       return;
     }
-    const item = {
-     postContent
-    };
+    const itemArray = await this.createItemArray(postText);
+    console.log(itemArray);
 
     try {
-      await this.props.addManyMenuItems(item, this.props.menuId);
+      await this.props.addManyMenuItems(itemArray, this.props.menuId);
       this.setState({ postContent: "" });
       this.props.handleClose();
     } catch (error) {
@@ -35,8 +34,23 @@ class AddMenuItem extends Component {
     }
   };
 
+  createItemArray(formData) {
+    const lineArray = formData.split(/\r?\n/);
+    let finishedArray = [];
+    lineArray.forEach((item) => {
+      
+      const splitItem = item.trim().split(" ");
+      const title = splitItem.slice(0, splitItem.length - 1).join(" ");
+      const price = splitItem[splitItem.length - 1];
+      finishedArray.push({ title, price });
+    });
+
+    return finishedArray;
+  }
+
   onChange = ({ target }) => {
     this.setState({ [target.id]: target.value });
+    console.log(target.value);
   };
 
   render() {
@@ -45,20 +59,19 @@ class AddMenuItem extends Component {
         open={this.props.dialog}
         onClose={this.props.handleClose}
         aria-labelledby="form-dialog-title"
-        
       >
         <DialogTitle id="form-dialog-title">Paste the text:</DialogTitle>
-        <DialogContent style={{width: 600}}>
+        <DialogContent style={{ width: 600 }}>
           <TextField
             autoFocus
             required
             multiline
-            inputProps={{rows: 21}}
+            inputProps={{ rows: 21 }}
             autoFocus={true}
             margin="dense"
-            id="title"
             label="FB text goes here"
             type="text"
+            id="postText"
             fullWidth={true}
             value={this.state.postText}
             onChange={this.onChange}
@@ -79,4 +92,4 @@ const mapStateToProps = (state) => ({
   menuId: state.menuReducers.menu?._id,
 });
 
-export default connect(mapStateToProps, { addManyMenuItems })(AddMenuItem);
+export default connect(mapStateToProps, { addManyMenuItems })(AddManyMenuItems);

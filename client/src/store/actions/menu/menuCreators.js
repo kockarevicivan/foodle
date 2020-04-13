@@ -14,9 +14,9 @@ export const addMenuItemCreator = (item) => ({
   type: ADD_MENU_ITEM,
   item,
 });
-export const addManyMenuItemsCreator = (items) => ({
+export const addManyMenuItemsCreator = (item) => ({
   type: ADD_MANY_MENU_ITEMS,
-  items,
+  item,
 });
 export const editItemCreator = (item) => ({
   type: EDIT_ITEM,
