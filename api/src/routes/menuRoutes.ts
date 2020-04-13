@@ -13,6 +13,11 @@ router.post(
   MenuItemController.createMenuForToday
 );
 router.put(
+  "/:menuId/addmany",
+  AuthorizationMiddleware.verifyPermission,
+  MenuItemController.addManyMenuItemsToCurrentMenu
+);
+router.put(
   "/:menuId",
   AuthorizationMiddleware.verifyPermission,
   MenuItemController.addMenuItemToCurrentMenu

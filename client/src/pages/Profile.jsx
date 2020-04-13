@@ -12,6 +12,7 @@ export default function Profile() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
 
+<<<<<<< HEAD
   return (
     <div className={classes.root}>
       <Tabs value={value}>
@@ -30,6 +31,38 @@ export default function Profile() {
           variant="outlined"
           color="secondary"
           onClick={() => setValue(1)}
+=======
+  
+    return (
+      <div>
+        <Tabs value={value}>
+          <IconButton
+            size="small"
+            className={classes.buttonStyles}
+            variant="outlined"
+            color="secondary"
+            onClick={() => setValue(0)}
+          >
+            Credentials
+          </IconButton>
+          <IconButton
+            className={classes.buttonStyles}
+            size="small"
+            variant="outlined"
+            color="secondary"
+            onClick={() => setValue(1)}
+          >
+            Security
+          </IconButton>
+        </Tabs>
+        <Grid
+          container
+          direction="row"
+          justify="flex-start"
+          alignItems="center"
+          mt="4rem"
+          className={classes.tabContainer}
+>>>>>>> Implement actions and form for menu creation
         >
           Security
         </IconButton>

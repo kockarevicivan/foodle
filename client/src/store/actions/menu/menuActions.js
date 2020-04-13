@@ -23,6 +23,11 @@ export const addMenuItem = (payLoad, menuId) => async (dispatch) => {
   dispatch(addMenuItemCreator(menuItem));
 };
 
+export const addManyMenuItem = (payLoad, menuId) => async (dispatch) => {
+  const { data: menuItem } = await axios.put(`/menu/${menuId}/addmany`, payLoad);
+  dispatch(addManyMenuItemsCreator(menuItem));
+};
+
 export const editItem = (itemId, payLoad) => async (dispatch) => {
   const { data } = await axios.put(`/menuItems/${itemId}`, payLoad);
   dispatch(editItemCreator(data));

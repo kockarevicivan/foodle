@@ -1,6 +1,7 @@
 import {
   SET_MENU,
   ADD_MENU_ITEM,
+  ADD_MANY_MENU_ITEMS,
   EDIT_ITEM,
   REMOVE_MENU_ITEM,
 } from "./menuTypes";
@@ -12,6 +13,10 @@ export const setMenuCreator = (menu) => ({
 export const addMenuItemCreator = (item) => ({
   type: ADD_MENU_ITEM,
   item,
+});
+export const addManyMenuItemsCreator = (items) => ({
+  type: ADD_MANY_MENU_ITEMS,
+  items,
 });
 export const editItemCreator = (item) => ({
   type: EDIT_ITEM,
