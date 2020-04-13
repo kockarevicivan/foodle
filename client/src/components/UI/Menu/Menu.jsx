@@ -64,7 +64,7 @@ class Menu extends Component {
                 </TableRow>
               ) : (
                 <React.Fragment>
-                  {menu?.items.map((item, index) =>
+                  {menu?.items?.map((item, index) =>
                     this.props.admin ? (
                       <AdminMenuItem key={item._id} item={item} index={index} />
                     ) : (

@@ -2,6 +2,7 @@ import axios from "../../../axios";
 import {
   setMenuCreator,
   addMenuItemCreator,
+  addManyMenuItemsCreator,
   editItemCreator,
   removeItemCreator,
 } from "./menuCreators";
@@ -21,6 +22,11 @@ export const getTodaysMenu = () => async (dispatch) => {
 export const addMenuItem = (payLoad, menuId) => async (dispatch) => {
   const { data: menuItem } = await axios.put(`/menu/${menuId}`, payLoad);
   dispatch(addMenuItemCreator(menuItem));
+};
+
+export const addManyMenuItems = (menuItemArray, menuId) => async (dispatch) => {
+  const { data: menu } = await axios.put(`/menu/${menuId}/addmany`, menuItemArray);
+  dispatch(setMenuCreator(menu));
 };
 
 export const editItem = (itemId, payLoad) => async (dispatch) => {
