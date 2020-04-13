@@ -42,6 +42,15 @@ class MenuController {
       res.status(400).send(error);
     }
   }
+  public async addManyMenuItemsToCurrentMenu(req: Request, res: Response) {
+    try {
+      const { menuId } = req.params;
+      const menu = await MenuService.addManyMenuItems(menuId, req.body);
+      res.send(menu);
+    } catch (error) {
+      res.status(400).send(error);
+    }
+  }
 
   public async delete(req: Request, res: Response): Promise<any> {
     try {

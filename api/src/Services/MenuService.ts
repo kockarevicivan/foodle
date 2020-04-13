@@ -25,6 +25,18 @@ class MenuService {
     menu.items.push(menuItem);
     await menu.save();
   }
+  
+  public async addManyMenuItems(id: string, menuItems: Array<any>) {
+    console.log('Reached menu item service');
+    
+    let menu: any = await Menu.findById(id);
+    await menuItems.forEach((item: any) => {
+      menu.items.push(item);
+      
+    });
+    await menu.save();
+    return menu;
+  }
 
   public async update(menuId: string, menuUpdate: any) {
     await Menu.findByIdAndUpdate(

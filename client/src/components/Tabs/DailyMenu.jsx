@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import AddMenuItem from "../UI/Menu/AddMenuItem";
+import AddManyMenuItems from "../UI/Menu/AddManyMenuItems";
 import Menu from "../UI/Menu/Menu";
 import { Grid, Button } from "@material-ui/core";
 
 class DailyMenu extends Component {
   state = {
     addMenuItemDialog: false,
+    createFromText: false,
   };
 
   handleOpen = () => {
@@ -14,6 +16,13 @@ class DailyMenu extends Component {
 
   handleClose = () => {
     this.setState({ ...this.state, addMenuItemDialog: false });
+  };
+  handleOpenCreate = () => {
+    this.setState({ ...this.state, createFromText: true });
+  };
+
+  handleCloseCreate = () => {
+    this.setState({ ...this.state, createFromText: false });
   };
 
   render() {
@@ -24,12 +33,19 @@ class DailyMenu extends Component {
           handleOpen={this.handleOpen}
           handleClose={this.handleClose}
         />
+        <AddManyMenuItems
+          dialog={this.state.createFromText}
+          handleOpen={this.handleOpenCreate}
+          handleClose={this.handleCloseCreate}
+        />
         <Grid container spacing={3}>
           <Grid item xs={8}>
             <Button onClick={this.handleOpen} variant="contained">
               Add a menu item
             </Button>
-            <Button variant="contained">Create from text</Button>
+            <Button onClick={this.handleOpenCreate} variant="contained">
+              Create from text
+            </Button>
           </Grid>
           <Grid item xs={8}>
             <Menu admin />
