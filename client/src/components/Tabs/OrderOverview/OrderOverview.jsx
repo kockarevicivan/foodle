@@ -61,7 +61,7 @@ class OrderOverview extends Component {
         {
           table: {
             widths: ["auto", "*"],
-            body: [...data, ["12", { text: "test", rowSpan: 2 }]],
+            body: data,
           },
         },
       ],
@@ -84,7 +84,6 @@ class OrderOverview extends Component {
         >
           Send the fucking order
         </Button>
-        <Button onClick={this.generatePdf}>test</Button>
         <Grid container spacing={3}>
           {orders?.map((order) => (
             <Grid item xs={6}>

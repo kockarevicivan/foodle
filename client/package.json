@@ -12,7 +12,6 @@
     "axios": "^0.19.2",
     "bootstrap": "^4.4.1",
     "jsonwebtoken": "^8.5.1",
-    "jspdf": "^1.5.3",
     "jspdf-autotable": "^3.4.3",
     "material-table": "^1.57.2",
     "materialize-css": "^1.0.0-rc.2",
