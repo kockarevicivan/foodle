@@ -7,8 +7,10 @@ export default {
   getStartAndEndOfDay(dateTime: string) {
     const startOfDay = new Date(dateTime);
     startOfDay.setHours(0, 0, 0, 0);
+    startOfDay.setHours(startOfDay.getHours() + 2);
     const endOfDay = new Date(dateTime);
     endOfDay.setHours(23, 59, 59, 999);
+    endOfDay.setHours(endOfDay.getHours() + 2);
     return { startOfDay, endOfDay };
   },
 

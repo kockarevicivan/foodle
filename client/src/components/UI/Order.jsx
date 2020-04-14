@@ -34,18 +34,30 @@ class OrderTable extends Component {
 
   onCompleteOrder = async () => {
     const { order } = this.props;
+    if (!this.validateOrder(order)) {
+      alert("You need to enter the quantity");
+      return;
+    }
+
+    try {
+      await this.props.updateOrder(order);
+      alert(
+        "Your order has been sent, you can still change it until the admin doesn't send it."
+      );
+    } catch (error) {
+      alert(error);
+    }
+  };
+
+  validateOrder(order) {
     for (let item of order.orderItems) {
       if (item.quantity <= 0) {
-        alert("You need to enter the quantity");
-        return;
+        return false;
       }
     }
 
-    await this.props.updateOrder(order);
-    alert(
-      "Your order has been sent, you can still change it until the admin doesn't send it."
-    );
-  };
+    return true;
+  }
 
   render() {
     const { order } = this.props;
@@ -95,6 +107,7 @@ class OrderTable extends Component {
                   <TableCell align="center">
                     <TextField
                       name="quantity"
+                      disabled={order.status !== 0}
                       value={row.quantity}
                       onChange={(e) => this.onChange(e, index)}
                     />
