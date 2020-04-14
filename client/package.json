@@ -16,6 +16,7 @@
     "jspdf-autotable": "^3.4.3",
     "material-table": "^1.57.2",
     "materialize-css": "^1.0.0-rc.2",
+    "pdfmake": "^0.1.65",
     "prop-types": "^15.7.2",
     "react": "^16.13.0",
     "react-bootstrap": "^1.0.0-beta.17",

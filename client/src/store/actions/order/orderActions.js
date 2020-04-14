@@ -33,6 +33,7 @@ export const getTodaysOrder = () => async (dispatch) => {
 
 export const updateOrder = (order) => async (dispatch) => {
   const { data } = await axios.put(`/orders/${order._id}`, order);
+  console.log(data);
   dispatch(setOrderCreator(data));
 };
 

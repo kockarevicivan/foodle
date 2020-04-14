@@ -38,7 +38,6 @@ class AddManyMenuItems extends Component {
     const lineArray = formData.split(/\r?\n/);
     let finishedArray = [];
     lineArray.forEach((item) => {
-      
       const splitItem = item.trim().split(" ");
       const title = splitItem.slice(0, splitItem.length - 1).join(" ");
       const price = splitItem[splitItem.length - 1];
@@ -63,7 +62,6 @@ class AddManyMenuItems extends Component {
         <DialogTitle id="form-dialog-title">Paste the text:</DialogTitle>
         <DialogContent style={{ width: 600 }}>
           <TextField
-            autoFocus
             required
             multiline
             inputProps={{ rows: 21 }}

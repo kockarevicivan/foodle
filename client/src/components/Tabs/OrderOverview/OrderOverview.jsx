@@ -19,8 +19,9 @@ import {
 import { compose } from "redux";
 import { withStyles } from "@material-ui/styles";
 import EnterPriceButton from "./EnterPriceButton";
-import jsPDF from "jspdf";
-import "jspdf-autotable";
+
+import pdfMake from "pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
 
 class OrderOverview extends Component {
   state = {};
@@ -43,7 +44,9 @@ class OrderOverview extends Component {
 
   generatePdf = () => {
     const data = this.props.orders.map((order) => {
-      let item = [order.user.fullName];
+      let firstAndLastName = order.user.fullName.split(" ");
+      const name = `${firstAndLastName[0][0]} ${firstAndLastName[1][0]}`;
+      let item = [name];
       const hrana = order.orderItems
         .map((item) => `${item.title} ${item.quantity}`)
         .join(`\n`);
@@ -51,15 +54,22 @@ class OrderOverview extends Component {
       return item;
     });
 
-    let doc = new jsPDF({ putOnlyUsedFonts: true, orientation: "landscape" });
     const date = `${new Date().getDate()}.${new Date().getMonth() + 1}`;
-    doc.text(date, 1, 5);
-    doc.autoTable({
-      theme: "grid",
-      head: [["ime", "hrana"]],
-      body: data,
-    });
-    doc.save(`${date}.pdf`);
+    let docDefinition = {
+      content: [
+        date,
+        {
+          table: {
+            widths: ["auto", "*"],
+            body: [...data, ["12", { text: "test", rowSpan: 2 }]],
+          },
+        },
+      ],
+    };
+
+    pdfMake.vfs = pdfFonts.pdfMake.vfs;
+    const pdf = pdfMake.createPdf(docDefinition);
+    pdf.download(`${date}.pdf`);
   };
 
   render() {
@@ -74,6 +84,7 @@ class OrderOverview extends Component {
         >
           Send the fucking order
         </Button>
+        <Button onClick={this.generatePdf}>test</Button>
         <Grid container spacing={3}>
           {orders?.map((order) => (
             <Grid item xs={6}>
