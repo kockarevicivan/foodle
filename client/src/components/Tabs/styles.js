@@ -22,5 +22,5 @@ export default (theme) => ({
     paddingLeft: "10px",
     paddingRight: "10px",
     marginRight: ".5em",
-  },
+  }
 });

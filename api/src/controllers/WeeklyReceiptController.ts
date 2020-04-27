@@ -38,6 +38,24 @@ class WeeklyReceiptController {
     }
   }
 
+  public async getByYearAndWeek(req: any, res: any) {
+    try {
+      const year = await parseInt(req.params.year);
+      const week = await parseInt(req.params.week);
+      console.log(1);
+      console.log(week,year);
+      
+      const weeklyReceipts = await WeeklyReceiptService.getByYearAndWeek(
+        year,
+        week
+      );
+
+      res.send(weeklyReceipts);
+    } catch (error) {
+      res.status(400).send({ error });
+    }
+  }
+
   public async update(req: Request, res: Response): Promise<any> {
     try {
       const { receiptId } = req.params;

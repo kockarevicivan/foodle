@@ -1,5 +1,5 @@
 import axios from "../../../axios";
-import { setWeeklyReceiptCreator } from "./weeklyReceiptsCreators";
+import { setWeeklyReceiptCreator,getWeeklyReceipts } from "./weeklyReceiptsCreators";
 
 export const getWeeklyReceipt = () => async dispatch => {
   try {
@@ -12,4 +12,10 @@ export const getWeeklyReceipt = () => async dispatch => {
     const { data: weeklyReceipt } = await axios.post("/receipts");
     dispatch(setWeeklyReceiptCreator(weeklyReceipt));
   }
+}
+
+export const getWeeklyReceiptsForDate = (year, week) => async dispatch => {
+    const { data: weeklyReceipt } = await axios.get(`/receipts/${year}/${week}`);
+    dispatch(getWeeklyReceipts(weeklyReceipt));
+  
 };

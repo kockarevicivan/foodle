@@ -15,8 +15,18 @@ const useStyles = makeStyles((theme) => ({
   },
 
   buttonStyles: {
+    '&:focus': {
+      backgroundColor: "#d50000",
+      color: "white",
+      outline: 'none'
+    },
+    border: 0,
+    borderRadius: "1em",
+    paddingLeft: "10px",
+    paddingRight: "10px",
     marginRight: ".5em",
-  },
+    
+  }
 }));
 
 function Ordering({ isAdmin }) {

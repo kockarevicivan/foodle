@@ -1,4 +1,6 @@
 import WeeklyReceipts from "../models/WeeklyReceipt";
+import { log } from "util";
+import User from "../models/User";
 
 class WeeklyReceiptService {
   public async add(user: string, dateTime: any) {
@@ -39,6 +41,29 @@ class WeeklyReceiptService {
     return weeklyReceipt;
   }
 
+  public async getByYearAndWeek(year: number, week: number) {
+    console.log(2);
+    
+    const weeklyReceipts = await WeeklyReceipts.find({
+      year,
+      week
+    });
+
+    if (!weeklyReceipts) {
+      throw new Error(
+        "Weekly receipt was not created for this week. You need to create one."
+      );
+    }
+    const fullNameList = [];
+    weeklyReceipts.forEach((receipt: any)=>{
+      
+      const fullName = User.findOne({ _id: receipt.user}).select('-fullName')
+      fullNameList.push(fullName)
+    })
+
+    return weeklyReceipts;
+  }
+  
   public async update(id: string, update: any) {
     await WeeklyReceipts.findByIdAndUpdate(
       id,
