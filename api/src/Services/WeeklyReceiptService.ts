@@ -42,26 +42,24 @@ class WeeklyReceiptService {
   }
 
   public async getByYearAndWeek(year: number, week: number) {
-    console.log(2);
     
-    const weeklyReceipts = await WeeklyReceipts.find({
+    const weeklyReceipts: any = await WeeklyReceipts.find({
       year,
       week
     });
 
+    
     if (!weeklyReceipts) {
       throw new Error(
         "Weekly receipt was not created for this week. You need to create one."
       );
     }
-    const fullNameList = [];
-    weeklyReceipts.forEach((receipt: any)=>{
-      
-      const fullName = User.findOne({ _id: receipt.user}).select('-fullName')
-      fullNameList.push(fullName)
-    })
-
-    return weeklyReceipts;
+    
+    const nameList = await this.nameHelper(weeklyReceipts);
+    
+    console.log(2,nameList);
+    
+    return {weeklyReceipts,nameList};
   }
   
   public async update(id: string, update: any) {
@@ -75,6 +73,20 @@ class WeeklyReceiptService {
 
   public async delete(id: string) {
     return await WeeklyReceipts.findByIdAndDelete(id);
+  }
+  private async nameHelper(weeklyReceipts: any) {
+    const nameList: Array<any> = [];
+
+    for (const receipt of weeklyReceipts) {
+
+      const user: any = await User.findOne({ _id: receipt.user})
+      nameList.push(user.fullName)
+      console.log(1,nameList);
+    }
+
+   console.log(4,nameList);
+   
+   return nameList
   }
   //Method returns the number of the week since the year started
   private getWeekAndYearNumber(d: any) {

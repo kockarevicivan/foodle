@@ -3,14 +3,14 @@ import {
   GET_WEEKLY_RECEIPTS_FOR_DATE,
 } from "../actions/weeklyReceipts/weeklyReceiptTypes";
 
-const initialState = { weeklyReceipt: null , weeklySummaryReceipts: null};
+const initialState = { weeklyReceipt: null , weeklySummaryReceipts: null, names: null};
   
 export const weeklyReceiptReducers = (state = initialState, action) => {
   switch (action.type) {
     case SET_WEEKLY_RECEIPT:
       return { weeklyReceipt: action.weeklyReceipt };
     case GET_WEEKLY_RECEIPTS_FOR_DATE:
-      return { weeklySummaryReceipts: action.weeklyReceipts };
+      return { weeklySummaryReceipts: action.weeklyReceipts.weeklyReceipts, names: action.weeklyReceipts.nameList };
 
     default:
       return state;

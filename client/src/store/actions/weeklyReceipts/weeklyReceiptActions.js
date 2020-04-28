@@ -15,7 +15,9 @@ export const getWeeklyReceipt = () => async dispatch => {
 }
 
 export const getWeeklyReceiptsForDate = (year, week) => async dispatch => {
-    const { data: weeklyReceipt } = await axios.get(`/receipts/${year}/${week}`);
-    dispatch(getWeeklyReceipts(weeklyReceipt));
+    const { data: weeklyReceipts } = await axios.get(`/receipts/${year}/${week}`);
+    console.log(1,weeklyReceipts);
+    
+    dispatch(getWeeklyReceipts(weeklyReceipts));
   
 };

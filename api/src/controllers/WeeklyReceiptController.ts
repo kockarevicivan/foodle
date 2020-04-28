@@ -45,12 +45,13 @@ class WeeklyReceiptController {
       console.log(1);
       console.log(week,year);
       
-      const weeklyReceipts = await WeeklyReceiptService.getByYearAndWeek(
+      const weeklyReceiptsAndNames = await WeeklyReceiptService.getByYearAndWeek(
         year,
         week
       );
-
-      res.send(weeklyReceipts);
+      console.log(3,weeklyReceiptsAndNames);
+      
+      res.send(weeklyReceiptsAndNames);
     } catch (error) {
       res.status(400).send({ error });
     }

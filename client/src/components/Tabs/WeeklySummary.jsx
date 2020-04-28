@@ -15,7 +15,6 @@ import {
   Toolbar,
   Typography,
   TextField,
-  FormControl,
   Grid,
   Button,
 } from "@material-ui/core";
@@ -35,7 +34,6 @@ class WeeklySummary extends Component {
         this.state.year,
         this.state.week
       );
-      console.log(this.props.summaries);
     } catch (error) {
       console.log(error.message);
     }
@@ -47,6 +45,7 @@ class WeeklySummary extends Component {
 
   render() {
     const { summaries } = this.props;
+    const { names } = this.props;
     return (
       <div>
         <Toolbar className={this.props.classes.header}>
@@ -105,10 +104,10 @@ class WeeklySummary extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {summaries?.map((item) => {
+              {summaries?.map((item, index) => {
                 return (
                   <TableRow key={item._id}>
-                    <TableCell align="center">{item.user}</TableCell>
+                    <TableCell align="center">{names[index]}</TableCell>
                     <TableCell align="center">{item.totalPrice}</TableCell>
                     <TableCell align="center">
                       {item.paid ? "paid" : "unpaid"}
@@ -126,6 +125,7 @@ class WeeklySummary extends Component {
 
 const mapStateToProps = (state) => ({
   summaries: state.weeklyReceiptReducers.weeklySummaryReceipts,
+  names: state.weeklyReceiptReducers.names,
 });
 
 export default compose(
