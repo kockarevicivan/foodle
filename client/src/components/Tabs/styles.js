@@ -1,4 +1,9 @@
 export default (theme) => ({
+  white: {
+    color: "white",
+    backgroundColor: "white",
+  },
+
   header: {
     backgroundColor: "#d50000",
   },

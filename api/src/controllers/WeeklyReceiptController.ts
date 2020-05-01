@@ -15,7 +15,13 @@ class WeeklyReceiptController {
   public async getByUserId(req: Request, res: Response) {
     try {
       const { userId } = req.params;
-      const weeklyReceipt = await WeeklyReceiptService.getByUserId(userId);
+      const year = await parseInt(req.params.year);
+      const week = await parseInt(req.params.week);
+      const weeklyReceipt = await WeeklyReceiptService.getByUserId(
+        userId,
+        year,
+        week
+      );
       res.send(weeklyReceipt);
     } catch (error) {
       res.status(400).send({ error });
@@ -33,6 +39,25 @@ class WeeklyReceiptController {
       );
 
       res.send(weeklyReceipt);
+    } catch (error) {
+      res.status(400).send({ error });
+    }
+  }
+
+  public async getByYearAndWeek(req: any, res: any) {
+    try {
+      const year = await parseInt(req.params.year);
+      const week = await parseInt(req.params.week);
+      console.log(1);
+      console.log(week, year);
+
+      const weeklyReceiptsAndNames = await WeeklyReceiptService.getByYearAndWeek(
+        year,
+        week
+      );
+      console.log(3, weeklyReceiptsAndNames);
+
+      res.send(weeklyReceiptsAndNames);
     } catch (error) {
       res.status(400).send({ error });
     }
