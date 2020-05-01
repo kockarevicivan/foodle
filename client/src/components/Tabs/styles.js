@@ -1,4 +1,9 @@
 export default (theme) => ({
+  white: {
+    color: "white",
+    backgroundColor: "white",
+  },
+
   header: {
     backgroundColor: "#d50000",
   },
@@ -22,5 +27,5 @@ export default (theme) => ({
     paddingLeft: "10px",
     paddingRight: "10px",
     marginRight: ".5em",
-  }
+  },
 });

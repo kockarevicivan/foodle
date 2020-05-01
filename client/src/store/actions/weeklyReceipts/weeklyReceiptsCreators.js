@@ -1,14 +1,19 @@
-import { 
+import {
   SET_WEEKLY_RECEIPT,
-  GET_WEEKLY_RECEIPTS_FOR_DATE
- } from "./weeklyReceiptTypes";
+  GET_WEEKLY_RECEIPTS_FOR_DATE,
+  GET_WEEKLY_RECEIPT_AND_ORDERS,
+} from "./weeklyReceiptTypes";
 
-export const setWeeklyReceiptCreator = weeklyReceipt => ({
+export const setWeeklyReceiptCreator = (weeklyReceipt) => ({
   type: SET_WEEKLY_RECEIPT,
-  weeklyReceipt
+  weeklyReceipt,
 });
 
-export const getWeeklyReceipts = weeklyReceipts => ({
+export const getWeeklyReceipts = (weeklyReceipts) => ({
   type: GET_WEEKLY_RECEIPTS_FOR_DATE,
-  weeklyReceipts
+  weeklyReceipts,
+});
+export const getWeeklyReceiptAndOrders = (weeklyReceiptAndOrders) => ({
+  type: GET_WEEKLY_RECEIPT_AND_ORDERS,
+  weeklyReceiptAndOrders,
 });

@@ -3,7 +3,7 @@ import { connect } from "react-redux";
 import { compose } from "redux";
 import { withStyles } from "@material-ui/styles";
 import styles from "./styles";
-import { getWeeklyReceiptsForDate } from "../../store/actions/weeklyReceipts/weeklyReceiptActions";
+import { getWeeklyReceiptAndOrdersForUser } from "../../store/actions/weeklyReceipts/weeklyReceiptActions";
 import {
   Table,
   TableBody,
@@ -28,13 +28,14 @@ class OrderHistory extends Component {
 
   getWeeklySummaries = async (event) => {
     event.preventDefault();
+    console.log(this.props.user._id);
 
     try {
-      await this.props.getWeeklyReceiptsForDate(
+      await this.props.getWeeklyReceiptAndOrdersForUser(
+        this.props.user._id,
         this.state.year,
         this.state.week
       );
-      console.log(this.props.summaries);
     } catch (error) {
       console.log(error.message);
     }
@@ -45,7 +46,10 @@ class OrderHistory extends Component {
   };
 
   render() {
-    const { summaries } = this.props;
+    const { userOrders } = this.props;
+    const { userReceipt } = this.props;
+    console.log(userOrders);
+
     return (
       <div>
         <Toolbar className={this.props.classes.header}>
@@ -57,37 +61,38 @@ class OrderHistory extends Component {
           >
             Order History
           </Typography>
-                      <form onSubmit={this.getWeeklySummaries} autoComplete="off">
-          <Grid container alignItems="flex-end">
-            <Grid item>
-              <TextField
-                label="Year"
-                name="year"
-                type="number"
-                variant="standard"
-                onChange={this.onChange}
-                inputProps={{ min: "2020" }}
-                InputProps={{ defaultValue: 2020, disableUnderline: true }}
-              ></TextField>
+          <form onSubmit={this.getWeeklySummaries} autoComplete="off">
+            <Grid container alignItems="flex-end">
+              <Grid item>
+                <TextField
+                  label="Year"
+                  name="year"
+                  type="number"
+                  variant="standard"
+                  onChange={this.onChange}
+                  classes={{ root: this.props.classes.white }}
+                  inputProps={{ min: "2020" }}
+                  InputProps={{ defaultValue: 2020, disableUnderline: true }}
+                ></TextField>
+              </Grid>
+              <Grid item>
+                <TextField
+                  label="Week"
+                  name="week"
+                  type="number"
+                  variant="standard"
+                  onChange={this.onChange}
+                  inputProps={{ min: "1" }}
+                  InputProps={{ defaultValue: 1, disableUnderline: true }}
+                ></TextField>
+              </Grid>
+              <Grid item alignContent="center">
+                <Button type="submit">Search</Button>
+              </Grid>
             </Grid>
-            <Grid item>
-              <TextField
-                label="Week"
-                name="week"
-                type="number"
-                variant="standard"
-                onChange={this.onChange}
-                InputProps={{ min: "1" }}
-                InputProps={{ defaultValue: 1, disableUnderline: true }}
-              ></TextField>
-            </Grid>
-            <Grid item alignContent="center">
-              <Button type="submit">Search</Button>
-            </Grid>
-
-          </Grid>
-            </form>
+          </form>
         </Toolbar>
+
         <TableContainer component={Paper}>
           <Table size="small">
             <TableHead>
@@ -104,14 +109,65 @@ class OrderHistory extends Component {
               </TableRow>
             </TableHead>
             <TableBody>
-              {summaries?.map((item) => {
+              {userReceipt ? (
+                <TableRow>
+                  <TableCell align="center">
+                    {this.props.user.fullName}
+                  </TableCell>
+                  <TableCell align="center">{userReceipt.totalPrice}</TableCell>
+                  <TableCell align="center">
+                    {userReceipt.paid ? "paid" : "unpaid"}
+                  </TableCell>
+                </TableRow>
+              ) : (
+                <TableRow>
+                  <TableCell align="center">
+                    There is not receipt for this week
+                  </TableCell>
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
+        </TableContainer>
+
+        <Toolbar className={this.props.classes.header}>
+          <Typography
+            className={this.props.classes.title}
+            variant="h6"
+            id="tableTitle"
+            component="div"
+          >
+            Orders
+          </Typography>
+        </Toolbar>
+        <TableContainer component={Paper}>
+          <Table size="small">
+            <TableHead>
+              <TableRow>
+                <TableCell align="center">
+                  <strong>Order</strong>
+                </TableCell>
+                <TableCell align="center">
+                  <strong>Bill</strong>
+                </TableCell>
+                <TableCell align="center">
+                  <strong>Order status</strong>
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>
+              {userOrders?.map((item) => {
                 return (
                   <TableRow key={item._id}>
-                    <TableCell align="center">{item.user}</TableCell>
-                    <TableCell align="center">{item.totalPrice}</TableCell>
                     <TableCell align="center">
-                      {item.paid ? "paid" : "unpaid"}
+                      <ul>
+                        {item.orderItems.map((order, index) => {
+                          return <li key={index}>{order.title}</li>;
+                        })}
+                      </ul>
                     </TableCell>
+                    <TableCell align="center">{item.totalPrice}</TableCell>
+                    <TableCell align="center">{item.status}</TableCell>
                   </TableRow>
                 );
               })}
@@ -124,11 +180,12 @@ class OrderHistory extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  summaries: state.weeklyReceiptReducers.weeklySummaryReceipts,
+  user: state.authenticationReducers.user,
+  userReceipt: state.weeklyReceiptReducers?.userReceipt,
+  userOrders: state.weeklyReceiptReducers.orders,
 });
 
 export default compose(
   withStyles(styles),
-  connect(mapStateToProps, { getWeeklyReceiptsForDate })
+  connect(mapStateToProps, { getWeeklyReceiptAndOrdersForUser })
 )(OrderHistory);
-
